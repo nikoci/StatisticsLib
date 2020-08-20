@@ -13,7 +13,7 @@ public class PlayerStatistic {
     }
 
     public static PlayerStatistic loadExisting(UUID uuid, String playerID) {
-        //TODO: Retrieve player statistics from SQL and put them accordingly
+        //TODO.md: Retrieve player statistics from SQL and put them accordingly
         return new PlayerStatistic(uuid, playerID);
     }
 
