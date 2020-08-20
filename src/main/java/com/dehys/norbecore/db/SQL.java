@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class SQL {
@@ -25,6 +26,16 @@ public class SQL {
         } else {
             return false;
         }
+    }
+
+    public static PreparedStatement preparedStatement(String query) {
+        assert con != null;
+        try {
+            return con.prepareStatement(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 
     private static boolean isConnected() {
