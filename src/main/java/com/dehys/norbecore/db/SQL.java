@@ -38,6 +38,7 @@ public class SQL {
         return null;
     }
 
+
     private static boolean isConnected() {
         return con != null;
     }
