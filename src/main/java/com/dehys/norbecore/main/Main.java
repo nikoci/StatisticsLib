@@ -26,6 +26,7 @@ public class Main extends JavaPlugin {
         setupListeners();
 
         System.out.println("debug");
+        System.out.println("hello worls");
 
     }
 
