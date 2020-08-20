@@ -28,7 +28,7 @@ public class SQL {
         }
     }
 
-    public static PreparedStatement preparedStatement(String query) {
+    public static PreparedStatement prepareStatement(String query) {
         assert con != null;
         try {
             return con.prepareStatement(query);
