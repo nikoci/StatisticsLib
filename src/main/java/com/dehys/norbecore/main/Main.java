@@ -1,4 +1,4 @@
-package com.dehys.norbecore;
+package com.dehys.norbecore.main;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
