@@ -16,10 +16,10 @@ public class SQL {
         if (!isConnected()) {
             try {
                 final String
-                        host = Main.getInstance().getConfigManager().getString("sql.host"),
-                        database = Main.getInstance().getConfigManager().getString("sql.database"),
-                        username = Main.getInstance().getConfigManager().getString("sql.username"),
-                        password = Main.getInstance().getConfigManager().getString("sql.password");
+                        host = Main.getInstance().getConfigManager().getString("sql.host").orElse(null),
+                        database = Main.getInstance().getConfigManager().getString("sql.database").orElse(null),
+                        username = Main.getInstance().getConfigManager().getString("sql.username").orElse(null),
+                        password = Main.getInstance().getConfigManager().getString("sql.password").orElse(null);
                 connection = DriverManager.getConnection("jdbc:mysql://" + host + ":3306/" + database + "?autoReconnect=true", username, password);
                 return true;
             } catch (SQLException var4) {

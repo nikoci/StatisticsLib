@@ -3,6 +3,8 @@ package com.dehys.norbecore.data;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 
+import java.util.Optional;
+
 public class ConfigManager {
 
     public long SAVEDATAPERIOD;
@@ -23,8 +25,8 @@ public class ConfigManager {
         PREFIX = plugin.getConfig().getString("prefix");
     }
 
-    public String getString(String path) {
-        return plugin.getConfig().getString(path);
+    public Optional<String> getString(String path) {
+        return Optional.ofNullable(plugin.getConfig().getString(path));
     }
 
     public void set(String path, Object value) {

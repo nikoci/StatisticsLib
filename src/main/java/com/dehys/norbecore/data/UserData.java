@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @SuppressWarnings({"unused", "RedundantSuppression"})
@@ -60,19 +61,19 @@ public class UserData {
         registerPlayer(offlinePlayer.getUniqueId(), offlinePlayer.getName());
     }
 
-    public UUID getUUID(String playerName) {
+    public Optional<UUID> getUUID(String playerName) {
         for (Map.Entry<UUID, String> entry : players.entrySet()) {
-            if (entry.getValue().equalsIgnoreCase(playerName)) return entry.getKey();
+            if (entry.getValue().equalsIgnoreCase(playerName)) return Optional.of(entry.getKey());
         }
-        return null;
+        return Optional.empty();
     }
 
-    public String getName(UUID uuid) {
-        return players.getOrDefault(uuid, null);
+    public Optional<String> getName(UUID uuid) {
+        return Optional.ofNullable(players.getOrDefault(uuid, null));
     }
 
-    public String getPlayerID(UUID uuid) {
-        return playerIDs.getOrDefault(uuid, null);
+    public Optional<String> getPlayerID(UUID uuid) {
+        return Optional.ofNullable(playerIDs.getOrDefault(uuid, null));
     }
 
     public void registerPlayer(UUID uuid, String playerName) {
