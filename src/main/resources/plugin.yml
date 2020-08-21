@@ -1,0 +1,5 @@
+name: NorbeCore
+authors: [dehys, OverDodo]
+version: 1.0
+main: com.dehys.norbecore.main.Main
+api-version: 1.16

@@ -1,10 +1,14 @@
 package com.dehys.norbecore.main;
 
+import com.dehys.norbecore.data.ConfigManager;
+import com.dehys.norbecore.data.UserData;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
     private static Main instance;
+    private UserData userData;
+    private ConfigManager configManager;
 
     public static Main getInstance() {
         return instance;
@@ -15,21 +19,22 @@ public class Main extends JavaPlugin {
         super.onEnable();
         instance = this;
 
-
-        setupConfig();
+        userData = UserData.retrieveData();
+        configManager = new ConfigManager(this);
     }
 
     @Override
     public void onDisable() {
         super.onDisable();
+        userData.saveData();
     }
 
-    private void setupConfig() {
-        getConfig().addDefault("mysql.host", "localhost");
-        getConfig().addDefault("mysql.database", "database");
-        getConfig().addDefault("mysql.username", "username");
-        getConfig().addDefault("mysql.password", "password");
-        getConfig().options().copyDefaults(true);
-        saveConfig();
+
+    public UserData getUserData() {
+        return userData;
+    }
+
+    public ConfigManager getConfigManager() {
+        return configManager;
     }
 }

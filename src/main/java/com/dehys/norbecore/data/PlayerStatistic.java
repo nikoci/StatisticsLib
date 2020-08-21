@@ -1,4 +1,4 @@
-package com.dehys.norbecore.db;
+package com.dehys.norbecore.data;
 
 import java.util.UUID;
 
