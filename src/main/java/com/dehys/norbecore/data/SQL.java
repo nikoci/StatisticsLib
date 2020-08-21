@@ -39,9 +39,6 @@ public class SQL {
 
     }
 
-    public static Connection getConnection() {
-        return connection;
-    }
 
     private static boolean isConnected() {
         return connection != null;

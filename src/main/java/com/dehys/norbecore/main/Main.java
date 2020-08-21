@@ -1,6 +1,7 @@
 package com.dehys.norbecore.main;
 
 import com.dehys.norbecore.data.ConfigManager;
+import com.dehys.norbecore.data.SQL;
 import com.dehys.norbecore.data.UserData;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,6 +19,7 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         super.onEnable();
         instance = this;
+        if (!SQL.connect()) return;
 
         userData = UserData.retrieveData();
         configManager = new ConfigManager(this);
