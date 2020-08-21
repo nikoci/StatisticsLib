@@ -32,6 +32,15 @@ public class SQL {
         }
     }
 
+    public static void setupTables() {
+        try {
+            PreparedStatement preparedStatement = SQL.prepareStatement("CREATE TABLE IF NOT EXISTS userdata (uuid VARCHAR(36), username VARCHAR(16), playerid VARCHAR(10))");
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     public static PreparedStatement prepareStatement(String query) throws SQLException {
         assert connection != null;
         return connection.prepareStatement(query);
