@@ -5,17 +5,17 @@ prefix: "&7[&bNorbe&3Core&7] "
 
 sql:
   # host: the host address of your sql server (if hosted on same device: localhost)
-  host:
+  host: "localhost"
 
   # database: the name of the database the plugin is supposed to use
-  database:
+  database: "norbecore"
 
   # username: the name of the sql user
-  username:
+  username: "root"
 
   # password: the password of the sql user
-  password:
+  password: "password"
 
 savedata:
   # period: the delay between each time the plugin saves all cached data to the sql database (in ticks -> 20 = 1 second)
-  period:
+  period: 6000
