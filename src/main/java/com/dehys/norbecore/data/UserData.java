@@ -1,5 +1,6 @@
 package com.dehys.norbecore.data;
 
+import com.dehys.norbecore.main.Util;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -14,14 +15,17 @@ import java.util.UUID;
 public class UserData {
 
     private HashMap<UUID, String> players;
+    private HashMap<UUID, String> playerIDs;
 
 
     public UserData() {
         this.players = new HashMap<>();
+        this.playerIDs = new HashMap<>();
     }
 
-    public UserData(HashMap<UUID, String> players) {
+    public UserData(HashMap<UUID, String> players, HashMap<UUID, String> playerIDs) {
         this.players = players;
+        this.playerIDs = playerIDs;
     }
 
     public static UserData retrieveData() {
@@ -29,16 +33,19 @@ public class UserData {
             PreparedStatement preparedStatement = SQL.prepareStatement("SELECT * FROM userdata");
             ResultSet resultSet = preparedStatement.executeQuery();
             HashMap<UUID, String> players = new HashMap<>();
+            HashMap<UUID, String> playerIDs = new HashMap<>();
             while (resultSet.next()) {
                 try {
                     UUID uuid = UUID.fromString(resultSet.getString("uuid"));
                     String playerName = resultSet.getString("username");
+                    String playerID = resultSet.getString("playerid");
                     players.put(uuid, playerName);
+                    playerIDs.put(uuid, playerID);
                 } catch (NullPointerException exception) {
                     exception.printStackTrace();
                 }
             }
-            return new UserData(players);
+            return new UserData(players, playerIDs);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -64,8 +71,19 @@ public class UserData {
         return players.getOrDefault(uuid, null);
     }
 
+    public String getPlayerID(UUID uuid) {
+        return playerIDs.getOrDefault(uuid, null);
+    }
+
     public void registerPlayer(UUID uuid, String playerName) {
         players.put(uuid, playerName);
+        if (!playerIDs.containsKey(uuid)) {
+            playerIDs.put(uuid, Util.generatePlayerID(6));
+        }
+    }
+
+    public boolean isPlayerIDAvailable(String playerID) {
+        return playerIDs.containsValue(playerID);
     }
 
     public void saveData() {
