@@ -23,6 +23,9 @@ public class Main extends JavaPlugin {
 
         userData = UserData.retrieveData();
         configManager = new ConfigManager(this);
+
+        System.out.println("debug");
+
     }
 
     @Override
