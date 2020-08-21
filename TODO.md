@@ -1,4 +1,4 @@
-HELLO
+HELLO AGAIN
 - Add some sort of StatisticsManager class that will have methods for easy processing of events.
 - Add Async Timer to save data on sql every x minutes to prevent large loss of data through crashes.
 - Start implementing events and storing the data.
