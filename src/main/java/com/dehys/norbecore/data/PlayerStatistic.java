@@ -14,6 +14,7 @@ public class PlayerStatistic {
     private final String userid;
     private final HashMap<Material, Integer> blocksBroken;
     private int deaths;
+    private int playerKills;
 
     public PlayerStatistic(final UUID uuid, final String userid) {
         this.uuid = uuid;
@@ -57,7 +58,11 @@ public class PlayerStatistic {
                 }
                 break;
             case DEATHS:
-                this.deaths++;
+                this.deaths += amount;
+                break;
+
+            case PLAYER_KILLS:
+                this.playerKills += amount;
                 break;
         }
     }
@@ -75,6 +80,9 @@ public class PlayerStatistic {
                     return blocksBroken.values().stream().mapToInt(Integer::intValue).sum();
             case DEATHS:
                 return this.deaths;
+
+            case PLAYER_KILLS:
+                return playerKills;
 
             default:
                 return 0;
