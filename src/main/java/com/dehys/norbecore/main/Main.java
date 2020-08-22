@@ -4,8 +4,7 @@ import com.dehys.norbecore.data.ConfigManager;
 import com.dehys.norbecore.data.SQL;
 import com.dehys.norbecore.data.StatisticsManager;
 import com.dehys.norbecore.data.UserData;
-import com.dehys.norbecore.listeners.BlockBreakListener;
-import com.dehys.norbecore.listeners.JoinListener;
+import com.dehys.norbecore.listeners.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -50,7 +49,13 @@ public class Main extends JavaPlugin {
 
     private void setupListeners() {
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
+        getServer().getPluginManager().registerEvents(new QuitListener(), this);
         getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
+        getServer().getPluginManager().registerEvents(new DeathListener(), this);
+        getServer().getPluginManager().registerEvents(new DropListener(), this);
+        getServer().getPluginManager().registerEvents(new EntityDamageListener(), this);
+        getServer().getPluginManager().registerEvents(new ItemBreakListener(), this);
+        getServer().getPluginManager().registerEvents(new ItemCraftListener(), this);
     }
 
     public StatisticsManager getStatisticsManager() {

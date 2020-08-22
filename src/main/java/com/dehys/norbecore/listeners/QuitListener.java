@@ -1,4 +1,6 @@
 package com.dehys.norbecore.listeners;
 
-public class QuitListener {
+import org.bukkit.event.Listener;
+
+public class QuitListener implements Listener {
 }
