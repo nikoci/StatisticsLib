@@ -1,6 +1,7 @@
 package com.dehys.norbecore.data;
 
 
+import com.sun.istack.internal.NotNull;
 import org.bukkit.Material;
 import org.bukkit.Statistic;
 
@@ -11,7 +12,7 @@ public class PlayerStatistic {
 
     private final UUID uuid;
     private final String playerID;
-    private HashMap<Material, Integer> blocksBroken;
+    private final HashMap<Material, Integer> blocksBroken;
     private int deaths;
 
     public PlayerStatistic(final UUID uuid, final String playerID) {
@@ -39,11 +40,11 @@ public class PlayerStatistic {
         return blocksBroken;
     }
 
-    public void addStatistic(Statistic statistic, int amount) {
+    public void addStatistic(@NotNull Statistic statistic, int amount) {
         addStatistic(statistic, null, amount);
     }
 
-    public void addStatistic(Statistic statistic, Material material, int amount) {
+    public void addStatistic(@NotNull Statistic statistic, Material material, int amount) {
         switch (statistic) {
             case MINE_BLOCK:
                 if (this.blocksBroken.containsKey(material)) {
@@ -53,20 +54,29 @@ public class PlayerStatistic {
                 }
                 break;
             case DEATHS:
-
+                this.deaths++;
                 break;
         }
     }
 
-    public int getBrokenBlocks(Material material) {
-        return blocksBroken.getOrDefault(material, 0);
+    public int getStatistic(@NotNull Statistic statistic) {
+        return getStatistic(statistic, null);
     }
 
-    public int getTotalBrokenBlocks() {
-        return blocksBroken.values().stream().mapToInt(Integer::intValue).sum();
+    public int getStatistic(@NotNull Statistic statistic, Material material) {
+        switch (statistic) {
+            case MINE_BLOCK:
+                if (material != null)
+                    return this.blocksBroken.getOrDefault(material, 0);
+                else
+                    return blocksBroken.values().stream().mapToInt(Integer::intValue).sum();
+            case DEATHS:
+                return this.deaths;
+
+            default:
+                return 0;
+        }
     }
 
-    public int getDeaths() {
-        return deaths;
-    }
+
 }
