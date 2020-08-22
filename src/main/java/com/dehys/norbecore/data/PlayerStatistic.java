@@ -12,11 +12,13 @@ public class PlayerStatistic {
     private final UUID uuid;
     private final String playerID;
     private HashMap<Material, Integer> blocksBroken;
+    private int deaths;
 
     public PlayerStatistic(final UUID uuid, final String playerID) {
         this.uuid = uuid;
         this.playerID = playerID;
         blocksBroken = new HashMap<>();
+        deaths = 0;
     }
 
     public static PlayerStatistic loadExisting(UUID uuid, String playerID) {
@@ -37,6 +39,10 @@ public class PlayerStatistic {
         return blocksBroken;
     }
 
+    public void addStatistic(Statistic statistic, int amount) {
+        addStatistic(statistic, null, amount);
+    }
+
     public void addStatistic(Statistic statistic, Material material, int amount) {
         switch (statistic) {
             case MINE_BLOCK:
@@ -45,6 +51,9 @@ public class PlayerStatistic {
                 } else {
                     this.blocksBroken.put(material, amount);
                 }
+                break;
+            case DEATHS:
+
                 break;
         }
     }
@@ -55,5 +64,9 @@ public class PlayerStatistic {
 
     public int getTotalBrokenBlocks() {
         return blocksBroken.values().stream().mapToInt(Integer::intValue).sum();
+    }
+
+    public int getDeaths() {
+        return deaths;
     }
 }

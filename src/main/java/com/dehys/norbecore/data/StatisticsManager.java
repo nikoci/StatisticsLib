@@ -1,6 +1,7 @@
 package com.dehys.norbecore.data;
 
 import com.dehys.norbecore.exceptions.StatisticAlreadyLoadedException;
+import com.dehys.norbecore.main.Main;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -54,5 +55,16 @@ public class StatisticsManager {
 
     public HashMap<UUID, PlayerStatistic> getPlayerStatistics() {
         return playerStatistics;
+    }
+
+    public PlayerStatistic createStatistic(Player player) {
+        Main.getInstance().getUserData().registerPlayer(player);
+        return createStatistic(player.getUniqueId());
+    }
+
+    private PlayerStatistic createStatistic(UUID uuid) {
+        PlayerStatistic statistic = new PlayerStatistic(uuid, Main.getInstance().getUserData().getPlayerID(uuid).orElseThrow(() -> new RuntimeException("Player was not registered due to an unknown error")));
+        playerStatistics.put(uuid, statistic);
+        return statistic;
     }
 }
