@@ -11,28 +11,30 @@ import java.util.UUID;
 public class PlayerStatistic {
 
     private final UUID uuid;
-    private final String playerID;
+    private final String userid;
     private final HashMap<Material, Integer> blocksBroken;
     private int deaths;
 
-    public PlayerStatistic(final UUID uuid, final String playerID) {
+    public PlayerStatistic(final UUID uuid, final String userid) {
         this.uuid = uuid;
-        this.playerID = playerID;
+        this.userid = userid;
         blocksBroken = new HashMap<>();
         deaths = 0;
     }
 
-    public static PlayerStatistic loadExisting(UUID uuid, String playerID) {
-        //TODO.md: Retrieve player statistics from SQL and put them accordingly
-        return new PlayerStatistic(uuid, playerID);
+    public PlayerStatistic(final UUID uuid, final String userid, HashMap<Material, Integer> blocksBroken, int deaths) {
+        this.uuid = uuid;
+        this.userid = userid;
+        this.blocksBroken = blocksBroken;
+        this.deaths = deaths;
     }
 
     public UUID getUUID() {
         return uuid;
     }
 
-    public String getPlayerID() {
-        return playerID;
+    public String getUserid() {
+        return userid;
     }
 
 

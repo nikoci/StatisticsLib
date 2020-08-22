@@ -11,7 +11,7 @@ public class BlockBreakListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        Main.getInstance().getStatisticsManager().getStatistic(event.getPlayer()).orElse(Main.getInstance().getStatisticsManager().createStatistic(event.getPlayer())).addStatistic(Statistic.MINE_BLOCK, 1);
+        Main.getInstance().getStatisticsManager().getStatistic(event.getPlayer()).orElse(Main.getInstance().getStatisticsManager().fetchOrCreate(event.getPlayer())).addStatistic(Statistic.MINE_BLOCK, 1);
     }
 
 }
