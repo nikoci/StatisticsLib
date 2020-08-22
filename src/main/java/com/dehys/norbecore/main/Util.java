@@ -6,9 +6,11 @@ public class Util {
 
     public static String generatePlayerID(int length) {
         StringBuilder builder = new StringBuilder();
-        while (length-- != 0) {
-            int character = (int) (Math.random() * ALPHA_NUMERIC_STRING.length());
-            builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+        while (builder.toString().equals("") || !Main.getInstance().getUserData().isPlayerIDAvailable(builder.toString())) {
+            while (length-- != 0) {
+                int character = (int) (Math.random() * ALPHA_NUMERIC_STRING.length());
+                builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+            }
         }
         return builder.toString();
     }
