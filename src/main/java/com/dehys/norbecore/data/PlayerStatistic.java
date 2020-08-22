@@ -49,6 +49,7 @@ public class PlayerStatistic {
     public void addStatistic(@NotNull Statistic statistic, Material material, int amount) {
         switch (statistic) {
             case MINE_BLOCK:
+                assert material != null;
                 if (this.blocksBroken.containsKey(material)) {
                     this.blocksBroken.put(material, this.blocksBroken.get(material) + amount);
                 } else {

@@ -4,6 +4,7 @@ import com.dehys.norbecore.exceptions.StatisticAlreadyLoadedException;
 import com.dehys.norbecore.main.Main;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 
 import java.sql.PreparedStatement;
@@ -92,6 +93,14 @@ public class StatisticsManager {
 
     public HashMap<UUID, PlayerStatistic> getPlayerStatistics() {
         return playerStatistics;
+    }
+
+    public void addStatistic(Player player, Statistic statistic, int amount) {
+        addStatistic(player, statistic, null, amount);
+    }
+
+    public void addStatistic(Player player, Statistic statistic, Material material, int amount) {
+        Main.getInstance().getStatisticsManager().getStatistic(player).orElse(Main.getInstance().getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, amount);
     }
 
     public PlayerStatistic createStatistic(Player player) {
