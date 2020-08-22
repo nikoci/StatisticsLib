@@ -1,6 +1,8 @@
 package com.dehys.norbecore.data;
 
-import javafx.scene.paint.Material;
+
+import org.bukkit.Material;
+import org.bukkit.Statistic;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -30,15 +32,28 @@ public class PlayerStatistic {
         return playerID;
     }
 
+
     public HashMap<Material, Integer> getBlocksBroken() {
         return blocksBroken;
     }
 
-    public Integer getBrokenBlocks(Material material) {
+    public void addStatistic(Statistic statistic, Material material, int amount) {
+        switch (statistic) {
+            case MINE_BLOCK:
+                if (this.blocksBroken.containsKey(material)) {
+                    this.blocksBroken.put(material, this.blocksBroken.get(material) + amount);
+                } else {
+                    this.blocksBroken.put(material, amount);
+                }
+                break;
+        }
+    }
+
+    public int getBrokenBlocks(Material material) {
         return blocksBroken.getOrDefault(material, 0);
     }
 
-    public Integer getTotalBrokenBlocks() {
+    public int getTotalBrokenBlocks() {
         return blocksBroken.values().stream().mapToInt(Integer::intValue).sum();
     }
 }

@@ -5,6 +5,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.UUID;
 
 public class StatisticsManager {
@@ -28,6 +29,18 @@ public class StatisticsManager {
             throw new StatisticAlreadyLoadedException("The statistics for that player are already loaded");
         }
         fetchStatistic(uuid);
+    }
+
+    public Optional<PlayerStatistic> getStatistic(Player player) {
+        return getStatistic(player.getUniqueId());
+    }
+
+    public Optional<PlayerStatistic> getStatistic(OfflinePlayer player) {
+        return getStatistic(player.getUniqueId());
+    }
+
+    public Optional<PlayerStatistic> getStatistic(UUID uuid) {
+        return Optional.ofNullable(playerStatistics.get(uuid));
     }
 
 
