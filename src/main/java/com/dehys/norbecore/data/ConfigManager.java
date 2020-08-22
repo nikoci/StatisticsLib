@@ -9,7 +9,7 @@ public class ConfigManager {
 
     public long SAVEDATAPERIOD;
     public String PREFIX;
-    private Plugin plugin;
+    private final Plugin plugin;
 
     public ConfigManager(Plugin plugin) {
         this.plugin = plugin;
