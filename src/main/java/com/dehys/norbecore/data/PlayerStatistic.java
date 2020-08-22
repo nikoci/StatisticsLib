@@ -23,11 +23,17 @@ public class PlayerStatistic {
         deaths = 0;
     }
 
-    public PlayerStatistic(final UUID uuid, final String userid, HashMap<Material, Integer> blocksBroken, int deaths) {
+    public PlayerStatistic(final UUID uuid, final String userid, HashMap<Material, Integer> blocksBroken, int... plain) {
         this.uuid = uuid;
         this.userid = userid;
         this.blocksBroken = blocksBroken;
-        this.deaths = deaths;
+        this.deaths = plain[0];
+        this.playerKills = plain[1];
+        this.mobKills = plain[2];
+        this.droppedItems = plain[3];
+        this.brokenItems = plain[4];
+        this.damageDealt = plain[5];
+        this.damageTaken = plain[6];
     }
 
     public UUID getUUID() {

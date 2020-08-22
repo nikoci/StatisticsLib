@@ -70,11 +70,22 @@ public class StatisticsManager {
             preparedStatement.setString(1, userid.get());
             resultSet = preparedStatement.executeQuery();
 
-            int deaths = 0;
+            /*
+            final UUID uuid, final String userid, HashMap<Material, Integer> blocksBroken, int deaths, int playerKills,
+                           int mobKills, int droppedItems, int brokenItems, int damageDealt, int damageTaken
+             */
+
+            int[] plain = new int[10];
             while (resultSet.next()) {
-                deaths = resultSet.getInt("deaths");
+                plain[0] = resultSet.getInt("deaths");
+                plain[1] = resultSet.getInt("playerkills");
+                plain[2] = resultSet.getInt("mobkills");
+                plain[3] = resultSet.getInt("droppeditems");
+                plain[4] = resultSet.getInt("brokenitems");
+                plain[5] = resultSet.getInt("damagedealt");
+                plain[6] = resultSet.getInt("damagetaken");
             }
-            return Optional.of(new PlayerStatistic(uuid, userid.get(), blocksBroken, deaths));
+            return Optional.of(new PlayerStatistic(uuid, userid.get(), blocksBroken, plain));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
