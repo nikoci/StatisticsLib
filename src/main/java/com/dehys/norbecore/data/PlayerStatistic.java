@@ -13,9 +13,8 @@ public class PlayerStatistic {
     private final UUID uuid;
     private final String userid;
     private final HashMap<Material, Integer> blocksBroken;
-    private int deaths;
-    private int playerKills;
-    private int mobKills;
+    private int deaths, playerKills, mobKills, droppedItems;
+
 
     public PlayerStatistic(final UUID uuid, final String userid) {
         this.uuid = uuid;
@@ -69,6 +68,11 @@ public class PlayerStatistic {
             case MOB_KILLS:
                 this.mobKills += amount;
                 break;
+
+            case DROP_COUNT:
+            case DROP:
+                this.droppedItems += amount;
+                break;
         }
     }
 
@@ -91,6 +95,10 @@ public class PlayerStatistic {
 
             case MOB_KILLS:
                 return this.mobKills;
+
+            case DROP_COUNT:
+            case DROP:
+                return this.droppedItems;
 
             default:
                 return 0;
