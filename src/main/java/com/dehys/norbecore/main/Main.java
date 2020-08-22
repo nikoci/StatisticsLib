@@ -24,13 +24,12 @@ public class Main extends JavaPlugin {
         super.onEnable();
         instance = this;
         if (!SQL.connect()) return;
+        SQL.setupTables();
         userData = UserData.retrieveData();
         configManager = new ConfigManager(this);
         statisticsManager = new StatisticsManager();
         setupListeners();
 
-        System.out.println("debug");
-        System.out.println("hello worls");
 
     }
 
