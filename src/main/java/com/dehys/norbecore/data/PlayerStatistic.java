@@ -13,7 +13,7 @@ public class PlayerStatistic {
     private final UUID uuid;
     private final String userid;
     private final HashMap<Material, Integer> blocksBroken;
-    private int deaths, playerKills, mobKills, droppedItems, brokenItems;
+    private int deaths, playerKills, mobKills, droppedItems, brokenItems, damageDealt, damageTaken;
 
 
     public PlayerStatistic(final UUID uuid, final String userid) {
@@ -78,6 +78,14 @@ public class PlayerStatistic {
                 this.brokenItems += amount;
                 break;
 
+            case DAMAGE_DEALT:
+                this.damageDealt += amount;
+                break;
+
+            case DAMAGE_TAKEN:
+                this.damageTaken += amount;
+                break;
+
         }
     }
 
@@ -107,6 +115,12 @@ public class PlayerStatistic {
 
             case BREAK_ITEM:
                 return this.brokenItems;
+
+            case DAMAGE_DEALT:
+                return this.damageDealt;
+
+            case DAMAGE_TAKEN:
+                return this.damageTaken;
 
             default:
                 return 0;
