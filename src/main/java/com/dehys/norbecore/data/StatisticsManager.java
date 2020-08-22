@@ -84,6 +84,7 @@ public class StatisticsManager {
                 plain[4] = resultSet.getInt("brokenitems");
                 plain[5] = resultSet.getInt("damagedealt");
                 plain[6] = resultSet.getInt("damagetaken");
+                plain[7] = resultSet.getInt("itemscrafted");
             }
             return Optional.of(new PlayerStatistic(uuid, userid.get(), blocksBroken, plain));
         } catch (SQLException throwables) {
