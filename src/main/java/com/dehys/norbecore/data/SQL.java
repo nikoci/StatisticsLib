@@ -35,7 +35,9 @@ public class SQL {
     public static void setupTables() {
         try {
             SQL.prepareStatement("CREATE TABLE IF NOT EXISTS users (uuid VARCHAR(36), playername VARCHAR(16), userid VARCHAR(20))").executeUpdate();
-            SQL.prepareStatement("CREATE TABLE IF NOT EXISTS blockbreak (userid VARCHAR(72), blocktype VARCHAR(20), amount BIGINT)").executeUpdate();
+            SQL.prepareStatement("CREATE TABLE IF NOT EXISTS plainstatistics (userid VARCHAR(72), statistic VARCHAR(20), amount BIGINT)").executeUpdate();
+            SQL.prepareStatement("CREATE TABLE IF NOT EXISTS materialstatistics (userid VARCHAR(72), statistic VARCHAR(20), material VARCHAR(30), amount BIGINT)").executeUpdate();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
