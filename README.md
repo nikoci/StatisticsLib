@@ -1,7 +1,3 @@
-<h1>NorbeCore API</h1>
-<<<<<<< HEAD
-This is the official NorbeCore API used for NorbeCore
-something
-=======
-This is the official NorbeCore API used for NorbeCore.
->>>>>>> pilot
+<div style="text-align:center"><img src="res/banner.png" /></div>
+
+# PlayerStatistics API - _All the statistics you need_
