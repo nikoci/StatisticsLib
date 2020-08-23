@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="NorbeCore" />
         <module name="norbecore" />
+        <module name="PlayerStatistics" />
       </profile>
     </annotationProcessing>
   </component>

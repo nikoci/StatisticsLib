@@ -1,6 +1,6 @@
 package com.dehys.norbecore.enums;
 
-import org.bukkit.Statistic;
+import com.dehys.norbecore.enums.Statistic;
 
 public enum BlockBreakStatistic {
     
