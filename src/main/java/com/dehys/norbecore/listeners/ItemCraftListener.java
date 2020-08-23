@@ -1,7 +1,7 @@
 package com.dehys.norbecore.listeners;
 
 import com.dehys.norbecore.main.Main;
-import org.bukkit.Statistic;
+import com.dehys.norbecore.enums.Statistic;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,7 +12,7 @@ public class ItemCraftListener implements Listener {
     @EventHandler
     public void onCraftItem(CraftItemEvent event) {
         assert event.getWhoClicked() instanceof Player;
-        Main.getInstance().getStatisticsManager().addStatistic((Player) event.getWhoClicked(), Statistic.CRAFT_ITEM, 1);
+        Main.getInstance().getStatisticsManager().addStatistic((Player) event.getWhoClicked(), Statistic.ITEMS_CRAFTED, 1);
     }
 
 }

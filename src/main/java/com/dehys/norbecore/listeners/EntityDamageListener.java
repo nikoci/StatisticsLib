@@ -1,7 +1,7 @@
 package com.dehys.norbecore.listeners;
 
 import com.dehys.norbecore.main.Main;
-import org.bukkit.Statistic;
+import com.dehys.norbecore.enums.Statistic;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
