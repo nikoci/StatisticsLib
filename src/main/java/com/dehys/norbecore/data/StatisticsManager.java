@@ -34,7 +34,7 @@ public class StatisticsManager {
         if (playerStatistics.containsKey(uuid)) {
             throw new StatisticAlreadyLoadedException("The statistics for that player are already loaded");
         }
-        fetchStatistic(uuid);
+        fetchStatistics(uuid);
     }
 
     public Optional<PlayerStatistic> getStatistic(Player player) {
@@ -50,25 +50,17 @@ public class StatisticsManager {
     }
 
 
-    private Optional<PlayerStatistic> fetchStatistic(UUID uuid) {
+    private Optional<PlayerStatistic> fetchStatistics(UUID uuid) {
         Optional<String> userid = Main.getInstance().getUserData().getPlayerID(uuid);
         if (!userid.isPresent()) throw new RuntimeException("No UserID found for given UUID.");
         try {
-            PreparedStatement preparedStatement = SQL.prepareStatement("SELECT * FROM blockbreak WHERE userid = ?");
+
+            HashMap<Material, Integer> blocksBroken = fetchMaterialFromTable(uuid, "blockbreak");
+            HashMap<Material, Integer> itemsBroken = fetchMaterialFromTable(uuid, "itembreak");
+
+            PreparedStatement preparedStatement = SQL.prepareStatement("SELECT * FROM plain WHERE userid = ?");
             preparedStatement.setString(1, userid.get());
             ResultSet resultSet = preparedStatement.executeQuery();
-
-            HashMap<Material, Integer> blocksBroken = new HashMap<>();
-            while (resultSet.next()) {
-                Material blockType = Material.getMaterial(resultSet.getString("blocktype"));
-                if (blockType == null) continue;
-                int amount = resultSet.getInt("amount");
-                blocksBroken.put(blockType, amount);
-            }
-
-            preparedStatement = SQL.prepareStatement("SELECT * FROM plain WHERE userid = ?");
-            preparedStatement.setString(1, userid.get());
-            resultSet = preparedStatement.executeQuery();
 
             /*
             final UUID uuid, final String userid, HashMap<Material, Integer> blocksBroken, int deaths, int playerKills,
@@ -81,22 +73,42 @@ public class StatisticsManager {
                 plain[1] = resultSet.getInt("playerkills");
                 plain[2] = resultSet.getInt("mobkills");
                 plain[3] = resultSet.getInt("droppeditems");
-                plain[4] = resultSet.getInt("brokenitems");
-                plain[5] = resultSet.getInt("damagedealt");
-                plain[6] = resultSet.getInt("damagetaken");
-                plain[7] = resultSet.getInt("itemscrafted");
+                plain[4] = resultSet.getInt("damagedealt");
+                plain[5] = resultSet.getInt("damagetaken");
+                plain[6] = resultSet.getInt("itemscrafted");
             }
-            return Optional.of(new PlayerStatistic(uuid, userid.get(), blocksBroken, plain));
+            return Optional.of(new PlayerStatistic(uuid, userid.get(), blocksBroken, itemsBroken, plain));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return Optional.empty();
     }
 
+    private HashMap<Material, Integer> fetchMaterialFromTable(UUID uuid, String tableName) throws SQLException {
+        Optional<String> userid = Main.getInstance().getUserData().getPlayerID(uuid);
+        if (!userid.isPresent()) throw new RuntimeException("No UserID found for given UUID.");
+
+        PreparedStatement preparedStatement = SQL.prepareStatement("SELECT * FROM " + tableName + " WHERE userid = ?");
+        preparedStatement.setString(1, userid.get());
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        HashMap<Material, Integer> materialMap = new HashMap<>();
+
+        while (resultSet.next()) {
+            Material materialType = Material.getMaterial(resultSet.getString("materialtype"));
+            if (materialType == null) continue;
+            int amount = resultSet.getInt("amount");
+            materialMap.put(materialType, amount);
+        }
+
+        return materialMap;
+    }
+
+
     private Optional<PlayerStatistic> fetchStatistics(UUID... uuids) {
         Thread thread = new Thread(() -> {
             for (UUID uuid : uuids) {
-                fetchStatistic(uuid);
+                fetchStatistics(uuid);
             }
         });
         thread.start();
@@ -131,7 +143,7 @@ public class StatisticsManager {
     }
 
     public PlayerStatistic fetchOrCreate(UUID uuid) {
-        Optional<PlayerStatistic> statistic = fetchStatistic(uuid);
+        Optional<PlayerStatistic> statistic = fetchStatistics(uuid);
         return statistic.orElseGet(() -> createStatistic(uuid));
     }
 }
