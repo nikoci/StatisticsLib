@@ -23,20 +23,6 @@ public class StatisticsManager {
         playerStatistics = new HashMap<>();
     }
 
-    public void loadStatistic(Player player) throws StatisticAlreadyLoadedException {
-        loadStatistic(player.getUniqueId());
-    }
-
-    public void loadStatistic(OfflinePlayer offlinePlayer) throws StatisticAlreadyLoadedException {
-        loadStatistic(offlinePlayer.getUniqueId());
-    }
-
-    public void loadStatistic(UUID uuid) throws StatisticAlreadyLoadedException {
-        if (playerStatistics.containsKey(uuid)) {
-            throw new StatisticAlreadyLoadedException("The statistics for that player are already loaded");
-        }
-        fetchStatistics(uuid);
-    }
 
     public Optional<PlayerStatistic> getStatistic(Player player) {
         return getStatistic(player.getUniqueId());
@@ -112,7 +98,7 @@ public class StatisticsManager {
         Main.getInstance().getStatisticsManager().getStatistic(player).orElse(Main.getInstance().getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, amount);
     }
 
-    public PlayerStatistic createStatistic(Player player) {
+    private PlayerStatistic createStatistic(Player player) {
         Main.getInstance().getUserData().registerPlayer(player);
         return createStatistic(player.getUniqueId());
     }

@@ -15,7 +15,6 @@ public class PlayerStatistic {
     private final String userid;
     private final HashMap<String, Integer> plainStatistics;
     private final HashMap<String, HashMap<Material, Integer>> materialStatistics;
-    //private int deaths, playerKills, mobKills, droppedItems, brokenItems, damageDealt, damageTaken, itemsCrafted;
 
 
     public PlayerStatistic(final UUID uuid, final String userid) {
@@ -38,7 +37,7 @@ public class PlayerStatistic {
         return uuid;
     }
 
-    public String getUserid() {
+    public String getUserID() {
         return userid;
     }
 
