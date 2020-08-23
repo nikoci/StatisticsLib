@@ -12,7 +12,7 @@ public class PlayerStatistic {
 
     private final UUID uuid;
     private final String userid;
-    private final HashMap<Material, Integer> blocksBroken;
+    private final HashMap<Material, Integer> blocksBroken, itemsBroken;
     private int deaths, playerKills, mobKills, droppedItems, brokenItems, damageDealt, damageTaken, itemsCrafted;
 
 
@@ -20,13 +20,15 @@ public class PlayerStatistic {
         this.uuid = uuid;
         this.userid = userid;
         blocksBroken = new HashMap<>();
+        itemsBroken = new HashMap<>();
         deaths = 0;
     }
 
-    public PlayerStatistic(final UUID uuid, final String userid, HashMap<Material, Integer> blocksBroken, int... plain) {
+    public PlayerStatistic(final UUID uuid, final String userid, HashMap<Material, Integer> blocksBroken, HashMap<Material, Integer> itemsBroken, int... plain) {
         this.uuid = uuid;
         this.userid = userid;
         this.blocksBroken = blocksBroken;
+        this.itemsBroken = itemsBroken;
         this.deaths = plain[0];
         this.playerKills = plain[1];
         this.mobKills = plain[2];
