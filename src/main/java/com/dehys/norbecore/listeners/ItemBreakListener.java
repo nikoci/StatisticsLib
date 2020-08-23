@@ -10,7 +10,7 @@ public class ItemBreakListener implements Listener {
 
     @EventHandler
     public void onItemBreak(PlayerItemBreakEvent event) {
-        Main.getInstance().getStatisticsManager().addStatistic(event.getPlayer(), Statistic.BREAK_ITEM, 1);
+        Main.getInstance().getStatisticsManager().addStatistic(event.getPlayer(), Statistic.BREAK_ITEM, event.getBrokenItem().getType(), 1);
     }
 
 }
