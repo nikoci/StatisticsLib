@@ -4,11 +4,12 @@ import com.dehys.norbecore.exceptions.StatisticAlreadyLoadedException;
 import com.dehys.norbecore.main.Main;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.Statistic;
+import com.dehys.norbecore.enums.Statistic;
 import org.bukkit.entity.Player;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Optional;
@@ -55,54 +56,38 @@ public class StatisticsManager {
         if (!userid.isPresent()) throw new RuntimeException("No UserID found for given UUID.");
         try {
 
-            HashMap<Material, Integer> blocksBroken = fetchMaterialFromTable(uuid, "blockbreak");
-            HashMap<Material, Integer> itemsBroken = fetchMaterialFromTable(uuid, "itembreak");
-
-            PreparedStatement preparedStatement = SQL.prepareStatement("SELECT * FROM plain WHERE userid = ?");
+            PreparedStatement preparedStatement = SQL.prepareStatement("SELECT statistic, amount FROM plainstatistics WHERE userid = ?");
             preparedStatement.setString(1, userid.get());
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            /*
-            final UUID uuid, final String userid, HashMap<Material, Integer> blocksBroken, int deaths, int playerKills,
-                           int mobKills, int droppedItems, int brokenItems, int damageDealt, int damageTaken
-             */
-
-            int[] plain = new int[10];
+            HashMap<String, Integer> plainStatistics = new HashMap<>();
             while (resultSet.next()) {
-                plain[0] = resultSet.getInt("deaths");
-                plain[1] = resultSet.getInt("playerkills");
-                plain[2] = resultSet.getInt("mobkills");
-                plain[3] = resultSet.getInt("droppeditems");
-                plain[4] = resultSet.getInt("damagedealt");
-                plain[5] = resultSet.getInt("damagetaken");
-                plain[6] = resultSet.getInt("itemscrafted");
+                plainStatistics.put(resultSet.getString("statistic"), resultSet.getInt("amount"));
             }
-            return Optional.of(new PlayerStatistic(uuid, userid.get(), blocksBroken, itemsBroken, plain));
+            preparedStatement = SQL.prepareStatement("SELECT statistic, material, amount FROM materialstatistics WHERE userid = ?");
+            preparedStatement.setString(1, userid.get());
+            resultSet = preparedStatement.executeQuery();
+
+            HashMap<String, HashMap<Material, Integer>> materialStatistics = new HashMap<>();
+            HashMap<Material, Integer> innerMap;
+            while (resultSet.next()) {
+                if(materialStatistics.containsKey(resultSet.getString("statistic"))) {
+                    innerMap = materialStatistics.get(resultSet.getString("statistic"));
+                    innerMap.put(Material.getMaterial(resultSet.getString("material")), resultSet.getInt("amount"));
+                } else {
+                    innerMap = new HashMap<>();
+                    innerMap.put(Material.getMaterial(resultSet.getString("material")), resultSet.getInt("amount"));
+                    materialStatistics.put(resultSet.getString("statistic"), innerMap);
+                }
+            }
+            return Optional.of(new PlayerStatistic(uuid, userid.get(), plainStatistics, materialStatistics));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return Optional.empty();
     }
 
-    private HashMap<Material, Integer> fetchMaterialFromTable(UUID uuid, String tableName) throws SQLException {
-        Optional<String> userid = Main.getInstance().getUserData().getPlayerID(uuid);
-        if (!userid.isPresent()) throw new RuntimeException("No UserID found for given UUID.");
 
-        PreparedStatement preparedStatement = SQL.prepareStatement("SELECT * FROM " + tableName + " WHERE userid = ?");
-        preparedStatement.setString(1, userid.get());
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        HashMap<Material, Integer> materialMap = new HashMap<>();
-
-        while (resultSet.next()) {
-            Material materialType = Material.getMaterial(resultSet.getString("materialtype"));
-            if (materialType == null) continue;
-            int amount = resultSet.getInt("amount");
-            materialMap.put(materialType, amount);
-        }
-
-        return materialMap;
-    }
 
 
     private Optional<PlayerStatistic> fetchStatistics(UUID... uuids) {
