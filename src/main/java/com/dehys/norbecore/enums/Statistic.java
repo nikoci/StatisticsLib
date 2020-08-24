@@ -1,5 +1,7 @@
 package com.dehys.norbecore.enums;
 
+import java.util.Arrays;
+
 public enum Statistic {
 
 
@@ -21,6 +23,10 @@ public enum Statistic {
     Statistic(String key, Substatistic substatistic) {
         this.key = key;
         this.substatistic = substatistic;
+    }
+
+    public static Statistic getByKey(String key) {
+        return Arrays.stream(Statistic.values()).filter(statistic -> statistic.getKey().equalsIgnoreCase(key)).findFirst().orElse(null);
     }
 
 

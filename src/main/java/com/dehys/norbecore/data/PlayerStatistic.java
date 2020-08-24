@@ -7,7 +7,10 @@ import com.sun.istack.internal.NotNull;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -164,6 +167,59 @@ public class PlayerStatistic {
             entityMap.put(entityType, entityMap.get(entityType)+value);
         }
     }
+    
+    public void savePlainStatistics() {
+        try {
+            PreparedStatement plainStatement = SQL.prepareStatement("INSERT INTO plainstatistics (userid, statistic, amount) VALUES (?, ?, ?)");
 
+            plainStatement.setString(1, userid);
+            for (Map.Entry<String, Integer> entry : plainStatistics.entrySet()) {
+                plainStatement.setString(2, entry.getKey());
+                plainStatement.setInt(3, entry.getValue());
+                plainStatement.executeUpdate();
+            }
+            
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
+    }
+
+    public void saveMaterialStatistics() {
+        try {
+            PreparedStatement materialStatement = SQL.prepareStatement("INSERT INTO materialstatistics (userid, statistic, material, amount) VALUES (?, ?, ?, ?)");
+            PreparedStatement entityStatement = SQL.prepareStatement("INSERT INTO plainstatistics (userid, statistic, entity, amount) VALUES (?, ?, ?, ?)");
+            materialStatement.setString(1, userid);
+            for (String statistic : materialStatistics.keySet()) {
+                HashMap<Material, Integer> innerMap = materialStatistics.get(statistic);
+                for (Map.Entry<Material, Integer> entry : innerMap.entrySet()) {
+                    materialStatement.setString(2, statistic);
+                    materialStatement.setString(3, entry.getKey().name());
+                    materialStatement.setInt(4, entry.getValue());
+                    materialStatement.executeUpdate();
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
+    public void saveEntityStatistics() {
+        try {
+            PreparedStatement entityStatement = SQL.prepareStatement("INSERT INTO plainstatistics (userid, statistic, entity, amount) VALUES (?, ?, ?, ?)");
+            entityStatement.setString(1, userid);
+            for (String statistic : entityStatistics.keySet()) {
+                HashMap<EntityType, Integer> innerMap = entityStatistics.get(statistic);
+                for (Map.Entry<EntityType, Integer> entry : innerMap.entrySet()) {
+                    entityStatement.setString(2, statistic);
+                    entityStatement.setString(3, entry.getKey().name());
+                    entityStatement.setInt(4, entry.getValue());
+                    entityStatement.executeUpdate();
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }

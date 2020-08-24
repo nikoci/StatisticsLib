@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -140,4 +141,22 @@ public class StatisticsManager {
         Optional<PlayerStatistic> statistic = fetchStatistics(uuid);
         return statistic.orElseGet(() -> createStatistic(uuid));
     }
+
+
+    public void saveStatistics() {
+
+        new Thread(() -> {
+                for (Map.Entry<UUID, PlayerStatistic> entry : playerStatistics.entrySet()) {
+                    UUID uuid = entry.getKey();
+                    PlayerStatistic statistic = entry.getValue();
+                    Optional<String> userID = Main.getInstance().getUserData().getPlayerID(uuid);
+                    if(!userID.isPresent()) continue;
+                    statistic.savePlainStatistics();
+                    statistic.saveMaterialStatistics();
+                    statistic.saveEntityStatistics();
+                }
+        }).start();
+
+    }
+
 }
