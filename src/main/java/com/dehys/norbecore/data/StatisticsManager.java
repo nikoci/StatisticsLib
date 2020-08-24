@@ -115,11 +115,19 @@ public class StatisticsManager {
     }
 
     public void addStatistic(Player player, Statistic statistic, int amount) {
-        addStatistic(player, statistic, null, amount);
+        addStatistic(player, statistic, null, null, amount);
     }
 
     public void addStatistic(Player player, Statistic statistic, Material material, int amount) {
-        Main.getInstance().getStatisticsManager().getStatistic(player).orElse(Main.getInstance().getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, amount);
+        addStatistic(player, statistic, material, null, amount);
+    }
+
+    public void addStatistic(Player player, Statistic statistic, EntityType entityType, int amount) {
+        addStatistic(player, statistic, null, entityType, amount);
+    }
+
+    private void addStatistic(Player player, Statistic statistic, Material material, EntityType entityType, int amount) {
+        Main.getInstance().getStatisticsManager().getStatistic(player).orElse(Main.getInstance().getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, entityType, amount);
     }
 
     private PlayerStatistic createStatistic(Player player) {

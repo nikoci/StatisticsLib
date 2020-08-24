@@ -8,14 +8,13 @@ public enum Statistic {
     BLOCKS_BROKEN("blocksbroken", Substatistic.MATERIAL),
     ITEMS_BROKEN("itemsbroken", Substatistic.MATERIAL),
     ITEMS_ENCHANTED("itemsenchanted", Substatistic.MATERIAL),
+    MOB_KILLS("mobkills", Substatistic.ENTITY),
     DEATHS("deaths", Substatistic.NONE),
     PLAYER_KILLS("playerkills", Substatistic.NONE),
-    MOB_KILLS("mobkills", Substatistic.NONE),
     ITEMS_DROPPED("itemsdropped", Substatistic.NONE),
     DAMAGE_DEALT("damagedealt", Substatistic.NONE),
     DAMAGE_TAKEN("damagetaken", Substatistic.NONE),
     ITEMS_CRAFTED("itemscrafted", Substatistic.NONE);
-
 
 
     private final String key;

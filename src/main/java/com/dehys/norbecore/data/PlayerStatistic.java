@@ -63,7 +63,7 @@ public class PlayerStatistic {
         addStatistic(statistic, null, entityType, amount);
     }
 
-    private void addStatistic(@NotNull Statistic statistic, Material material, EntityType entityType, int amount) {
+    void addStatistic(@NotNull Statistic statistic, Material material, EntityType entityType, int amount) {
        switch (statistic.getSubstatistic()) {
            case MATERIAL:
                assert material!=null;
