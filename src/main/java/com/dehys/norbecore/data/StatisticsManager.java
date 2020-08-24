@@ -1,5 +1,6 @@
 package com.dehys.norbecore.data;
 
+import com.dehys.norbecore.enums.Substatistic;
 import com.dehys.norbecore.main.Main;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -25,21 +26,59 @@ public class StatisticsManager {
     }
 
 
+
+    /**
+     * This method gets the {@link PlayerStatistic} for a specific player
+     * @param player the player whose {@link PlayerStatistic} wants to be accessed
+     * @return this returns an {@link Optional} containing a {@link PlayerStatistic}
+     * object of the player or an {@link Optional#empty()} if no Statistics for the player
+     * could be found (Due to the Statistic not being fetched or the player not having a statistic yet)
+     */
     public Optional<PlayerStatistic> getStatistic(Player player) {
         return getStatistic(player.getUniqueId());
     }
 
+
+
+    /**
+     * This method gets the {@link PlayerStatistic} for a specific player
+     * @param player the player whose {@link PlayerStatistic} wants to be accessed
+     * @return this returns an {@link Optional} containing a {@link PlayerStatistic}
+     * object of the player or an {@link Optional#empty()} if no Statistics for the player
+     * could be found (Due to the Statistic not being fetched or the player not having a statistic yet)
+     *
+     * This method is similar to {@link StatisticsManager#getStatistic(Player)}
+     * except it accepts an {@link OfflinePlayer} as a parameter
+     */
     public Optional<PlayerStatistic> getStatistic(OfflinePlayer player) {
         return getStatistic(player.getUniqueId());
     }
 
+
+
+    /**
+     * This method gets the {@link PlayerStatistic} for a specific player
+     * @param uuid the uuid of the player whose {@link PlayerStatistic} wants to be accessed
+     * @return this returns an {@link Optional} containing a {@link PlayerStatistic}
+     * object of the player or an {@link Optional#empty()} if no Statistics for the player
+     * could be found (Due to the Statistic not being fetched or the player not having a statistic yet)
+     */
     public Optional<PlayerStatistic> getStatistic(UUID uuid) {
         return Optional.ofNullable(playerStatistics.get(uuid));
     }
 
 
+    /**
+     * This method fetches the {@link PlayerStatistic} of a player from the
+     * MySQL-Database
+     * @param uuid the uuid of the player whose {@link PlayerStatistic} wants to be fetched
+     * @return this returns an {@link Optional} containing a {@link PlayerStatistic}
+     * object of the player or an {@link Optional#empty()} if no Statistics for the player
+     * could be found
+     */
     private Optional<PlayerStatistic> fetchStatistics(UUID uuid) {
         Optional<String> userid = Main.getInstance().getUserData().getPlayerID(uuid);
+        if(getStatistic(uuid).isPresent()) throw new RuntimeException("Statistics for this user are already fetched");
         if (!userid.isPresent()) throw new RuntimeException("No UserID found for given UUID.");
         try {
 
@@ -98,59 +137,147 @@ public class StatisticsManager {
     }
 
 
-
-
-    private Optional<PlayerStatistic> fetchStatistics(UUID... uuids) {
+    /**
+     * This method allows for multiple PlayerStatistics to be fetched
+     * by calling {@link StatisticsManager#fetchStatistics(UUID)} for
+     * each player asynchronously
+     * @param uuids the uuid of the player whose {@link PlayerStatistic} wants to be fetched
+     */
+    private void fetchStatistics(UUID... uuids) {
         Thread thread = new Thread(() -> {
             for (UUID uuid : uuids) {
                 fetchStatistics(uuid);
             }
         });
         thread.start();
-        return Optional.empty();
     }
 
+    /**
+     * This method returns the entire Map of fetched {@link PlayerStatistic}
+     * @return this returns a {@link HashMap} containing all fetched {@link PlayerStatistic}
+     */
     public HashMap<UUID, PlayerStatistic> getPlayerStatistics() {
         return playerStatistics;
     }
 
+
+
+    /**
+     * This method is meant to increase a {@link Statistic} with no (NONE) {@link Substatistic}
+     * @param player the player whose statistic should be increased
+     * @param statistic the statistic that wants to be increased
+     * @param amount the value by which the statistic should be increased
+     *
+     * This method is similar to {@link PlayerStatistic#addStatistic(Statistic, int)}
+     * but does not require the {@link PlayerStatistic} object of the player
+     */
     public void addStatistic(Player player, Statistic statistic, int amount) {
         addStatistic(player, statistic, null, null, amount);
     }
 
+
+
+    /**
+     * This method is meant to increase a {@link Statistic} with a MATERIAL {@link Substatistic}
+     * @param player the player whose statistic should be increased
+     * @param statistic the statistic that wants to be increased
+     * @param material define the {@link Material} of the statistic
+     * @param amount the value by which the statistic should be increased
+     *
+     * This method is similar to {@link PlayerStatistic#addStatistic(Statistic, Material, int)}
+     * but does not require the {@link PlayerStatistic} object of the player
+     */
     public void addStatistic(Player player, Statistic statistic, Material material, int amount) {
         addStatistic(player, statistic, material, null, amount);
     }
 
+
+
+    /**
+     * This method is meant to increase a {@link Statistic} with an ENTITY {@link Substatistic}
+     * @param player the player whose statistic should be increased
+     * @param statistic the statistic that wants to be increased
+     * @param entityType define the {@link EntityType} of a statistic
+     * @param amount the value by which the statistic should be increased
+     *
+     * This method is similar to {@link PlayerStatistic#addStatistic(Statistic, EntityType, int)}
+     * but does not require the {@link PlayerStatistic} object of the player
+     */
     public void addStatistic(Player player, Statistic statistic, EntityType entityType, int amount) {
         addStatistic(player, statistic, null, entityType, amount);
     }
 
+
+    /**
+     * This method is meant to increase a {@link Statistic} with a MATERIAL {@link Substatistic}
+     * @param player the player whose statistic should be increased
+     * @param statistic the statistic that wants to be increased
+     * @param material define the {@link Material} of the statistic
+     * @param entityType define the {@link EntityType} of a statistic
+     * @param amount the value by which the statistic should be increased
+     *
+     * This method is similar to {@link PlayerStatistic#addStatistic(Statistic, Material, int)}
+     * but does not require the {@link PlayerStatistic} object of the player
+     */
     private void addStatistic(Player player, Statistic statistic, Material material, EntityType entityType, int amount) {
         Main.getInstance().getStatisticsManager().getStatistic(player).orElse(Main.getInstance().getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, entityType, amount);
     }
 
+
+    /**
+     * This method is meant to create a new {@link PlayerStatistic} object
+     * @param player the player whose {@link PlayerStatistic} should be created
+     * @return this returns a new {@link PlayerStatistic} object for the player
+     */
     private PlayerStatistic createStatistic(Player player) {
         Main.getInstance().getUserData().registerPlayer(player);
         return createStatistic(player.getUniqueId());
     }
 
+
+    /**
+     * This method is meant to create a new {@link PlayerStatistic} object
+     * @param uuid the uuid of the player whose {@link PlayerStatistic} should be created
+     * @return this returns a new {@link PlayerStatistic} object for the player
+     */
     private PlayerStatistic createStatistic(UUID uuid) {
         PlayerStatistic statistic = new PlayerStatistic(uuid, Main.getInstance().getUserData().getPlayerID(uuid).orElseThrow(() -> new RuntimeException("Player was not registered due to an unknown error")));
         playerStatistics.put(uuid, statistic);
         return statistic;
     }
 
+
+    /**
+     * This method is meant to either fetch {@link StatisticsManager#fetchStatistics(UUID)} an existing {@link PlayerStatistic}
+     * from the MySQL-Database or {@link StatisticsManager#createStatistic(Player)}
+     * if no Statistic could be found on the database
+     * @param player the player whose {@link PlayerStatistic} should be fetched/created
+     * @return this returns either a new {@link PlayerStatistic} for the player
+     * or an existing one fetched from the MySQL-Database
+     */
     public PlayerStatistic fetchOrCreate(Player player) {
         return fetchOrCreate(player.getUniqueId());
     }
 
+
+
+    /**
+     * This method is meant to either fetch {@link StatisticsManager#fetchStatistics(UUID)} an existing {@link PlayerStatistic}
+     * from the MySQL-Database or {@link StatisticsManager#createStatistic(Player)}
+     * if no Statistic could be found on the database
+     * @param uuid the uuid of the player whose {@link PlayerStatistic} should be fetched/created
+     * @return this returns either a new {@link PlayerStatistic} for the player
+     * or an existing one fetched from the MySQL-Database
+     */
     public PlayerStatistic fetchOrCreate(UUID uuid) {
         Optional<PlayerStatistic> statistic = fetchStatistics(uuid);
         return statistic.orElseGet(() -> createStatistic(uuid));
     }
 
-
+    /**
+     * This method is meant to save all currently cached {@link PlayerStatistic}
+     * from {@link StatisticsManager#getPlayerStatistics()} asynchronously
+     */
     public void saveStatistics() {
 
         new Thread(() -> {
