@@ -6,13 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="NorbeCore" />
-        <module name="norbecore" />
-<<<<<<< HEAD
-        <module name="playerstatistics" />
-=======
         <module name="PlayerStatistics" />
->>>>>>> 1ab80584270ff75c3008a2e7b8e27fa0e215df06
       </profile>
     </annotationProcessing>
   </component>

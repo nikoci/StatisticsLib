@@ -5,6 +5,7 @@ import com.dehys.norbecore.main.Main;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import com.dehys.norbecore.enums.Statistic;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import java.sql.PreparedStatement;
@@ -50,23 +51,46 @@ public class StatisticsManager {
             while (resultSet.next()) {
                 plainStatistics.put(resultSet.getString("statistic"), resultSet.getInt("amount"));
             }
+            
+            /*
+            Retrieve material-statistics from different table
+             */
             preparedStatement = SQL.prepareStatement("SELECT statistic, material, amount FROM materialstatistics WHERE userid = ?");
             preparedStatement.setString(1, userid.get());
             resultSet = preparedStatement.executeQuery();
 
             HashMap<String, HashMap<Material, Integer>> materialStatistics = new HashMap<>();
-            HashMap<Material, Integer> innerMap;
+            HashMap<Material, Integer> innerMapMAT;
             while (resultSet.next()) {
                 if(materialStatistics.containsKey(resultSet.getString("statistic"))) {
-                    innerMap = materialStatistics.get(resultSet.getString("statistic"));
-                    innerMap.put(Material.getMaterial(resultSet.getString("material")), resultSet.getInt("amount"));
+                    innerMapMAT = materialStatistics.get(resultSet.getString("statistic"));
+                    innerMapMAT.put(Material.getMaterial(resultSet.getString("material")), resultSet.getInt("amount"));
                 } else {
-                    innerMap = new HashMap<>();
-                    innerMap.put(Material.getMaterial(resultSet.getString("material")), resultSet.getInt("amount"));
-                    materialStatistics.put(resultSet.getString("statistic"), innerMap);
+                    innerMapMAT = new HashMap<>();
+                    innerMapMAT.put(Material.getMaterial(resultSet.getString("material")), resultSet.getInt("amount"));
+                    materialStatistics.put(resultSet.getString("statistic"), innerMapMAT);
                 }
             }
-            return Optional.of(new PlayerStatistic(uuid, userid.get(), plainStatistics, materialStatistics));
+
+            preparedStatement = SQL.prepareStatement("SELECT statistic, entity, amount FROM entitystatistics WHERE userid = ?");
+            preparedStatement.setString(1, userid.get());
+            resultSet = preparedStatement.executeQuery();
+
+            HashMap<String, HashMap<EntityType, Integer>> entityStatistics = new HashMap<>();
+            HashMap<EntityType, Integer> innerMapENT;
+            while (resultSet.next()) {
+                if(entityStatistics.containsKey(resultSet.getString("statistic"))) {
+                    innerMapENT = entityStatistics.get(resultSet.getString("statistic"));
+                    innerMapENT.put(EntityType.valueOf(resultSet.getString("entity")), resultSet.getInt("amount"));
+                } else {
+                    innerMapENT = new HashMap<>();
+                    innerMapENT.put(EntityType.valueOf(resultSet.getString("entity")), resultSet.getInt("amount"));
+                    entityStatistics.put(resultSet.getString("statistic"), innerMapENT);
+                }
+            }
+            
+            
+            return Optional.of(new PlayerStatistic(uuid, userid.get(), plainStatistics, materialStatistics, entityStatistics));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

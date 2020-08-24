@@ -15,9 +15,9 @@ public enum Statistic {
 
 
 
-    private String key;
-    private Substatistic substatistic;
-    private Statistic(String key, Substatistic substatistic) {
+    private final String key;
+    private final Substatistic substatistic;
+    Statistic(String key, Substatistic substatistic) {
         this.key = key;
         this.substatistic = substatistic;
     }

@@ -5,6 +5,8 @@ import com.dehys.norbecore.enums.Statistic;
 import com.dehys.norbecore.enums.Substatistic;
 import com.sun.istack.internal.NotNull;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
+
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,6 +17,7 @@ public class PlayerStatistic {
     private final String userid;
     private final HashMap<String, Integer> plainStatistics;
     private final HashMap<String, HashMap<Material, Integer>> materialStatistics;
+    private final HashMap<String, HashMap<EntityType, Integer>> entityStatistics;
 
 
     public PlayerStatistic(final UUID uuid, final String userid) {
@@ -23,13 +26,16 @@ public class PlayerStatistic {
 
         plainStatistics = new HashMap<>();
         materialStatistics = new HashMap<>();
+        entityStatistics = new HashMap<>();
     }
 
-    public PlayerStatistic(final UUID uuid, final String userid, HashMap<String, Integer> plainStatistics, HashMap<String, HashMap<Material, Integer>> materialStatistics) {
+    public PlayerStatistic(final UUID uuid, final String userid, HashMap<String, Integer> plainStatistics,
+                           HashMap<String, HashMap<Material, Integer>> materialStatistics, HashMap<String, HashMap<EntityType, Integer>> entityStatistics) {
         this.uuid = uuid;
         this.userid = userid;
         this.plainStatistics = plainStatistics;
         this.materialStatistics = materialStatistics;
+        this.entityStatistics = entityStatistics;
 
     }
 
@@ -41,9 +47,19 @@ public class PlayerStatistic {
         return userid;
     }
 
-
+    public void addStatistic(@NotNull Statistic statistic, int amount) {
+        addStatistic(statistic, null, null, amount);
+    }
 
     public void addStatistic(@NotNull Statistic statistic, Material material, int amount) {
+       addStatistic(statistic, material, null, amount);
+    }
+    
+    public void addStatistic(@NotNull Statistic statistic, EntityType entityType, int amount) {
+        addStatistic(statistic, null, entityType, amount);
+    }
+
+    private void addStatistic(@NotNull Statistic statistic, Material material, EntityType entityType, int amount) {
        switch (statistic.getSubstatistic()) {
            case MATERIAL:
                assert material!=null;
@@ -51,7 +67,8 @@ public class PlayerStatistic {
                break;
 
            case ENTITY:
-               //Add when needed
+               assert entityType!=null;
+               
 
            case NONE:
                addPlainStatistic(statistic, amount);
@@ -59,17 +76,25 @@ public class PlayerStatistic {
     }
 
     public int getStatistic(@NotNull Statistic statistic) {
-        return getStatistic(statistic, null);
+        return getStatistic(statistic, null, null);
     }
 
     public int getStatistic(@NotNull Statistic statistic, Material material) {
+        return getStatistic(statistic, material, null);
+    }
+
+    public int getStatistic(@NotNull Statistic statistic, EntityType entityType) {
+        return getStatistic(statistic, null, entityType);
+    }
+
+    private int getStatistic(@NotNull Statistic statistic, Material material, EntityType entityType) {
         switch (statistic.getSubstatistic()) {
             case MATERIAL:
                 assert material!=null;
                 return getMaterialStatistic(statistic).isPresent() ? getMaterialStatistic(statistic).get().getOrDefault(material, 0) : 0;
             case ENTITY:
-                return 0;
-                //add when needed
+                assert entityType!=null;
+                return getEntityStatistic(statistic).isPresent() ? getEntityStatistic(statistic).get().getOrDefault(entityType, 0) : 0;
             case NONE:
                 return getPlainStatistic(statistic);
 
@@ -83,8 +108,13 @@ public class PlayerStatistic {
     }
 
     private Optional<HashMap<Material, Integer>> getMaterialStatistic(Statistic statistic) {
-        if(!statistic.hasSubstatistic()) return Optional.empty();
+        if(statistic.getSubstatistic()!=Substatistic.MATERIAL) return Optional.empty();
         return Optional.ofNullable(materialStatistics.get(statistic.getKey()));
+    }
+
+    private Optional<HashMap<EntityType, Integer>> getEntityStatistic(Statistic statistic) {
+        if(statistic.getSubstatistic()!=Substatistic.ENTITY) return Optional.empty();
+        return Optional.ofNullable(entityStatistics.get(statistic.getKey()));
     }
 
     private void addPlainStatistic(Statistic statistic, int value) {
@@ -115,8 +145,20 @@ public class PlayerStatistic {
         }
     }
 
-    public void addStatistic(@NotNull Statistic statistic, int amount) {
-        addStatistic(statistic, null, amount);
+    private void addEntityStatistic(Statistic statistic, EntityType entityType, int value) {
+        final String key = statistic.getKey();
+        if(statistic.getSubstatistic() != Substatistic.ENTITY) {
+            throw new IllegalArgumentException("Given Statistic has no entity substatistics");
+        }
+        HashMap<EntityType, Integer> entityMap;
+        if(!entityStatistics.containsKey(key)) {
+            entityMap = new HashMap<>();
+            entityMap.put(entityType, value);
+            entityStatistics.put(key, entityMap);
+        } else {
+            entityMap = entityStatistics.get(key);
+            entityMap.put(entityType, entityMap.get(entityType)+value);
+        }
     }
 
 
