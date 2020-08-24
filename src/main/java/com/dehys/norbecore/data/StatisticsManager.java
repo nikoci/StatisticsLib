@@ -1,6 +1,5 @@
 package com.dehys.norbecore.data;
 
-import com.dehys.norbecore.exceptions.StatisticAlreadyLoadedException;
 import com.dehys.norbecore.main.Main;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -10,15 +9,15 @@ import org.bukkit.entity.Player;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
 
+@SuppressWarnings({"unused", "RedundantSuppression"})
 public class StatisticsManager {
 
-    private HashMap<UUID, PlayerStatistic> playerStatistics;
+    private final HashMap<UUID, PlayerStatistic> playerStatistics;
 
     public StatisticsManager() {
         playerStatistics = new HashMap<>();

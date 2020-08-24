@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
 
+@SuppressWarnings({"unused", "RedundantSuppression"})
 public class PlayerStatistic {
 
     private final UUID uuid;
@@ -102,6 +103,9 @@ public class PlayerStatistic {
                 return 0;
         }
     }
+
+
+
 
     private Integer getPlainStatistic(@NotNull Statistic statistic) {
         return plainStatistics.getOrDefault(statistic.getKey(), 0);
