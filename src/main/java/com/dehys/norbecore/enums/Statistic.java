@@ -15,7 +15,8 @@ public enum Statistic {
     ITEMS_DROPPED("itemsdropped", Substatistic.NONE),
     DAMAGE_DEALT("damagedealt", Substatistic.NONE),
     DAMAGE_TAKEN("damagetaken", Substatistic.NONE),
-    ITEMS_CRAFTED("itemscrafted", Substatistic.NONE);
+    ITEMS_CRAFTED("itemscrafted", Substatistic.NONE),
+    FISH_CAUGHT("fishcaught", Substatistic.NONE);
 
 
     private final String key;
