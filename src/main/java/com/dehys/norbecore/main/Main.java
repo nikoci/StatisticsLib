@@ -56,6 +56,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EntityDamageListener(), this);
         getServer().getPluginManager().registerEvents(new ItemBreakListener(), this);
         getServer().getPluginManager().registerEvents(new ItemCraftListener(), this);
+        getServer().getPluginManager().registerEvents(new EnchantListener(), this);
     }
 
     public StatisticsManager getStatisticsManager() {

@@ -5,6 +5,7 @@ public enum Statistic {
 
     BLOCKS_BROKEN("blocksbroken", Substatistic.MATERIAL),
     ITEMS_BROKEN("itemsbroken", Substatistic.MATERIAL),
+    ITEMS_ENCHANTED("itemsenchanted", Substatistic.MATERIAL),
     DEATHS("deaths", Substatistic.NONE),
     PLAYER_KILLS("playerkills", Substatistic.NONE),
     MOB_KILLS("mobkills", Substatistic.NONE),
