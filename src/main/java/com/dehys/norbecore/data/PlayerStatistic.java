@@ -23,7 +23,12 @@ public class PlayerStatistic {
     private final HashMap<String, HashMap<Material, Integer>> materialStatistics;
     private final HashMap<String, HashMap<EntityType, Integer>> entityStatistics;
 
-
+    /**
+     * This is the main constructor used for creating a new and empty {@link PlayerStatistic} object
+     *
+     * @param uuid   the uuid of the player this object will be destined to
+     * @param userid another, shorter id of the player, which is used internally to access data from the SQL-Database
+     */
     public PlayerStatistic(final UUID uuid, final String userid) {
         this.uuid = uuid;
         this.userid = userid;
@@ -33,6 +38,17 @@ public class PlayerStatistic {
         entityStatistics = new HashMap<>();
     }
 
+
+    /**
+     * This is the constructor used for creating a new {@link PlayerStatistic} object
+     * for a player who already has existing statistics
+     *
+     * @param uuid               the uuid of the player this object will be destined to
+     * @param userid             another, shorter id of the player, which is used internally to access data from the SQL-Database
+     * @param plainStatistics    a map of all statistics which have no (NONE) {@link Substatistic}
+     * @param materialStatistics a map of all statistics which have a MATERIAL {@link Substatistic}
+     * @param entityStatistics   a map of all statistics which have an ENTITY {@link Substatistic}
+     */
     public PlayerStatistic(final UUID uuid, final String userid, HashMap<String, Integer> plainStatistics,
                            HashMap<String, HashMap<Material, Integer>> materialStatistics, HashMap<String, HashMap<EntityType, Integer>> entityStatistics) {
         this.uuid = uuid;
@@ -43,13 +59,26 @@ public class PlayerStatistic {
 
     }
 
+
+    /**
+     * Getter for players UUID
+     *
+     * @return returns the {@link UUID} of the {@link org.bukkit.entity.Player}
+     */
     public UUID getUUID() {
         return uuid;
     }
 
+
+    /**
+     * Getter for players UserID
+     *
+     * @return returns the UserID of a player, which is an internal ID for accessing data from the SQL-Database
+     */
     public String getUserID() {
         return userid;
     }
+
 
     /**
      * This method is meant to increase a {@link Statistic} with no (NONE) {@link Substatistic}
