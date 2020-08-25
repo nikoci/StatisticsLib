@@ -9,6 +9,7 @@ public enum Statistic {
     ITEMS_BROKEN("itemsbroken", Substatistic.MATERIAL),
     ITEMS_ENCHANTED("itemsenchanted", Substatistic.MATERIAL),
     ITEMS_DROPPED("itemsdropped", Substatistic.MATERIAL),
+    ITEMS_USED("itemsused", Substatistic.MATERIAL),
     MOB_KILLS("mobkills", Substatistic.ENTITY),
     TARGETS_HIT("targetshit", Substatistic.ENTITY),
     DEATHS("deaths", Substatistic.NONE),

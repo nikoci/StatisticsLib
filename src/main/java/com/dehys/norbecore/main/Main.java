@@ -59,6 +59,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EnchantListener(), this);
         getServer().getPluginManager().registerEvents(new ProjectileHitListener(), this);
         getServer().getPluginManager().registerEvents(new FishListener(), this);
+        getServer().getPluginManager().registerEvents(new InteractListener(), this);
     }
 
     public StatisticsManager getStatisticsManager() {
