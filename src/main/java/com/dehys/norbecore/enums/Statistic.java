@@ -10,13 +10,13 @@ public enum Statistic {
     ITEMS_ENCHANTED("itemsenchanted", Substatistic.MATERIAL),
     ITEMS_DROPPED("itemsdropped", Substatistic.MATERIAL),
     ITEMS_USED("itemsused", Substatistic.MATERIAL),
+    ITEMS_CRAFTED("itemscrafted", Substatistic.MATERIAL),
     MOB_KILLS("mobkills", Substatistic.ENTITY),
     TARGETS_HIT("targetshit", Substatistic.ENTITY),
     DEATHS("deaths", Substatistic.NONE),
     PLAYER_KILLS("playerkills", Substatistic.NONE),
     DAMAGE_DEALT("damagedealt", Substatistic.NONE),
     DAMAGE_TAKEN("damagetaken", Substatistic.NONE),
-    ITEMS_CRAFTED("itemscrafted", Substatistic.NONE),
     FISH_CAUGHT("fishcaught", Substatistic.NONE);
 
 

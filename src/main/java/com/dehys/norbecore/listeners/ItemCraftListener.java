@@ -7,12 +7,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
 
+import java.util.Objects;
+
 public class ItemCraftListener implements Listener {
 
     @EventHandler
     public void onCraftItem(CraftItemEvent event) {
         assert event.getWhoClicked() instanceof Player;
-        Main.getInstance().getStatisticsManager().addStatistic((Player) event.getWhoClicked(), Statistic.ITEMS_CRAFTED, 1);
+        if(event.getCurrentItem() == null) return;
+        Main.getInstance().getStatisticsManager().addStatistic((Player) event.getWhoClicked(), Statistic.ITEMS_CRAFTED, event.getCurrentItem().getType(), event.getCurrentItem().getAmount());
     }
 
 }
