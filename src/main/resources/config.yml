@@ -1,4 +1,5 @@
-#Configuration File for NorbeCore
+#Configuration File for PlayerStatistics
+#Developed by dehys and OverDodo
 
 # prefix: a prefix the plugin will use for all internal and external messages
 prefix: "&7[&bNorbe&3Core&7] "
@@ -19,3 +20,6 @@ sql:
 savedata:
   # period: the delay between each time the plugin saves all cached data to the sql database (in ticks -> 20 = 1 second)
   period: 6000
+
+  # clearcache: if set to true, every time all cached data is saved to the sql database, the cache will be cleared
+  clearcache: true

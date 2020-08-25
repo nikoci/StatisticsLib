@@ -8,6 +8,7 @@ import java.util.Optional;
 public class ConfigManager {
 
     public long SAVEDATAPERIOD;
+    public boolean clearCacheOnSave;
     public String PREFIX;
     private final Plugin plugin;
 
@@ -23,6 +24,7 @@ public class ConfigManager {
     private void refreshVariables() {
         SAVEDATAPERIOD = plugin.getConfig().getLong("savedata.period");
         PREFIX = plugin.getConfig().getString("prefix");
+        clearCacheOnSave = plugin.getConfig().getBoolean("savedata.clearcache");
     }
 
     public Optional<String> getString(String path) {

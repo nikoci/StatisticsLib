@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.logging.Level;
 
 @SuppressWarnings({"unused", "RedundantSuppression"})
 public class StatisticsManager {
@@ -294,4 +295,29 @@ public class StatisticsManager {
 
     }
 
+
+    /**
+     * This method is for internal saving only
+     * @param clearCache decides whether the cache should be cleared after saving or not
+     */
+    void saveStatistics(boolean clearCache) {
+
+        Main.getInstance().getLogger().log(Level.INFO, "All cached Statistics will now be saved...");
+            for (Map.Entry<UUID, PlayerStatistic> entry : playerStatistics.entrySet()) {
+                UUID uuid = entry.getKey();
+                PlayerStatistic statistic = entry.getValue();
+                Optional<String> userID = Main.getInstance().getUserData().getPlayerID(uuid);
+                if(!userID.isPresent()) continue;
+                statistic.savePlainStatistics();
+                statistic.saveMaterialStatistics();
+                statistic.saveEntityStatistics();
+            }
+            Main.getInstance().getLogger().log(Level.INFO, "All Statistics have successfully been saved");
+            if(clearCache) {
+                final int entries = playerStatistics.size();
+                playerStatistics.clear();
+                Main.getInstance().getLogger().log(Level.INFO, entries + " cached entries have been cleared.");
+            }
+
+    }
 }

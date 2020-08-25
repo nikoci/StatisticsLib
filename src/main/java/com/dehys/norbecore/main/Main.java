@@ -1,11 +1,10 @@
 package com.dehys.norbecore.main;
 
-import com.dehys.norbecore.data.ConfigManager;
-import com.dehys.norbecore.data.SQL;
-import com.dehys.norbecore.data.StatisticsManager;
-import com.dehys.norbecore.data.UserData;
+import com.dehys.norbecore.data.*;
 import com.dehys.norbecore.listeners.*;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Timer;
 
 public class Main extends JavaPlugin {
 
@@ -29,7 +28,8 @@ public class Main extends JavaPlugin {
         statisticsManager = new StatisticsManager();
         setupListeners();
 
-
+        Timer timer = new Timer();
+        timer.schedule(new StatisticsTimer(), getConfigManager().SAVEDATAPERIOD, getConfigManager().SAVEDATAPERIOD);
     }
 
     @Override
