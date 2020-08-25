@@ -82,8 +82,9 @@ public class PlayerStatistic {
 
     /**
      * This method is meant to increase a {@link Statistic} with no (NONE) {@link Substatistic}
+     *
      * @param statistic the statistic that wants to be increased
-     * @param amount the value by which the statistic should be increased
+     * @param amount    the value by which the statistic should be increased
      */
     public void addStatistic(@NotNull Statistic statistic, int amount) {
         addStatistic(statistic, null, null, amount);
@@ -91,9 +92,10 @@ public class PlayerStatistic {
 
     /**
      * This method is meant to increase a {@link Statistic} with a MATERIAL {@link Substatistic}
+     *
      * @param statistic the statistic that wants to be increased
-     * @param material define the {@link Material} of the statistic
-     * @param amount the value by which the statistic should be increased
+     * @param material  define the {@link Material} of the statistic
+     * @param amount    the value by which the statistic should be increased
      */
     public void addStatistic(@NotNull Statistic statistic, Material material, int amount) {
         addStatistic(statistic, material, null, amount);
@@ -101,9 +103,10 @@ public class PlayerStatistic {
 
     /**
      * This method is meant to increase a {@link Statistic} with a ENTITY {@link Substatistic}
-     * @param statistic the statistic that wants to be increased
+     *
+     * @param statistic  the statistic that wants to be increased
      * @param entityType define the {@link EntityType} of the statistic
-     * @param amount the value by which the statistic should be increased
+     * @param amount     the value by which the statistic should be increased
      */
     public void addStatistic(@NotNull Statistic statistic, EntityType entityType, int amount) {
         addStatistic(statistic, null, entityType, amount);
@@ -127,6 +130,7 @@ public class PlayerStatistic {
 
     /**
      * This method is meant for {@link Statistic} with no (NONE) {@link Substatistic}
+     *
      * @param statistic the statistic that wants to be retrieved
      * @return returns the statistic selected
      * If a Statistic with Substatistics has been selected,
@@ -138,8 +142,9 @@ public class PlayerStatistic {
 
     /**
      * This method is meant for {@link Statistic} with a MATERIAL {@link Substatistic}
+     *
      * @param statistic the statistic that wants to be retrieved
-     * @param material define the {@link Material} of the statistic
+     * @param material  define the {@link Material} of the statistic
      * @return returns the statistic specified by the {@link Material}
      * Will return the sum of all the Substatistics of that Statistic if material = null
      */
@@ -149,7 +154,8 @@ public class PlayerStatistic {
 
     /**
      * This method is meant for {@link Statistic} with a ENTITY {@link Substatistic}
-     * @param statistic the statistic that wants to be retrieved
+     *
+     * @param statistic  the statistic that wants to be retrieved
      * @param entityType define the {@link EntityType} of the statistic
      * @return returns the statistic specified by the {@link EntityType}
      * Will return the sum of all the Substatistics of that Statistic if entityType = null
@@ -192,7 +198,6 @@ public class PlayerStatistic {
     public void saveMaterialStatistics() {
         try {
             PreparedStatement materialStatement = SQL.prepareStatement("INSERT INTO materialstatistics (userid, statistic, material, amount) VALUES (?, ?, ?, ?)");
-            PreparedStatement entityStatement = SQL.prepareStatement("INSERT INTO plainstatistics (userid, statistic, entity, amount) VALUES (?, ?, ?, ?)");
             materialStatement.setString(1, userid);
             for (String statistic : materialStatistics.keySet()) {
                 HashMap<Material, Integer> innerMap = materialStatistics.get(statistic);
@@ -238,16 +243,13 @@ public class PlayerStatistic {
         switch (statistic.getSubstatistic()) {
 
             case MATERIAL:
-                if (material != null)
-                    return getMaterialStatistic(statistic).isPresent() ? getMaterialStatistic(statistic).get().getOrDefault(material, 0) : 0;
-                else
-                    return getMaterialStatistic(statistic).isPresent() ? getMaterialStatistic(statistic).get().values().stream().mapToInt(Integer::intValue).sum() : 0;
-
+                return getMaterialStatistic(statistic).isPresent() ?
+                        (material != null ? getMaterialStatistic(statistic).get().getOrDefault(material, 0)
+                                : getMaterialStatistic(statistic).get().values().stream().mapToInt(Integer::intValue).sum()) : 0;
             case ENTITY:
-                if (entityType != null)
-                    return getEntityStatistic(statistic).isPresent() ? getEntityStatistic(statistic).get().getOrDefault(entityType, 0) : 0;
-                else
-                    return getEntityStatistic(statistic).isPresent() ? getEntityStatistic(statistic).get().values().stream().mapToInt(Integer::intValue).sum() : 0;
+                return getEntityStatistic(statistic).isPresent() ?
+                        (entityType != null ? getEntityStatistic(statistic).get().getOrDefault(entityType, 0)
+                                : getEntityStatistic(statistic).get().values().stream().mapToInt(Integer::intValue).sum()) : 0;
             case NONE:
                 return getPlainStatistic(statistic);
 
