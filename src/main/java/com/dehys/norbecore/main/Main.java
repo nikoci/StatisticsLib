@@ -24,6 +24,7 @@ public class Main extends JavaPlugin {
         if (!SQL.connect()) return;
         SQL.setupTables();
         userData = UserData.retrieveData();
+        saveDefaultConfig();
         configManager = new ConfigManager(this);
         statisticsManager = new StatisticsManager();
         setupListeners();
