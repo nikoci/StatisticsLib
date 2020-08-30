@@ -197,6 +197,14 @@ public class PlayerStatistic {
      */
     public void saveMaterialStatistics() {
         try {
+            /*
+            PreparedStatement checkStatement = SQL.prepareStatement("SELECT amount FROM materialstatistics WHERE userid = ? AND statistic = ? AND material = ?");
+            checkStatement.setString(1, userid);
+            PreparedStatement materialStatementINSERT = SQL.prepareStatement("INSERT INTO materialstatistics (userid, statistic, material, amount) VALUES (?, ?, ?, ?)");
+            materialStatementINSERT.setString(1, userid);
+            PreparedStatement materialStatementUPDATE = SQL.prepareStatement("UPDATE materialstatistics SET amount = ? WHERE userid = ? AND statistic = ? AND material = ?");
+            materialStatementUPDATE.setString(1, userid);
+             */
             PreparedStatement materialStatement = SQL.prepareStatement("INSERT INTO materialstatistics (userid, statistic, material, amount) VALUES (?, ?, ?, ?)");
             materialStatement.setString(1, userid);
             for (String statistic : materialStatistics.keySet()) {
@@ -239,6 +247,14 @@ public class PlayerStatistic {
         }
     }
 
+    /**
+     * This method is used internally to get a statistic of any type
+     *
+     * @param statistic  the {@link Statistic} that wants to be retrieved
+     * @param material   define the {@link Material} of the statistic
+     * @param entityType define the {@link EntityType} of the statistic
+     * @return returns the value of the {@link Statistic} or 0 if it cannot be found.
+     */
     private int getStatistic(@NotNull Statistic statistic, Material material, EntityType entityType) {
         switch (statistic.getSubstatistic()) {
 
