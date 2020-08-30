@@ -2,7 +2,7 @@
 #Developed by dehys and OverDodo
 
 # prefix: a prefix the plugin will use for all internal and external messages
-prefix: "&7[&bNorbe&3Core&7] "
+prefix: "&7[&bPlayerStatistics&7] "
 
 sql:
   # host: the host address of your sql server (if hosted on same device: localhost)

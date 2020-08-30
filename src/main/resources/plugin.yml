@@ -1,4 +1,4 @@
-name: NorbeCore
+name: PlayerStatistics
 authors: [dehys, OverDodo]
 version: 1.0
 main: com.dehys.norbecore.main.Main
