@@ -1,10 +1,10 @@
 package com.dehys.norbecore.data;
 
+import com.dehys.norbecore.enums.Statistic;
 import com.dehys.norbecore.enums.Substatistic;
 import com.dehys.norbecore.main.Main;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
-import com.dehys.norbecore.enums.Statistic;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
@@ -222,6 +222,8 @@ public class StatisticsManager {
      */
     private void addStatistic(Player player, Statistic statistic, Material material, EntityType entityType, int amount) {
         Main.getInstance().getStatisticsManager().getStatistic(player).orElse(Main.getInstance().getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, entityType, amount);
+        System.out.println("Added statistic " + statistic.name() + " with material " + material + " and entity " + entityType.name() + " with amount " + amount + " to player " + player.getName());
+        System.out.println("Player " + player.getName() + "now has a total of " + getStatistic(player).get().getStatistic(statistic) + "for " + statistic.name());
     }
 
 
@@ -271,6 +273,7 @@ public class StatisticsManager {
      * or an existing one fetched from the MySQL-Database
      */
     public PlayerStatistic fetchOrCreate(UUID uuid) {
+        System.out.println("fetchOrCreate -> " + uuid.toString());
         Optional<PlayerStatistic> statistic = fetchStatistics(uuid);
         return statistic.orElseGet(() -> createStatistic(uuid));
     }
