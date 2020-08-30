@@ -37,6 +37,7 @@ public class Main extends JavaPlugin {
     public void onDisable() {
         super.onDisable();
         userData.saveData();
+        statisticsManager.saveStatistics();
     }
 
 

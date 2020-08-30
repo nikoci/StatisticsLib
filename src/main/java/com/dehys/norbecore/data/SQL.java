@@ -34,7 +34,7 @@ public class SQL {
 
     public static void setupTables() {
         try {
-            SQL.prepareStatement("CREATE TABLE IF NOT EXISTS userdata (uuid VARCHAR(36), username VARCHAR(16), userid VARCHAR(20))").executeUpdate();
+            SQL.prepareStatement("CREATE TABLE IF NOT EXISTS userdata (uuid VARCHAR(36) UNIQUE, username VARCHAR(16), userid VARCHAR(20))").executeUpdate();
             SQL.prepareStatement("CREATE TABLE IF NOT EXISTS plainstatistics (userid VARCHAR(72), statistic VARCHAR(20), amount BIGINT)").executeUpdate();
             SQL.prepareStatement("CREATE TABLE IF NOT EXISTS materialstatistics (userid VARCHAR(72), statistic VARCHAR(20), material VARCHAR(30), amount BIGINT)").executeUpdate();
             SQL.prepareStatement("CREATE TABLE IF NOT EXISTS entitystatistics (userid VARCHAR(72), statistic VARCHAR(20), entity VARCHAR(30), amount BIGINT)").executeUpdate();

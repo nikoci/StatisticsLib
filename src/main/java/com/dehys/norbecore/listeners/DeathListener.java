@@ -1,7 +1,7 @@
 package com.dehys.norbecore.listeners;
 
-import com.dehys.norbecore.main.Main;
 import com.dehys.norbecore.enums.Statistic;
+import com.dehys.norbecore.main.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,7 +12,8 @@ public class DeathListener implements Listener {
 
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event) {
-        Main.getInstance().getStatisticsManager().addStatistic((Player) event.getEntity(), Statistic.DEATHS, 1);
+        if (event.getEntity() instanceof Player)
+            Main.getInstance().getStatisticsManager().addStatistic((Player) event.getEntity(), Statistic.DEATHS, 1);
 
         if (event.getEntity().getKiller() != null) {
             Main.getInstance().getStatisticsManager().addStatistic(event.getEntity().getKiller(), (event.getEntity() instanceof Player ? Statistic.PLAYER_KILLS : Statistic.MOB_KILLS), (event.getEntity() instanceof Player ? null : event.getEntityType()), 1);

@@ -65,7 +65,8 @@ public class StatisticsManager {
      * could be found (Due to the Statistic not being fetched or the player not having a statistic yet)
      */
     public Optional<PlayerStatistic> getStatistic(UUID uuid) {
-        return Optional.ofNullable(playerStatistics.get(uuid));
+        if (playerStatistics.get(uuid) != null) System.out.println("IT IS PRESENT");
+        return Optional.ofNullable(playerStatistics.getOrDefault(uuid, null));
     }
 
 
@@ -222,7 +223,7 @@ public class StatisticsManager {
      * but does not require the {@link PlayerStatistic} object of the player
      */
     private void addStatistic(Player player, Statistic statistic, Material material, EntityType entityType, int amount) {
-        Main.getInstance().getStatisticsManager().getStatistic(player).orElse(Main.getInstance().getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, entityType, amount);
+        Main.getInstance().getStatisticsManager().getStatistic(player).orElseGet(() -> Main.getInstance().getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, entityType, amount);
         System.out.println("Added statistic " + statistic.name() + " with material " + material + " with amount " + amount + " to player " + player.getName());
         System.out.println("Player " + player.getName() + "now has a total of " + getStatistic(player).get().getStatistic(statistic) + "for " + statistic.name());
     }
@@ -275,6 +276,7 @@ public class StatisticsManager {
      */
     public PlayerStatistic fetchOrCreate(UUID uuid) {
         System.out.println("fetchOrCreate -> " + uuid.toString());
+        if (getStatistic(uuid).isPresent()) return getStatistic(uuid).get();
         Optional<PlayerStatistic> statistic = fetchStatistics(uuid);
         return statistic.orElseGet(() -> createStatistic(uuid));
     }

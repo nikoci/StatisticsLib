@@ -297,7 +297,7 @@ public class PlayerStatistic {
             materialStatistics.put(key, materialMap);
         } else {
             materialMap = materialStatistics.get(key);
-            materialMap.put(material, materialMap.get(material) + value);
+            materialMap.put(material, (materialMap.containsKey(material) ? materialMap.get(material) + value : value));
         }
     }
 
@@ -313,7 +313,7 @@ public class PlayerStatistic {
             entityStatistics.put(key, entityMap);
         } else {
             entityMap = entityStatistics.get(key);
-            entityMap.put(entityType, entityMap.get(entityType) + value);
+            entityMap.put(entityType, (entityMap.containsKey(entityType) ? entityMap.get(entityType) + value : value));
         }
     }
 }

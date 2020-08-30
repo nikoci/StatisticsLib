@@ -39,13 +39,14 @@ public class UserData {
                 try {
                     UUID uuid = UUID.fromString(resultSet.getString("uuid"));
                     String playerName = resultSet.getString("username");
-                    String playerID = resultSet.getString("playerid");
+                    String playerID = resultSet.getString("userid");
                     players.put(uuid, playerName);
                     playerIDs.put(uuid, playerID);
                 } catch (NullPointerException exception) {
                     exception.printStackTrace();
                 }
             }
+            playerIDs.forEach((key, value) -> System.out.println(key + " -> " + value));
             return new UserData(players, playerIDs);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -79,7 +80,7 @@ public class UserData {
     public void registerPlayer(UUID uuid, String playerName) {
         players.put(uuid, playerName);
         if (!playerIDs.containsKey(uuid)) {
-            playerIDs.put(uuid, Util.generatePlayerID(6));
+            playerIDs.put(uuid, Util.generatePlayerID());
         }
     }
 
@@ -91,9 +92,11 @@ public class UserData {
         try {
             PreparedStatement preparedStatement = SQL.prepareStatement("INSERT INTO userdata (uuid, username, userid) VALUES (?,?,?) ON DUPLICATE KEY UPDATE username = ?");
             for (Map.Entry<UUID, String> entry : players.entrySet()) {
+                if (getPlayerID(entry.getKey()).isPresent()) System.out.println("IS PRESENT FOR " + entry.getValue());
+                else System.out.println("IS NOT PRESENT FOR " + entry.getValue());
                 preparedStatement.setString(1, entry.getKey().toString());
                 preparedStatement.setString(2, entry.getValue());
-                preparedStatement.setString(3, getPlayerID(entry.getKey()).orElse(Util.generatePlayerID(6)));
+                preparedStatement.setString(3, getPlayerID(entry.getKey()).orElseGet(Util::generatePlayerID));
                 preparedStatement.setString(4, entry.getValue());
                 preparedStatement.executeUpdate();
             }
