@@ -21,11 +21,11 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         super.onEnable();
         instance = this;
+        configManager = new ConfigManager(this);
         if (!SQL.connect()) return;
         SQL.setupTables();
         userData = UserData.retrieveData();
         saveDefaultConfig();
-        configManager = new ConfigManager(this);
         statisticsManager = new StatisticsManager();
         setupListeners();
 
