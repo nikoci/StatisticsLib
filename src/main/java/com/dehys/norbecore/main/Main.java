@@ -30,7 +30,7 @@ public class Main extends JavaPlugin {
         setupListeners();
 
         Timer timer = new Timer();
-        timer.schedule(new StatisticsTimer(), getConfigManager().SAVEDATAPERIOD, getConfigManager().SAVEDATAPERIOD);
+        timer.schedule(new StatisticsTimer(), getConfigManager().SAVEDATAPERIOD * 1000, getConfigManager().SAVEDATAPERIOD * 1000);
     }
 
     @Override

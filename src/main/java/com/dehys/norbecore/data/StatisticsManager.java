@@ -119,7 +119,7 @@ public class StatisticsManager {
             HashMap<String, HashMap<EntityType, Integer>> entityStatistics = new HashMap<>();
             HashMap<EntityType, Integer> innerMapENT;
             while (resultSet.next()) {
-                if(entityStatistics.containsKey(resultSet.getString("statistic"))) {
+                if (entityStatistics.containsKey(resultSet.getString("statistic"))) {
                     innerMapENT = entityStatistics.get(resultSet.getString("statistic"));
                     innerMapENT.put(EntityType.valueOf(resultSet.getString("entity")), resultSet.getInt("amount"));
                 } else {
@@ -128,9 +128,10 @@ public class StatisticsManager {
                     entityStatistics.put(resultSet.getString("statistic"), innerMapENT);
                 }
             }
-            
-            
-            return Optional.of(new PlayerStatistic(uuid, userid.get(), plainStatistics, materialStatistics, entityStatistics));
+
+            PlayerStatistic statistic = new PlayerStatistic(uuid, userid.get(), plainStatistics, materialStatistics, entityStatistics);
+            playerStatistics.put(uuid, statistic);
+            return Optional.of(statistic);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -222,7 +223,7 @@ public class StatisticsManager {
      */
     private void addStatistic(Player player, Statistic statistic, Material material, EntityType entityType, int amount) {
         Main.getInstance().getStatisticsManager().getStatistic(player).orElse(Main.getInstance().getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, entityType, amount);
-        System.out.println("Added statistic " + statistic.name() + " with material " + material + " and entity " + entityType.name() + " with amount " + amount + " to player " + player.getName());
+        System.out.println("Added statistic " + statistic.name() + " with material " + material + " with amount " + amount + " to player " + player.getName());
         System.out.println("Player " + player.getName() + "now has a total of " + getStatistic(player).get().getStatistic(statistic) + "for " + statistic.name());
     }
 

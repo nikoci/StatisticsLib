@@ -15,8 +15,8 @@ import java.util.UUID;
 @SuppressWarnings({"unused", "RedundantSuppression"})
 public class UserData {
 
-    private HashMap<UUID, String> players;
-    private HashMap<UUID, String> playerIDs;
+    private final HashMap<UUID, String> players;
+    private final HashMap<UUID, String> playerIDs;
 
 
     public UserData() {
@@ -89,11 +89,12 @@ public class UserData {
 
     public void saveData() {
         try {
-            PreparedStatement preparedStatement = SQL.prepareStatement("INSERT INTO userdata (uuid, username) VALUES (?,?) ON DUPLICATE KEY UPDATE username = ?");
+            PreparedStatement preparedStatement = SQL.prepareStatement("INSERT INTO userdata (uuid, username, userid) VALUES (?,?,?) ON DUPLICATE KEY UPDATE username = ?");
             for (Map.Entry<UUID, String> entry : players.entrySet()) {
                 preparedStatement.setString(1, entry.getKey().toString());
                 preparedStatement.setString(2, entry.getValue());
-                preparedStatement.setString(3, entry.getValue());
+                preparedStatement.setString(3, getPlayerID(entry.getKey()).orElse(Util.generatePlayerID(6)));
+                preparedStatement.setString(4, entry.getValue());
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException throwables) {
