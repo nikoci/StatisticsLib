@@ -22,7 +22,7 @@ public class ConfigManager {
     }
 
     private void refreshVariables() {
-        SAVEDATAPERIOD = plugin.getConfig().getLong("savedata.period");
+        SAVEDATAPERIOD = plugin.getConfig().getLong("savedata.period") * 1000;
         PREFIX = plugin.getConfig().getString("prefix");
         clearCacheOnSave = plugin.getConfig().getBoolean("savedata.clearcache");
     }

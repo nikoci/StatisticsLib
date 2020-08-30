@@ -12,10 +12,10 @@ sql:
   database: "norbecore"
 
   # username: the name of the sql user
-  username: "root"
+  username: "dodo"
 
   # password: the password of the sql user
-  password: "password"
+  password: "dodoisdodo"
 
 savedata:
   # period: the delay between each time the plugin saves all cached data to the sql database (in ticks -> 20 = 1 second)
