@@ -2,6 +2,7 @@ package com.dehys.norbecore.enums;
 
 import java.util.Arrays;
 
+@SuppressWarnings({"unused", "RedundantSuppression"})
 public enum Statistic {
 
 
@@ -22,6 +23,7 @@ public enum Statistic {
 
     private final String key;
     private final Substatistic substatistic;
+
     Statistic(String key, Substatistic substatistic) {
         this.key = key;
         this.substatistic = substatistic;

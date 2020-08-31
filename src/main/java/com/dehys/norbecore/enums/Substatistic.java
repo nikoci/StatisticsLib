@@ -4,6 +4,6 @@ public enum Substatistic {
 
     MATERIAL,
     ENTITY,
-    NONE;
+    NONE
 
 }
