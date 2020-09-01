@@ -11,9 +11,9 @@
   <a href="https://en.wikipedia.org/wiki/MIT_License"><img alt="Discord" src="https://img.shields.io/github/license/dream-n-delight/playerstatistics?color=%23f9a154&label=License&style=flat-square"></a>
 </p>
 <p align="center">
-  <a href="#white_check_mark-requirements">Dependencies</a> &#xa0; | &#xa0;
-  <a href="#checkered_flag-starting">Implementation</a> &#xa0; | &#xa0;
-  <a href="#memo-license">Getting Started</a> &#xa0;
+  <a href="https://github.com/Dream-n-Delight/PlayerStatistics/blob/pilot/README.md#dependencies">Dependencies</a> &#xa0; | &#xa0;
+  <a href="https://github.com/Dream-n-Delight/PlayerStatistics/blob/pilot/README.md#implementation">Implementation</a> &#xa0; | &#xa0;
+  <a href="https://github.com/Dream-n-Delight/PlayerStatistics/tree/pilot#getting-started">Getting Started</a> &#xa0;
 </p>
 
 *PlayerStatistics API makes storing and retrieving player statistics for player on a spigot/bukkit server alot easier. At its core, it stores every statistic for every player ever joined on a server onto your desired sql database. It handles all tables, sql functions and queries. You wanted to see how many diamond axes you've broken? We got it. You can either choose to [download](https://github.com/Dream-n-Delight/PlayerStatistics/releases) it as a spigot/bukkit plugin or use it as a library by following the steps down below.*
