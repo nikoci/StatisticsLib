@@ -1,7 +1,7 @@
 name: PlayerStatistics
 authors: [ dehys, OverDodo ]
-version: '1.0'
-main: 'com.dehys.norbecore.main.Main'
+version: '1.1.7'
+main: 'org.dreamndelight.playerstatistics.main.Main'
 api-version: '1.16'
 loadbefore:
   - StatisticsPlugin
