@@ -1,4 +1,4 @@
-package com.dehys.norbecore.enums;
+package org.dreamndelight.playerstatistics.enums;
 
 import java.util.Arrays;
 

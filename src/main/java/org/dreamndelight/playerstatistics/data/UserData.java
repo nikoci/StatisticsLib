@@ -1,6 +1,6 @@
-package com.dehys.norbecore.data;
+package org.dreamndelight.playerstatistics.data;
 
-import com.dehys.norbecore.main.Util;
+import org.dreamndelight.playerstatistics.main.Util;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 

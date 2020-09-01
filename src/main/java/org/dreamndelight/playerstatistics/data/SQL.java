@@ -1,6 +1,6 @@
-package com.dehys.norbecore.data;
+package org.dreamndelight.playerstatistics.data;
 
-import com.dehys.norbecore.main.Main;
+import org.dreamndelight.playerstatistics.main.Main;
 import org.bukkit.Bukkit;
 
 import java.sql.Connection;

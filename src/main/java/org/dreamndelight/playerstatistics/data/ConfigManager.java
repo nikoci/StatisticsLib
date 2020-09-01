@@ -1,4 +1,4 @@
-package com.dehys.norbecore.data;
+package org.dreamndelight.playerstatistics.data;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;

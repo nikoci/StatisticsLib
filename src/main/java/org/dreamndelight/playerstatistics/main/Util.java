@@ -1,4 +1,4 @@
-package com.dehys.norbecore.main;
+package org.dreamndelight.playerstatistics.main;
 
 public class Util {
 

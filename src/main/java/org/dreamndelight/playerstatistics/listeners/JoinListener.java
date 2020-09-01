@@ -1,6 +1,6 @@
-package com.dehys.norbecore.listeners;
+package org.dreamndelight.playerstatistics.listeners;
 
-import com.dehys.norbecore.main.Main;
+import org.dreamndelight.playerstatistics.main.Main;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;

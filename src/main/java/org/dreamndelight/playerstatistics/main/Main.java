@@ -1,8 +1,8 @@
-package com.dehys.norbecore.main;
+package org.dreamndelight.playerstatistics.main;
 
-import com.dehys.norbecore.data.*;
-import com.dehys.norbecore.listeners.*;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.dreamndelight.playerstatistics.data.*;
+import org.dreamndelight.playerstatistics.listeners.*;
 
 import java.util.Timer;
 

@@ -1,4 +1,4 @@
-package com.dehys.norbecore.listeners;
+package org.dreamndelight.playerstatistics.listeners;
 
 import org.bukkit.event.Listener;
 
