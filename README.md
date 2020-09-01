@@ -16,14 +16,10 @@
   <a href="#memo-license">Getting Started</a> &#xa0;
 </p>
 
-### Description ###
-
 *PlayerStatistics API makes storing and retrieving player statistics for player on a spigot/bukkit server alot easier. At its core, it stores every statistic for every player ever joined on a server onto your desired sql database. It handles all tables, sql functions and queries. You wanted to see how many diamond axes you've broken? We got it. You can either choose to [download](https://github.com/Dream-n-Delight/PlayerStatistics/releases) it as a spigot/bukkit plugin or use it as a library by following the steps down below.*
 
 **NOTE:** Maven support is coming soon. We are currently waiting for our project to be accepted to Maven Central.
 
-<br>
-<br>
 <br>
 <br>
 
@@ -35,13 +31,11 @@
   
 <br>
 <br>
-<br>
-<br>
 
 ### Implementation ###
 
 <h5>Maven</h5>
-*Copy and paste this into your pom.xml file*
+
 ```xml
 <description>
     Coming Soon
@@ -52,13 +46,10 @@
 
 
 <h5>Raw Jar file</h5>
-*Depending on what IDE you use, implementation with external jar file libraries may vary.*
-<br>
+
 1. Download the latest jar file from [here](https://github.com/dream-n-delight/playerstatistics/releases)
 2. Open your preferred IDE and add a new external jar file to the project structure
 
-<br>
-<br>
 <br>
 <br>
 
@@ -75,8 +66,6 @@ UserData userData = statisticsController.getUserData("ad4b9f63-cf28-4fea-883c-47
 
 ```
 
-<br>
-<br>
 <br>
 <br>
 
