@@ -12,6 +12,13 @@
     <description>A library for getting/storing player statistics in a spigot-server environment.</description>
     <url>https://github.com/dream-n-delight/PlayerStatistics</url>
 
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
     <repositories>
         <repository>
             <id>spigot-repo</id>
