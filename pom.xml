@@ -19,6 +19,21 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <name>dehys</name>
+            <email>arijan.nikoci@outlook.com</email>
+            <organization>Dream n Delight</organization>
+            <organizationUrl>http://dreamndelight.org</organizationUrl>
+        </developer>
+        <developer>
+            <name>overdodo</name>
+            <email>dodo.stenzi@gmx.de</email>
+            <organization>Dream n Delight</organization>
+            <organizationUrl>http://dreamndelight.org</organizationUrl>
+        </developer>
+    </developers>
+
     <repositories>
         <repository>
             <id>spigot-repo</id>
