@@ -40,6 +40,8 @@
         <url>http://github.com/dream-n-delight/playerstatistics/tree/release</url>
     </scm>
 
+
+
     <repositories>
         <repository>
             <id>spigot-repo</id>
