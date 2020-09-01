@@ -1,6 +1,6 @@
-package com.dehys.playerstatistics.data;
+package org.dreamndelight.playerstatistics.data;
 
-import com.dehys.playerstatistics.main.Main;
+import org.dreamndelight.playerstatistics.main.Main;
 
 import java.util.TimerTask;
 

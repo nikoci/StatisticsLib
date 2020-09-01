@@ -1,4 +1,4 @@
-package com.dehys.playerstatistics.listeners;
+package org.dreamndelight.playerstatistics.listeners;
 
 import org.bukkit.event.Listener;
 

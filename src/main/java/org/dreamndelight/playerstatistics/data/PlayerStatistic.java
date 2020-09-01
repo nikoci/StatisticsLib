@@ -1,8 +1,8 @@
-package com.dehys.playerstatistics.data;
+package org.dreamndelight.playerstatistics.data;
 
 
-import com.dehys.playerstatistics.enums.Statistic;
-import com.dehys.playerstatistics.enums.Substatistic;
+import org.dreamndelight.playerstatistics.enums.Statistic;
+import org.dreamndelight.playerstatistics.enums.Substatistic;
 import com.sun.istack.internal.NotNull;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;

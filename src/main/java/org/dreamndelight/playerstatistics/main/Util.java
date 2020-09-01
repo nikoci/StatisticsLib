@@ -1,4 +1,4 @@
-package com.dehys.playerstatistics.main;
+package org.dreamndelight.playerstatistics.main;
 
 public class Util {
 

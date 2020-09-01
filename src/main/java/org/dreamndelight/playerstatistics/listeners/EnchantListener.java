@@ -1,7 +1,7 @@
-package com.dehys.playerstatistics.listeners;
+package org.dreamndelight.playerstatistics.listeners;
 
-import com.dehys.playerstatistics.enums.Statistic;
-import com.dehys.playerstatistics.main.Main;
+import org.dreamndelight.playerstatistics.enums.Statistic;
+import org.dreamndelight.playerstatistics.main.Main;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.EnchantItemEvent;
