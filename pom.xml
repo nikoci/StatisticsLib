@@ -34,6 +34,12 @@
         </developer>
     </developers>
 
+    <scm>
+        <connection>scm:git:git://github.com/dream-n-delight/playerstatistics.git</connection>
+        <developerConnection>scm:git:ssh://github.com:dream-n-delight/playerstatistics.git</developerConnection>
+        <url>http://github.com/dream-n-delight/playerstatistics/tree/release</url>
+    </scm>
+
     <repositories>
         <repository>
             <id>spigot-repo</id>
