@@ -1,4 +1,4 @@
-package com.dehys.norbecore.enums;
+package com.dehys.playerstatistics.enums;
 
 public enum Substatistic {
 

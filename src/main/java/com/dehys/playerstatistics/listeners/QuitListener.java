@@ -1,4 +1,4 @@
-package com.dehys.norbecore.listeners;
+package com.dehys.playerstatistics.listeners;
 
 import org.bukkit.event.Listener;
 

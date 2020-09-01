@@ -1,6 +1,6 @@
-package com.dehys.norbecore.data;
+package com.dehys.playerstatistics.data;
 
-import com.dehys.norbecore.main.Util;
+import com.dehys.playerstatistics.main.Util;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 

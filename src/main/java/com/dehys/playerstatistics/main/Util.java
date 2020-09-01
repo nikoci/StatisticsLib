@@ -1,4 +1,4 @@
-package com.dehys.norbecore.main;
+package com.dehys.playerstatistics.main;
 
 public class Util {
 

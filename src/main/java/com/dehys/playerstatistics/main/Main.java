@@ -1,7 +1,7 @@
-package com.dehys.norbecore.main;
+package com.dehys.playerstatistics.main;
 
-import com.dehys.norbecore.data.*;
-import com.dehys.norbecore.listeners.*;
+import com.dehys.playerstatistics.data.*;
+import com.dehys.playerstatistics.listeners.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Timer;

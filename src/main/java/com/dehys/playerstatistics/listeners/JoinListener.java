@@ -1,6 +1,6 @@
-package com.dehys.norbecore.listeners;
+package com.dehys.playerstatistics.listeners;
 
-import com.dehys.norbecore.main.Main;
+import com.dehys.playerstatistics.main.Main;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;

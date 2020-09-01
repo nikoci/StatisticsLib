@@ -1,8 +1,8 @@
-package com.dehys.norbecore.data;
+package com.dehys.playerstatistics.data;
 
 
-import com.dehys.norbecore.enums.Statistic;
-import com.dehys.norbecore.enums.Substatistic;
+import com.dehys.playerstatistics.enums.Statistic;
+import com.dehys.playerstatistics.enums.Substatistic;
 import com.sun.istack.internal.NotNull;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;

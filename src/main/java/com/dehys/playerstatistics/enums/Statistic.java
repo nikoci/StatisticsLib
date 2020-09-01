@@ -1,4 +1,4 @@
-package com.dehys.norbecore.enums;
+package com.dehys.playerstatistics.enums;
 
 import java.util.Arrays;
 

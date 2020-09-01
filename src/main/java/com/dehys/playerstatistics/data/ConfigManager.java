@@ -1,4 +1,4 @@
-package com.dehys.norbecore.data;
+package com.dehys.playerstatistics.data;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;

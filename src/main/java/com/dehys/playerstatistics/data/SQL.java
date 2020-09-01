@@ -1,6 +1,6 @@
-package com.dehys.norbecore.data;
+package com.dehys.playerstatistics.data;
 
-import com.dehys.norbecore.main.Main;
+import com.dehys.playerstatistics.main.Main;
 import org.bukkit.Bukkit;
 
 import java.sql.Connection;
