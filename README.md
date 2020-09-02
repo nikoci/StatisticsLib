@@ -2,8 +2,6 @@
   <img src="./res/banner.png" alt="Playerstatistics" />
 </div>
 
-<h1 align="center">Playerstatistics API</h1>
-
 <p align="center">
   <a href="https://discord.gg/p8Brtwj"><img alt="Discord" src="https://img.shields.io/discord/435431724831211522?color=%237289DA&label=%20%E2%80%8E%20%E2%80%8E%20%E2%80%8EDiscord%20%E2%80%8E&logo=Discord&logoColor=%237289DA&style=flat-square"></a>
   <a href="https://spigotmc.org/"><img alt="Spigot" src="https://img.shields.io/github/v/release/dream-n-delight/playerstatistics?color=%23EF8D1D&label=Spigot&style=flat-square"></a>
@@ -57,7 +55,7 @@
 
 *Jump right in to using the your freshly added PlayerStatisticsAPI*
 ```java
-# Example : using the StatisticsController object
+/*Example : using the StatisticsController object*/
 
 import org.dreamndelight.playerstatistics.controllers.StatisticsController;
 
