@@ -27,7 +27,6 @@ public class StatisticsManager {
     }
 
 
-
     /**
      * This method gets the {@link PlayerStatistic} for a specific player
      * @param player the player whose {@link PlayerStatistic} wants to be accessed
