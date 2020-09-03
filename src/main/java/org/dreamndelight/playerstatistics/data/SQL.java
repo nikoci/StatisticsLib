@@ -1,7 +1,7 @@
 package org.dreamndelight.playerstatistics.data;
 
-import org.dreamndelight.playerstatistics.main.Main;
 import org.bukkit.Bukkit;
+import org.dreamndelight.playerstatistics.main.PlayerStatistics;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,15 +16,15 @@ public class SQL {
         if (!isConnected()) {
             try {
                 final String
-                        host = Main.getInstance().getConfigManager().getString("sql.host").orElse(null),
-                        database = Main.getInstance().getConfigManager().getString("sql.database").orElse(null),
-                        username = Main.getInstance().getConfigManager().getString("sql.username").orElse(null),
-                        password = Main.getInstance().getConfigManager().getString("sql.password").orElse(null);
+                        host = PlayerStatistics.get().getConfigManager().getString("sql.host").orElse(null),
+                        database = PlayerStatistics.get().getConfigManager().getString("sql.database").orElse(null),
+                        username = PlayerStatistics.get().getConfigManager().getString("sql.username").orElse(null),
+                        password = PlayerStatistics.get().getConfigManager().getString("sql.password").orElse(null);
                 connection = DriverManager.getConnection("jdbc:mysql://" + host + ":3306/" + database + "?autoReconnect=true", username, password);
                 return true;
             } catch (SQLException var4) {
                 Bukkit.getConsoleSender().sendMessage("Connection to SQL-Database unsuccessful. Plugin will be disabled.");
-                Bukkit.getServer().getPluginManager().disablePlugin(Main.getInstance());
+                Bukkit.getServer().getPluginManager().disablePlugin(PlayerStatistics.get());
                 return false;
             }
         } else {
