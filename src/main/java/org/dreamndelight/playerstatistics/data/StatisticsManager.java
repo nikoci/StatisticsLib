@@ -28,6 +28,31 @@ public class StatisticsManager {
 
 
     /**
+     * This method will return a cached {@link PlayerStatistic} instance
+     * if existing, or fetch/create a new instance.
+     * @param player the player whose {@link PlayerStatistic} wants to be accessed/fetched
+     * @return returns either a cached {@link PlayerStatistic} instance or a new one
+     */
+    public PlayerStatistic getOrFetch(Player player) {
+        return getOrFetch(player.getUniqueId());
+    }
+
+
+
+    /**
+     * This method will return a cached {@link PlayerStatistic} instance
+     * if existing, or fetch/create a new instance.
+     * @param uuid the uuid of the player whose {@link PlayerStatistic} wants to be accessed/fetched
+     * @return returns either a cached {@link PlayerStatistic} instance or a new one through {@link StatisticsManager#fetchOrCreate(UUID)}
+     */
+    public PlayerStatistic getOrFetch(UUID uuid) {
+        Optional<PlayerStatistic> statistic = getStatistic(uuid);
+        return statistic.orElseGet(() -> getOrFetch(uuid));
+    }
+
+
+
+    /**
      * This method gets the {@link PlayerStatistic} for a specific player
      * @param player the player whose {@link PlayerStatistic} wants to be accessed
      * @return this returns an {@link Optional} containing a {@link PlayerStatistic}
