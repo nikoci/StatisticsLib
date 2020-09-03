@@ -1,6 +1,6 @@
 package org.dreamndelight.playerstatistics.data;
 
-import org.dreamndelight.playerstatistics.main.Main;
+import org.dreamndelight.playerstatistics.main.PlayerStatistics;
 
 import java.util.TimerTask;
 
@@ -9,6 +9,6 @@ public class StatisticsTimer extends TimerTask {
 
     @Override
     public void run() {
-        Main.getInstance().getStatisticsManager().saveStatistics(Main.getInstance().getConfigManager().clearCacheOnSave);
+        PlayerStatistics.get().getStatisticsManager().saveStatistics(PlayerStatistics.get().getConfigManager().clearCacheOnSave);
     }
 }

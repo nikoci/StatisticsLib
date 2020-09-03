@@ -6,14 +6,14 @@ import org.dreamndelight.playerstatistics.listeners.*;
 
 import java.util.Timer;
 
-public class Main extends JavaPlugin {
+public class PlayerStatistics extends JavaPlugin {
 
-    private static Main instance;
+    private static PlayerStatistics instance;
     private UserData userData;
     private ConfigManager configManager;
     private StatisticsManager statisticsManager;
 
-    public static Main getInstance() {
+    public static PlayerStatistics get() {
         return instance;
     }
 
