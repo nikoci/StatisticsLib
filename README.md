@@ -4,9 +4,8 @@
 
 <p align="center">
   <a href="https://discord.gg/p8Brtwj"><img alt="Discord" src="https://img.shields.io/discord/435431724831211522?color=%237289DA&label=%20%E2%80%8E%20%E2%80%8E%20%E2%80%8EDiscord%20%E2%80%8E&logo=Discord&logoColor=%237289DA&style=flat-square"></a>
-  <a href="https://spigotmc.org/"><img alt="Spigot" src="https://img.shields.io/github/v/release/dream-n-delight/playerstatistics?color=%23EF8D1D&label=Spigot&style=flat-square"></a>
-  <a href="https://github.com/Dream-n-Delight/PlayerStatistics/releases"><img alt="Releases" src="https://img.shields.io/github/v/release/dream-n-delight/playerstatistics?color=%2354f95f&label=Latest%20Release&logo=GitHub&logoColor=%2354f95f&style=flat-square"></a>
-  <a href="https://en.wikipedia.org/wiki/MIT_License"><img alt="Discord" src="https://img.shields.io/github/license/dream-n-delight/playerstatistics?color=%23f9a154&label=License&style=flat-square"></a>
+  <a href="https://github.com/Dream-n-Delight/PlayerStatistics/releases"><img alt="Releases" src="https://img.shields.io/github/v/release/dream-n-delight/PlayerStatisticsLib?color=%2354f95f&label=Latest%20Release&logo=GitHub&logoColor=%2354f95f&style=flat-square"></a>
+  <a href="https://en.wikipedia.org/wiki/MIT_License"><img alt="Discord" src="https://img.shields.io/github/license/dream-n-delight/PlayerStatisticsLib?color=%23f9a154&label=License&style=flat-square"></a>
 </p>
 <p align="center">
   <a href="https://github.com/Dream-n-Delight/PlayerStatistics/blob/pilot/README.md#dependencies">Dependencies</a> &#xa0; | &#xa0;
