@@ -54,8 +54,6 @@
 
 *Jump right in to using the your freshly added PlayerStatisticsAPI*
 ```java
-/*Example : using the StatisticsController object*/
-
 import org.dreamndelight.playerstatistics.lib.PlayerStatistics;
 
 class Main extends JavaPlugin {
