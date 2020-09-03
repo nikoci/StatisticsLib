@@ -1,12 +1,12 @@
 package org.dreamndelight.playerstatistics.data;
 
-import org.dreamndelight.playerstatistics.enums.Statistic;
-import org.dreamndelight.playerstatistics.enums.Substatistic;
-import org.dreamndelight.playerstatistics.main.Main;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.dreamndelight.playerstatistics.enums.Statistic;
+import org.dreamndelight.playerstatistics.enums.Substatistic;
+import org.dreamndelight.playerstatistics.main.PlayerStatistics;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +25,6 @@ public class StatisticsManager {
     public StatisticsManager() {
         playerStatistics = new HashMap<>();
     }
-
 
 
     /**
@@ -78,7 +77,7 @@ public class StatisticsManager {
      * could be found
      */
     private Optional<PlayerStatistic> fetchStatistics(UUID uuid) {
-        Optional<String> userid = Main.getInstance().getUserData().getPlayerID(uuid);
+        Optional<String> userid = PlayerStatistics.get().getUserData().getPlayerID(uuid);
         if(getStatistic(uuid).isPresent()) throw new RuntimeException("Statistics for this user are already fetched");
         if (!userid.isPresent()) throw new RuntimeException("No UserID found for given UUID.");
         try {
@@ -222,7 +221,7 @@ public class StatisticsManager {
      * but does not require the {@link PlayerStatistic} object of the player
      */
     private void addStatistic(Player player, Statistic statistic, Material material, EntityType entityType, int amount) {
-        Main.getInstance().getStatisticsManager().getStatistic(player).orElseGet(() -> Main.getInstance().getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, entityType, amount);
+        PlayerStatistics.get().getStatisticsManager().getStatistic(player).orElseGet(() -> PlayerStatistics.get().getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, entityType, amount);
         }
 
 
@@ -232,7 +231,7 @@ public class StatisticsManager {
      * @return this returns a new {@link PlayerStatistic} object for the player
      */
     private PlayerStatistic createStatistic(Player player) {
-        Main.getInstance().getUserData().registerPlayer(player);
+        PlayerStatistics.get().getUserData().registerPlayer(player);
         return createStatistic(player.getUniqueId());
     }
 
@@ -243,7 +242,7 @@ public class StatisticsManager {
      * @return this returns a new {@link PlayerStatistic} object for the player
      */
     private PlayerStatistic createStatistic(UUID uuid) {
-        PlayerStatistic statistic = new PlayerStatistic(uuid, Main.getInstance().getUserData().getPlayerID(uuid).orElseThrow(() -> new RuntimeException("Player was not registered due to an unknown error")));
+        PlayerStatistic statistic = new PlayerStatistic(uuid, PlayerStatistics.get().getUserData().getPlayerID(uuid).orElseThrow(() -> new RuntimeException("Player was not registered due to an unknown error")));
         playerStatistics.put(uuid, statistic);
         return statistic;
     }
@@ -287,7 +286,7 @@ public class StatisticsManager {
                 for (Map.Entry<UUID, PlayerStatistic> entry : playerStatistics.entrySet()) {
                     UUID uuid = entry.getKey();
                     PlayerStatistic statistic = entry.getValue();
-                    Optional<String> userID = Main.getInstance().getUserData().getPlayerID(uuid);
+                    Optional<String> userID = PlayerStatistics.get().getUserData().getPlayerID(uuid);
                     if(!userID.isPresent()) continue;
                     statistic.savePlainStatistics();
                     statistic.saveMaterialStatistics();
@@ -304,21 +303,21 @@ public class StatisticsManager {
      */
     void saveStatistics(boolean clearCache) {
 
-        Main.getInstance().getLogger().log(Level.INFO, "All cached Statistics will now be saved...");
+        PlayerStatistics.get().getLogger().log(Level.INFO, "All cached Statistics will now be saved...");
             for (Map.Entry<UUID, PlayerStatistic> entry : playerStatistics.entrySet()) {
                 UUID uuid = entry.getKey();
                 PlayerStatistic statistic = entry.getValue();
-                Optional<String> userID = Main.getInstance().getUserData().getPlayerID(uuid);
+                Optional<String> userID = PlayerStatistics.get().getUserData().getPlayerID(uuid);
                 if(!userID.isPresent()) continue;
                 statistic.savePlainStatistics();
                 statistic.saveMaterialStatistics();
                 statistic.saveEntityStatistics();
             }
-            Main.getInstance().getLogger().log(Level.INFO, "All Statistics have successfully been saved");
+        PlayerStatistics.get().getLogger().log(Level.INFO, "All Statistics have successfully been saved");
             if(clearCache) {
                 final int entries = playerStatistics.size();
                 playerStatistics.clear();
-                Main.getInstance().getLogger().log(Level.INFO, entries + " cached entries have been cleared.");
+                PlayerStatistics.get().getLogger().log(Level.INFO, entries + " cached entries have been cleared.");
             }
 
     }
