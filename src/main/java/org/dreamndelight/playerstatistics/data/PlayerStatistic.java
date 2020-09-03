@@ -1,9 +1,9 @@
 package org.dreamndelight.playerstatistics.data;
 
 
+import org.jetbrains.annotations.Nullable;
 import org.dreamndelight.playerstatistics.enums.Statistic;
 import org.dreamndelight.playerstatistics.enums.Substatistic;
-import com.sun.istack.internal.NotNull;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 
@@ -86,7 +86,7 @@ public class PlayerStatistic {
      * @param statistic the statistic that wants to be increased
      * @param amount    the value by which the statistic should be increased
      */
-    public void addStatistic(@NotNull Statistic statistic, int amount) {
+    public void addStatistic(@Nullable Statistic statistic, int amount) {
         addStatistic(statistic, null, null, amount);
     }
 
@@ -97,7 +97,7 @@ public class PlayerStatistic {
      * @param material  define the {@link Material} of the statistic
      * @param amount    the value by which the statistic should be increased
      */
-    public void addStatistic(@NotNull Statistic statistic, Material material, int amount) {
+    public void addStatistic(@Nullable Statistic statistic, Material material, int amount) {
         addStatistic(statistic, material, null, amount);
     }
 
@@ -108,11 +108,11 @@ public class PlayerStatistic {
      * @param entityType define the {@link EntityType} of the statistic
      * @param amount     the value by which the statistic should be increased
      */
-    public void addStatistic(@NotNull Statistic statistic, EntityType entityType, int amount) {
+    public void addStatistic(@Nullable Statistic statistic, EntityType entityType, int amount) {
         addStatistic(statistic, null, entityType, amount);
     }
 
-    void addStatistic(@NotNull Statistic statistic, Material material, EntityType entityType, int amount) {
+    void addStatistic(@Nullable Statistic statistic, Material material, EntityType entityType, int amount) {
         switch (statistic.getSubstatistic()) {
             case MATERIAL:
                 assert material != null;
@@ -136,7 +136,7 @@ public class PlayerStatistic {
      * If a Statistic with Substatistics has been selected,
      * this method will return the sum of all the Substatistics of that Statistic
      */
-    public int getStatistic(@NotNull Statistic statistic) {
+    public int getStatistic(@Nullable Statistic statistic) {
         return getStatistic(statistic, null, null);
     }
 
@@ -148,7 +148,7 @@ public class PlayerStatistic {
      * @return returns the statistic specified by the {@link Material}
      * Will return the sum of all the Substatistics of that Statistic if material = null
      */
-    public int getStatistic(@NotNull Statistic statistic, Material material) {
+    public int getStatistic(@Nullable Statistic statistic, Material material) {
         return getStatistic(statistic, material, null);
     }
 
@@ -160,7 +160,7 @@ public class PlayerStatistic {
      * @return returns the statistic specified by the {@link EntityType}
      * Will return the sum of all the Substatistics of that Statistic if entityType = null
      */
-    public int getStatistic(@NotNull Statistic statistic, EntityType entityType) {
+    public int getStatistic(@Nullable Statistic statistic, EntityType entityType) {
         return getStatistic(statistic, null, entityType);
     }
 
@@ -255,7 +255,7 @@ public class PlayerStatistic {
      * @param entityType define the {@link EntityType} of the statistic
      * @return returns the value of the {@link Statistic} or 0 if it cannot be found.
      */
-    private int getStatistic(@NotNull Statistic statistic, Material material, EntityType entityType) {
+    private int getStatistic(@Nullable Statistic statistic, Material material, EntityType entityType) {
         switch (statistic.getSubstatistic()) {
 
             case MATERIAL:
@@ -275,7 +275,7 @@ public class PlayerStatistic {
     }
 
 
-    private Integer getPlainStatistic(@NotNull Statistic statistic) {
+    private Integer getPlainStatistic(@Nullable Statistic statistic) {
         return plainStatistics.getOrDefault(statistic.getKey(), 0);
     }
 
