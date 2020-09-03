@@ -59,8 +59,8 @@
 
 import org.dreamndelight.playerstatistics.controllers.StatisticsController;
 
-StatisticsController statisticsController = new StatisticsController();
-UserData userData = statisticsController.getUserData("ad4b9f63-cf28-4fea-883c-474e6eec6253");
+StatisticsManager manager = PlayerStatistics.get().getStatisticsManager();
+PlayerStatistic statistic = manager.getStatistic("61d1c15c-98db-4662-b696-1668daeef4f0");
 
 ```
 
