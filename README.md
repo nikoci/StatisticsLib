@@ -14,7 +14,7 @@
   <a href="https://github.com/Dream-n-Delight/PlayerStatistics/tree/pilot#getting-started">Getting Started</a> &#xa0;
 </p>
 
-*PlayerStatistics API makes storing and retrieving player statistics for player on a spigot/bukkit server alot easier. At its core, it stores every statistic for every player ever joined on a server onto your desired sql database. It handles all tables, sql functions and queries. You wanted to see how many diamond axes you've broken? We got it. You can either choose to [download](https://github.com/Dream-n-Delight/PlayerStatistics/releases) it as a spigot/bukkit plugin or use it as a library by following the steps down below.*
+*PlayerStatistics LIB makes storing and retrieving player statistics for players on a spigot/bukkit server alot easier. At its core, it stores every statistic for every player ever joined on a server onto your desired sql database. It handles all tables, sql functions and queries. You wanted to see how many diamond axes you've broken? We got it. You can either choose to [download](https://github.com/Dream-n-Delight/PlayerStatistics/releases) it as a jar file or use it with maven*
 
 **NOTE:** Maven support is coming soon. We are currently waiting for our project to be accepted to Maven Central.
 
@@ -57,11 +57,18 @@
 ```java
 /*Example : using the StatisticsController object*/
 
-import org.dreamndelight.playerstatistics.controllers.StatisticsController;
+import org.dreamndelight.playerstatistics.lib.PlayerStatistics;
 
-StatisticsManager manager = PlayerStatistics.get().getStatisticsManager();
-PlayerStatistic statistic = manager.getStatistic("61d1c15c-98db-4662-b696-1668daeef4f0");
+class Main extends JavaPlugin {
 
+  private PlayerStatistics ps;
+  private StatisticsManager sm;
+
+  public void onEnable(){
+    this.ps = new PlayerStatistics(this); //<--- INITIALIZES THE LIB FOR USE, PASSES JavaPlugin TO LIB.
+    this.sm = ps.getStatisticsManager(); //<--- The StatisticsManager class could be used anywhere, this is what you would use to get player statistics.
+  }
+}
 ```
 
 <br>
