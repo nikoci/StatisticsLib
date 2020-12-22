@@ -1,6 +1,11 @@
 #Configuration File for PlayerStatistics
 #Developed by dehys and OverDodo
 
+#The PlayerStatisticsLib allows for plugin developers to work with a lot of different statistics.
+#Unlike the Statistics included in Spigot, this library is not bound to worlds or in fact any folder
+#Instead, PlayerStatisticsLib utilizes MySQL for saving data, which also allows for administrators to access the statistics
+#outside of the server. It also allows for administrators to modify the statistics if necessary.
+
 # prefix: a prefix the plugin will use for all internal and external messages
 prefix: "&7[&bPlayerStatistics&7] "
 
@@ -18,8 +23,9 @@ sql:
   password: "verysecurepassword"
 
 savedata:
-  # period: the delay between each time the plugin saves all cached data to the sql database (in ticks -> 20 = 1 second)
-  period: 6000
+  # period: the delay between each time the plugin saves all cached data to the sql database (in seconds)
+  period: 600
 
   # clearcache: if set to true, every time all cached data is saved to the sql database, the cache will be cleared
+  # useful for servers with a higher player count
   clearcache: true
