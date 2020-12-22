@@ -1,7 +1,5 @@
 name: PlayerStatistics
 authors: [ dehys, OverDodo ]
-version: '1.1.7'
-main: 'org.dreamndelight.playerstatistics.main.PlayerStatistics'
+version: '1.2.0'
+main: 'org.dreamndelight.playerstatistics.lib.main.PlayerStatistics'
 api-version: '1.16'
-loadbefore:
-  - StatisticsPlugin
