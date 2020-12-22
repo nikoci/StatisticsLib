@@ -10,8 +10,8 @@ public class FishListener implements Listener {
 
 
     @EventHandler
-    public void onFish(PlayerFishEvent event) {
-        if(event.getState() == PlayerFishEvent.State.CAUGHT_FISH) {
+    public void onFish(final PlayerFishEvent event) {
+        if (event.getState() == PlayerFishEvent.State.CAUGHT_FISH) {
             PlayerStatistics.get().getStatisticsManager().addStatistic(event.getPlayer(), Statistic.FISH_CAUGHT, 1);
         }
     }

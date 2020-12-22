@@ -9,7 +9,7 @@ import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 public class ItemBreakListener implements Listener {
 
     @EventHandler
-    public void onItemBreak(PlayerItemBreakEvent event) {
+    public void onItemBreak(final PlayerItemBreakEvent event) {
         PlayerStatistics.get().getStatisticsManager().addStatistic(event.getPlayer(), Statistic.ITEMS_BROKEN, event.getBrokenItem().getType(), 1);
     }
 

@@ -10,7 +10,7 @@ public class EnchantListener implements Listener {
 
 
     @EventHandler
-    public void onEnchant(EnchantItemEvent event) {
+    public void onEnchant(final EnchantItemEvent event) {
         PlayerStatistics.get().getStatisticsManager().addStatistic(event.getEnchanter(), Statistic.ITEMS_ENCHANTED, event.getItem().getType(), 1);
     }
 
