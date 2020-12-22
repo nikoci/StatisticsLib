@@ -1,5 +1,7 @@
 package org.dreamndelight.playerstatistics.lib.main;
 
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.dreamndelight.playerstatistics.lib.data.*;
 import org.dreamndelight.playerstatistics.lib.listeners.*;
@@ -25,7 +27,7 @@ public class PlayerStatistics extends JavaPlugin {
         userData = UserData.retrieveData();
         statisticsManager = new StatisticsManager();
         setupListeners();
-
+        registerProvider();
         Timer timer = new Timer();
         timer.schedule(new StatisticsTimer(), getConfigManager().SAVEDATAPERIOD * 1000, getConfigManager().SAVEDATAPERIOD * 1000);
     }
@@ -67,5 +69,9 @@ public class PlayerStatistics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ProjectileHitListener(), this);
         getServer().getPluginManager().registerEvents(new FishListener(), this);
         getServer().getPluginManager().registerEvents(new InteractListener(), this);
+    }
+
+    private void registerProvider() {
+        Bukkit.getServer().getServicesManager().register(PlayerStatistics.class, this, this, ServicePriority.Highest);
     }
 }
