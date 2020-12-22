@@ -9,13 +9,13 @@ sql:
   host: "localhost"
 
   # database: the name of the database the plugin is supposed to use
-  database: "norbecore"
+  database: "playerstatistics"
 
   # username: the name of the sql user
-  username: "dodo"
+  username: "root"
 
   # password: the password of the sql user
-  password: "dodoisdodo"
+  password: "verysecurepassword"
 
 savedata:
   # period: the delay between each time the plugin saves all cached data to the sql database (in ticks -> 20 = 1 second)
