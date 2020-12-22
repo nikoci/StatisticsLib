@@ -46,7 +46,6 @@ public class UserData {
                     exception.printStackTrace();
                 }
             }
-            playerIDs.forEach((key, value) -> System.out.println(key + " -> " + value));
             return new UserData(players, playerIDs);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -92,8 +91,6 @@ public class UserData {
         try {
             PreparedStatement preparedStatement = SQL.prepareStatement("INSERT INTO userdata (uuid, username, userid) VALUES (?,?,?) ON DUPLICATE KEY UPDATE username = ?");
             for (Map.Entry<UUID, String> entry : players.entrySet()) {
-                if (getPlayerID(entry.getKey()).isPresent()) System.out.println("IS PRESENT FOR " + entry.getValue());
-                else System.out.println("IS NOT PRESENT FOR " + entry.getValue());
                 preparedStatement.setString(1, entry.getKey().toString());
                 preparedStatement.setString(2, entry.getValue());
                 preparedStatement.setString(3, getPlayerID(entry.getKey()).orElseGet(Util::generatePlayerID));

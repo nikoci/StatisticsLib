@@ -14,7 +14,6 @@ public class Util {
             length--;
         }
         // }
-        System.out.println(builder.toString());
         return builder.toString();
     }
 
