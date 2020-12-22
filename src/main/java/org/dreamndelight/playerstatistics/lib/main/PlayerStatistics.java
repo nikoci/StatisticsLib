@@ -13,16 +13,13 @@ public class PlayerStatistics extends JavaPlugin {
     private ConfigManager configManager;
     private StatisticsManager statisticsManager;
 
-    public static PlayerStatistics get() {
-        return instance;
-    }
-
     @Override
     public void onEnable() {
         super.onEnable();
         instance = this;
         saveDefaultConfig();
         configManager = new ConfigManager(this);
+
         if (!SQL.connect()) return;
         SQL.setupTables();
         userData = UserData.retrieveData();
@@ -41,12 +38,20 @@ public class PlayerStatistics extends JavaPlugin {
     }
 
 
+    public static PlayerStatistics get() {
+        return instance;
+    }
+
     public UserData getUserData() {
         return userData;
     }
 
     public ConfigManager getConfigManager() {
         return configManager;
+    }
+
+    public StatisticsManager getStatisticsManager() {
+        return statisticsManager;
     }
 
     private void setupListeners() {
@@ -62,9 +67,5 @@ public class PlayerStatistics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ProjectileHitListener(), this);
         getServer().getPluginManager().registerEvents(new FishListener(), this);
         getServer().getPluginManager().registerEvents(new InteractListener(), this);
-    }
-
-    public StatisticsManager getStatisticsManager() {
-        return statisticsManager;
     }
 }
