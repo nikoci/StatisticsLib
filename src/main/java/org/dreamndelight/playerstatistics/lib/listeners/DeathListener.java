@@ -1,11 +1,11 @@
-package org.dreamndelight.playerstatistics.listeners;
+package org.dreamndelight.playerstatistics.lib.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.dreamndelight.playerstatistics.enums.Statistic;
-import org.dreamndelight.playerstatistics.main.PlayerStatistics;
+import org.dreamndelight.playerstatistics.lib.enums.Statistic;
+import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 
 public class DeathListener implements Listener {
 

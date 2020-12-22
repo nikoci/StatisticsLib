@@ -1,8 +1,8 @@
-package org.dreamndelight.playerstatistics.main;
+package org.dreamndelight.playerstatistics.lib.main;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.dreamndelight.playerstatistics.data.*;
-import org.dreamndelight.playerstatistics.listeners.*;
+import org.dreamndelight.playerstatistics.lib.data.*;
+import org.dreamndelight.playerstatistics.lib.listeners.*;
 
 import java.util.Timer;
 

@@ -1,7 +1,7 @@
-package org.dreamndelight.playerstatistics.data;
+package org.dreamndelight.playerstatistics.lib.data;
 
 import org.bukkit.Bukkit;
-import org.dreamndelight.playerstatistics.main.PlayerStatistics;
+import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

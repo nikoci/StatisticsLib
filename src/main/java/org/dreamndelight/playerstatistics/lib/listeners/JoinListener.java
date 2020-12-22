@@ -1,9 +1,9 @@
-package org.dreamndelight.playerstatistics.listeners;
+package org.dreamndelight.playerstatistics.lib.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.dreamndelight.playerstatistics.main.PlayerStatistics;
+import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 
 public class JoinListener implements Listener {
 

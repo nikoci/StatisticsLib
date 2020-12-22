@@ -1,10 +1,10 @@
-package org.dreamndelight.playerstatistics.listeners;
+package org.dreamndelight.playerstatistics.lib.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.EnchantItemEvent;
-import org.dreamndelight.playerstatistics.enums.Statistic;
-import org.dreamndelight.playerstatistics.main.PlayerStatistics;
+import org.dreamndelight.playerstatistics.lib.enums.Statistic;
+import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 
 public class EnchantListener implements Listener {
 

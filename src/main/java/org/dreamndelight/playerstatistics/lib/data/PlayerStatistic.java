@@ -1,11 +1,11 @@
-package org.dreamndelight.playerstatistics.data;
+package org.dreamndelight.playerstatistics.lib.data;
 
 
-import org.jetbrains.annotations.Nullable;
-import org.dreamndelight.playerstatistics.enums.Statistic;
-import org.dreamndelight.playerstatistics.enums.Substatistic;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
+import org.dreamndelight.playerstatistics.lib.enums.Statistic;
+import org.dreamndelight.playerstatistics.lib.enums.Substatistic;
+import org.jetbrains.annotations.Nullable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

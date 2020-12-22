@@ -1,4 +1,4 @@
-package org.dreamndelight.playerstatistics.data;
+package org.dreamndelight.playerstatistics.lib.data;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;

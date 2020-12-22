@@ -1,12 +1,12 @@
-package org.dreamndelight.playerstatistics.data;
+package org.dreamndelight.playerstatistics.lib.data;
 
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.dreamndelight.playerstatistics.enums.Statistic;
-import org.dreamndelight.playerstatistics.enums.Substatistic;
-import org.dreamndelight.playerstatistics.main.PlayerStatistics;
+import org.dreamndelight.playerstatistics.lib.enums.Statistic;
+import org.dreamndelight.playerstatistics.lib.enums.Substatistic;
+import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

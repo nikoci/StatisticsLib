@@ -1,8 +1,8 @@
-package org.dreamndelight.playerstatistics.data;
+package org.dreamndelight.playerstatistics.lib.data;
 
-import org.dreamndelight.playerstatistics.main.Util;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.dreamndelight.playerstatistics.lib.main.Util;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
