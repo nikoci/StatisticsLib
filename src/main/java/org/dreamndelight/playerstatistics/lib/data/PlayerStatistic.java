@@ -5,7 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.dreamndelight.playerstatistics.lib.enums.Statistic;
 import org.dreamndelight.playerstatistics.lib.enums.Substatistic;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -86,7 +86,7 @@ public class PlayerStatistic {
      * @param statistic the statistic that wants to be increased
      * @param amount    the value by which the statistic should be increased
      */
-    public void addStatistic(@Nullable Statistic statistic, int amount) {
+    public void addStatistic(@NotNull Statistic statistic, int amount) {
         addStatistic(statistic, null, null, amount);
     }
 
@@ -97,7 +97,7 @@ public class PlayerStatistic {
      * @param material  define the {@link Material} of the statistic
      * @param amount    the value by which the statistic should be increased
      */
-    public void addStatistic(@Nullable Statistic statistic, Material material, int amount) {
+    public void addStatistic(@NotNull Statistic statistic, Material material, int amount) {
         addStatistic(statistic, material, null, amount);
     }
 
@@ -108,11 +108,11 @@ public class PlayerStatistic {
      * @param entityType define the {@link EntityType} of the statistic
      * @param amount     the value by which the statistic should be increased
      */
-    public void addStatistic(@Nullable Statistic statistic, EntityType entityType, int amount) {
+    public void addStatistic(@NotNull Statistic statistic, EntityType entityType, int amount) {
         addStatistic(statistic, null, entityType, amount);
     }
 
-    void addStatistic(@Nullable Statistic statistic, Material material, EntityType entityType, int amount) {
+    void addStatistic(@NotNull Statistic statistic, Material material, EntityType entityType, int amount) {
         switch (statistic.getSubstatistic()) {
             case MATERIAL:
                 assert material != null;
@@ -136,7 +136,7 @@ public class PlayerStatistic {
      * If a Statistic with Substatistics has been selected,
      * this method will return the sum of all the Substatistics of that Statistic
      */
-    public int getStatistic(@Nullable Statistic statistic) {
+    public int getStatistic(@NotNull Statistic statistic) {
         return getStatistic(statistic, null, null);
     }
 
@@ -148,7 +148,7 @@ public class PlayerStatistic {
      * @return returns the statistic specified by the {@link Material}
      * Will return the sum of all the Substatistics of that Statistic if material = null
      */
-    public int getStatistic(@Nullable Statistic statistic, Material material) {
+    public int getStatistic(@NotNull Statistic statistic, Material material) {
         return getStatistic(statistic, material, null);
     }
 
@@ -160,7 +160,7 @@ public class PlayerStatistic {
      * @return returns the statistic specified by the {@link EntityType}
      * Will return the sum of all the Substatistics of that Statistic if entityType = null
      */
-    public int getStatistic(@Nullable Statistic statistic, EntityType entityType) {
+    public int getStatistic(@NotNull Statistic statistic, EntityType entityType) {
         return getStatistic(statistic, null, entityType);
     }
 
@@ -197,14 +197,6 @@ public class PlayerStatistic {
      */
     public void saveMaterialStatistics() {
         try {
-            /*
-            PreparedStatement checkStatement = SQL.prepareStatement("SELECT amount FROM materialstatistics WHERE userid = ? AND statistic = ? AND material = ?");
-            checkStatement.setString(1, userid);
-            PreparedStatement materialStatementINSERT = SQL.prepareStatement("INSERT INTO materialstatistics (userid, statistic, material, amount) VALUES (?, ?, ?, ?)");
-            materialStatementINSERT.setString(1, userid);
-            PreparedStatement materialStatementUPDATE = SQL.prepareStatement("UPDATE materialstatistics SET amount = ? WHERE userid = ? AND statistic = ? AND material = ?");
-            materialStatementUPDATE.setString(1, userid);
-             */
             PreparedStatement materialStatement = SQL.prepareStatement("INSERT INTO materialstatistics (userid, statistic, material, amount) VALUES (?, ?, ?, ?)");
             materialStatement.setString(1, userid);
             for (String statistic : materialStatistics.keySet()) {
@@ -255,7 +247,7 @@ public class PlayerStatistic {
      * @param entityType define the {@link EntityType} of the statistic
      * @return returns the value of the {@link Statistic} or 0 if it cannot be found.
      */
-    private int getStatistic(@Nullable Statistic statistic, Material material, EntityType entityType) {
+    private int getStatistic(@NotNull Statistic statistic, Material material, EntityType entityType) {
         switch (statistic.getSubstatistic()) {
 
             case MATERIAL:
@@ -275,7 +267,7 @@ public class PlayerStatistic {
     }
 
 
-    private Integer getPlainStatistic(@Nullable Statistic statistic) {
+    private Integer getPlainStatistic(@NotNull Statistic statistic) {
         return plainStatistics.getOrDefault(statistic.getKey(), 0);
     }
 

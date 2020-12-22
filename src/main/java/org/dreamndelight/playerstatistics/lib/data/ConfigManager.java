@@ -5,6 +5,7 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.Optional;
 
+@SuppressWarnings("unused")
 public class ConfigManager {
 
     public long SAVEDATAPERIOD;
