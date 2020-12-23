@@ -17,8 +17,9 @@ public class ProjectileHitListener implements Listener {
             if (event.getHitEntity() != null) {
                 PlayerStatistics.get().getStatisticsManager().addStatistic(player, Statistic.PROJECTILES_HIT_ENTITY, event.getEntityType(), 1);
             } else if (event.getHitBlock() != null) {
-                PlayerStatistics.get().getStatisticsManager().addStatistic(player, Statistic.PROJECTILES_HIT_BLOCK, event.getEntityType(), 1);
+                PlayerStatistics.get().getStatisticsManager().addStatistic(player, Statistic.PROJECTILES_HIT_BLOCK, event.getHitBlock().getType(), 1);
             }
+
         }
     }
 
