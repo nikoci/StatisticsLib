@@ -47,7 +47,7 @@ public class StatisticsManager {
      */
     public PlayerStatistic getOrFetch(UUID uuid) {
         Optional<PlayerStatistic> statistic = getStatistic(uuid);
-        return statistic.orElseGet(() -> getOrFetch(uuid));
+        return statistic.orElseGet(() -> fetchOrCreate(uuid));
     }
 
 
