@@ -13,7 +13,12 @@ public class ProjectileHitListener implements Listener {
     public void onProjectileHit(final ProjectileHitEvent event) {
         if (event.getEntity().getShooter() instanceof Player) {
             Player player = (Player) event.getEntity().getShooter();
-            PlayerStatistics.get().getStatisticsManager().addStatistic(player, Statistic.TARGETS_HIT, event.getEntityType(), 1);
+
+            if (event.getHitEntity() != null) {
+                PlayerStatistics.get().getStatisticsManager().addStatistic(player, Statistic.PROJECTILES_HIT_ENTITY, event.getEntityType(), 1);
+            } else if (event.getHitBlock() != null) {
+                PlayerStatistics.get().getStatisticsManager().addStatistic(player, Statistic.PROJECTILES_HIT_BLOCK, event.getEntityType(), 1);
+            }
         }
     }
 
