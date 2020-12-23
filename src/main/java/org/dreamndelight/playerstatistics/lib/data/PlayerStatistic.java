@@ -224,7 +224,7 @@ public class PlayerStatistic {
      */
     public void saveEntityStatistics() {
         try {
-            PreparedStatement entityStatement = SQL.prepareStatement("INSERT INTO plainstatistics (userid, statistic, entity, amount) VALUES (?, ?, ?, ?)");
+            PreparedStatement entityStatement = SQL.prepareStatement("INSERT INTO entitystatistics (userid, statistic, entity, amount) VALUES (?, ?, ?, ?)");
             entityStatement.setString(1, userid);
             for (String statistic : entityStatistics.keySet()) {
                 HashMap<EntityType, Integer> innerMap = entityStatistics.get(statistic);
