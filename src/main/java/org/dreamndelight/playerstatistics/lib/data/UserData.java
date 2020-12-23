@@ -84,7 +84,7 @@ public class UserData {
     }
 
     public boolean isPlayerIDAvailable(String playerID) {
-        return playerIDs.containsValue(playerID);
+        return !playerIDs.containsValue(playerID);
     }
 
     public void saveData() {
