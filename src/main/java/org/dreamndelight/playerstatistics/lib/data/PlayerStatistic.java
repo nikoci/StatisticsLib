@@ -121,7 +121,8 @@ public class PlayerStatistic {
 
             case ENTITY:
                 assert entityType != null;
-
+                addEntityStatistic(statistic, entityType, amount);
+                break;
 
             case NONE:
                 addPlainStatistic(statistic, amount);
