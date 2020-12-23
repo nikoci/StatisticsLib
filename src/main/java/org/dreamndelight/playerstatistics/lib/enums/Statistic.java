@@ -19,7 +19,7 @@ public enum Statistic {
     PLAYER_KILLS("playerkills", Substatistic.NONE),
     DAMAGE_DEALT("damagedealt", Substatistic.NONE),
     DAMAGE_TAKEN("damagetaken", Substatistic.NONE),
-    FISH_CAUGHT("fishcaught", Substatistic.NONE);
+    FISH_CAUGHT("fishcaught", Substatistic.MATERIAL);
 
 
     private final String key;
