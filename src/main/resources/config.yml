@@ -16,7 +16,7 @@ sql:
   # database: the name of the database the plugin is supposed to use
   database: "playerstatistics"
 
-  # username: the name of the sql user
+  # username: the name of the sql user.
   username: "root"
 
   # password: the password of the sql user
