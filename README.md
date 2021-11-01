@@ -52,7 +52,9 @@
 
 ### Getting Started ###
 
-*Jump right in to using the your freshly added PlayerStatisticsAPI*
+*Jump right in to using the your freshly added PlayerStatisticsLib!*
+<br>
+*Use this demo class to get started.*
 ```java
 package org.dreamndelight.playerstatistics.lib.main;
 
