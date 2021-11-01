@@ -12,14 +12,15 @@ public enum Statistic {
     ITEMS_DROPPED("itemsdropped", Substatistic.MATERIAL),
     ITEMS_USED("itemsused", Substatistic.MATERIAL),
     ITEMS_CRAFTED("itemscrafted", Substatistic.MATERIAL),
+    FISH_CAUGHT("fishcaught", Substatistic.MATERIAL),
+    PROJECTILES_HIT_BLOCK("projectileshitblock", Substatistic.MATERIAL),
     MOB_KILLS("mobkills", Substatistic.ENTITY),
     PROJECTILES_HIT_ENTITY("projectileshitentity", Substatistic.ENTITY),
-    PROJECTILES_HIT_BLOCK("projectileshitblock", Substatistic.MATERIAL),
     DEATHS("deaths", Substatistic.NONE),
     PLAYER_KILLS("playerkills", Substatistic.NONE),
     DAMAGE_DEALT("damagedealt", Substatistic.NONE),
     DAMAGE_TAKEN("damagetaken", Substatistic.NONE),
-    FISH_CAUGHT("fishcaught", Substatistic.MATERIAL);
+    PLAYER_JOINS("joins", Substatistic.NONE);
 
 
     private final String key;
