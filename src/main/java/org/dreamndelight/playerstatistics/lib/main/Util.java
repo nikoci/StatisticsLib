@@ -5,7 +5,7 @@ public class Util {
     private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
     public static String generatePlayerID() {
-        int length = 6;
+        int length = 10;
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < length; i++) {
             int character = (int) (Math.random() * ALPHA_NUMERIC_STRING.length());

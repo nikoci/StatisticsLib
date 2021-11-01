@@ -11,9 +11,10 @@ import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 public class ItemCraftListener implements Listener {
 
     @EventHandler
-    public void onCraftItem(CraftItemEvent event) {
+    public void onCraftItem(final CraftItemEvent event) {
         assert event.getWhoClicked() instanceof Player;
-        if(event.getCurrentItem() == null) return;
+        if (event.getCurrentItem() == null) return;
+        //TODO: Find a way to calculate shift click since it only fires for one batch
         PlayerStatistics.get().getStatisticsManager().addStatistic((Player) event.getWhoClicked(), Statistic.ITEMS_CRAFTED, event.getCurrentItem().getType(), event.getCurrentItem().getAmount());
     }
 

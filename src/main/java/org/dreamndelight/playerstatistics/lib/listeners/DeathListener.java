@@ -11,7 +11,7 @@ public class DeathListener implements Listener {
 
 
     @EventHandler
-    public void onEntityDeath(EntityDeathEvent event) {
+    public void onEntityDeath(final EntityDeathEvent event) {
         if (event.getEntity() instanceof Player)
             PlayerStatistics.get().getStatisticsManager().addStatistic((Player) event.getEntity(), Statistic.DEATHS, 1);
 

@@ -9,7 +9,7 @@ public class JoinListener implements Listener {
 
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
+    public void onJoin(final PlayerJoinEvent event) {
         PlayerStatistics.get().getUserData().registerPlayer(event.getPlayer());
     }
 
