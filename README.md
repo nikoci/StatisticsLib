@@ -45,7 +45,8 @@
 <h5>Raw Jar file</h5>
 
 1. Download the latest jar file from [here](https://github.com/dream-n-delight/playerstatistics/releases)
-2. Open your preferred IDE and add a new external jar file to the project structure
+2. Add the jar file to your server's plugins folder
+3. Open your preferred IDE and add a new external jar file to the project structure
 
 <br>
 <br>
