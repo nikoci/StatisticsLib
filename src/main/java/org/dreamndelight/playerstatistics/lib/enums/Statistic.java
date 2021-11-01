@@ -2,7 +2,7 @@ package org.dreamndelight.playerstatistics.lib.enums;
 
 import java.util.Arrays;
 
-@SuppressWarnings({"unused", "RedundantSuppression"})
+@SuppressWarnings({"unused", "RedundantSuppression", "SpellCheckingInspection"})
 public enum Statistic {
 
 
