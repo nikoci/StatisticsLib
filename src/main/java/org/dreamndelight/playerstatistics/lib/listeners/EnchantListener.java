@@ -8,10 +8,15 @@ import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 
 public class EnchantListener implements Listener {
 
+    private final PlayerStatistics plugin;
+
+    public EnchantListener(PlayerStatistics plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onEnchant(final EnchantItemEvent event) {
-        PlayerStatistics.get().getStatisticsManager().addStatistic(event.getEnchanter(), Statistic.ITEMS_ENCHANTED, event.getItem().getType(), 1);
+        plugin.getLib().getStatisticsManager().addStatistic(event.getEnchanter(), Statistic.ITEMS_ENCHANTED, event.getItem().getType(), 1);
     }
 
 }

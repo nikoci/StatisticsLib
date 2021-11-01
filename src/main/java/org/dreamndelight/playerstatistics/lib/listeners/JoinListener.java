@@ -7,10 +7,15 @@ import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 
 public class JoinListener implements Listener {
 
+    private final PlayerStatistics plugin;
+
+    public JoinListener(PlayerStatistics plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onJoin(final PlayerJoinEvent event) {
-        PlayerStatistics.get().getUserData().registerPlayer(event.getPlayer());
+        plugin.getLib().getUserData().registerPlayer(event.getPlayer());
     }
 
 }

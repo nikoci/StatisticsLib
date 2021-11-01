@@ -8,10 +8,15 @@ import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 
 public class DropListener implements Listener {
 
+    private final PlayerStatistics plugin;
+
+    public DropListener(PlayerStatistics plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onDrop(final PlayerDropItemEvent event) {
-        PlayerStatistics.get().getStatisticsManager().addStatistic(event.getPlayer(), Statistic.ITEMS_DROPPED, event.getItemDrop().getItemStack().getType(), event.getItemDrop().getItemStack().getAmount());
+        plugin.getLib().getStatisticsManager().addStatistic(event.getPlayer(), Statistic.ITEMS_DROPPED, event.getItemDrop().getItemStack().getType(), event.getItemDrop().getItemStack().getAmount());
     }
 
 

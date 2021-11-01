@@ -16,12 +16,18 @@ import static org.dreamndelight.playerstatistics.lib.main.Util.getRemainingInvSp
 
 public class ItemCraftListener implements Listener {
 
+    private final PlayerStatistics plugin;
+
+    public ItemCraftListener(PlayerStatistics plugin) {
+        this.plugin = plugin;
+    }
+
     @EventHandler
     public void onCraftItem(final CraftItemEvent event) {
         assert event.getWhoClicked() instanceof Player;
         if (event.getCurrentItem() == null) return;
         //TODO: Test if multiple crafts through e.g shiftclick is calculated correctly (with (half)full inventory, drops, etc.)
-        PlayerStatistics.get().getStatisticsManager().addStatistic((Player) event.getWhoClicked(), Statistic.ITEMS_CRAFTED, event.getCurrentItem().getType(), calculateAmount(event));
+        plugin.getLib().getStatisticsManager().addStatistic((Player) event.getWhoClicked(), Statistic.ITEMS_CRAFTED, event.getCurrentItem().getType(), calculateAmount(event));
     }
 
     private int calculateAmount(final CraftItemEvent event) {

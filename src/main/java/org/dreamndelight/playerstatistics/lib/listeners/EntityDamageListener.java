@@ -10,18 +10,24 @@ import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 
 public class EntityDamageListener implements Listener {
 
+    private final PlayerStatistics plugin;
+
+    public EntityDamageListener(PlayerStatistics plugin) {
+        this.plugin = plugin;
+    }
+
     @EventHandler
     public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player) {
 
-            PlayerStatistics.get().getStatisticsManager().addStatistic((Player) event.getDamager(), Statistic.DAMAGE_DEALT, (int) Math.round(event.getFinalDamage()));
+            plugin.getLib().getStatisticsManager().addStatistic((Player) event.getDamager(), Statistic.DAMAGE_DEALT, (int) Math.round(event.getFinalDamage()));
         }
     }
 
     @EventHandler
     public void onEntityDamage(final EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
-            PlayerStatistics.get().getStatisticsManager().addStatistic((Player) event.getEntity(), Statistic.DAMAGE_TAKEN, (int) Math.round(event.getDamage()));
+            plugin.getLib().getStatisticsManager().addStatistic((Player) event.getEntity(), Statistic.DAMAGE_TAKEN, (int) Math.round(event.getDamage()));
         }
     }
 

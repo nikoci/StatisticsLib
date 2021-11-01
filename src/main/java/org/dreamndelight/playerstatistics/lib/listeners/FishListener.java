@@ -10,13 +10,18 @@ import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 
 public class FishListener implements Listener {
 
+    private final PlayerStatistics plugin;
+
+    public FishListener(PlayerStatistics plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onFish(final PlayerFishEvent event) {
 
         if (event.getState() == PlayerFishEvent.State.CAUGHT_FISH) {
             if (event.getCaught() != null && event.getCaught().getType() == EntityType.DROPPED_ITEM) {
-                PlayerStatistics.get().getStatisticsManager().addStatistic(event.getPlayer(), Statistic.FISH_CAUGHT, ((Item) event.getCaught()).getItemStack().getType(), 1);
+                plugin.getLib().getStatisticsManager().addStatistic(event.getPlayer(), Statistic.FISH_CAUGHT, ((Item) event.getCaught()).getItemStack().getType(), 1);
             }
 
         }

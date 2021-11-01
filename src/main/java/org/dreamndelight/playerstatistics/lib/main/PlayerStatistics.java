@@ -3,75 +3,70 @@ package org.dreamndelight.playerstatistics.lib.main;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.dreamndelight.playerstatistics.lib.data.*;
+import org.dreamndelight.playerstatistics.lib.data.ConfigManager;
+import org.dreamndelight.playerstatistics.lib.data.StatisticsManager;
+import org.dreamndelight.playerstatistics.lib.data.StatisticsTimer;
+import org.dreamndelight.playerstatistics.lib.data.UserData;
 import org.dreamndelight.playerstatistics.lib.listeners.*;
 
 import java.util.Timer;
 
 public class PlayerStatistics extends JavaPlugin {
 
-    private static PlayerStatistics instance;
-    private UserData userData;
-    private ConfigManager configManager;
-    private StatisticsManager statisticsManager;
+    private PlayerStatisticsLib lib;
+
 
     @Override
     public void onEnable() {
         super.onEnable();
-        instance = this;
         saveDefaultConfig();
-        configManager = new ConfigManager(this);
-
-        if (!SQL.connect()) return;
-        SQL.setupTables();
-        userData = UserData.retrieveData();
-        statisticsManager = new StatisticsManager();
+        lib = new PlayerStatisticsLib(this);
         setupListeners();
         registerProvider();
         Timer timer = new Timer();
-        timer.schedule(new StatisticsTimer(), getConfigManager().SAVEDATAPERIOD * 1000, getConfigManager().SAVEDATAPERIOD * 1000);
+        timer.schedule(new StatisticsTimer(this), getConfigManager().SAVEDATAPERIOD * 1000, getConfigManager().SAVEDATAPERIOD * 1000);
     }
 
     @Override
     public void onDisable() {
         super.onDisable();
-        userData.saveData();
-        statisticsManager.saveStatistics();
+        lib.getUserData().saveData();
+        lib.getStatisticsManager().saveStatistics();
     }
 
 
-    public static PlayerStatistics get() {
-        return instance;
+    public PlayerStatisticsLib getLib() {
+        return lib;
     }
 
     public UserData getUserData() {
-        return userData;
+        return lib.getUserData();
     }
 
     public ConfigManager getConfigManager() {
-        return configManager;
+        return lib.getConfigManager();
     }
 
     public StatisticsManager getStatisticsManager() {
-        return statisticsManager;
+        return lib.getStatisticsManager();
     }
 
     private void setupListeners() {
-        getServer().getPluginManager().registerEvents(new JoinListener(), this);
-        getServer().getPluginManager().registerEvents(new QuitListener(), this);
-        getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
-        getServer().getPluginManager().registerEvents(new DeathListener(), this);
-        getServer().getPluginManager().registerEvents(new DropListener(), this);
-        getServer().getPluginManager().registerEvents(new EntityDamageListener(), this);
-        getServer().getPluginManager().registerEvents(new ItemBreakListener(), this);
-        getServer().getPluginManager().registerEvents(new ItemCraftListener(), this);
-        getServer().getPluginManager().registerEvents(new EnchantListener(), this);
-        getServer().getPluginManager().registerEvents(new ProjectileHitListener(), this);
-        getServer().getPluginManager().registerEvents(new FishListener(), this);
-        getServer().getPluginManager().registerEvents(new InteractListener(), this);
+        getServer().getPluginManager().registerEvents(new JoinListener(this), this);
+        getServer().getPluginManager().registerEvents(new QuitListener(this), this);
+        getServer().getPluginManager().registerEvents(new BlockBreakListener(this), this);
+        getServer().getPluginManager().registerEvents(new DeathListener(this), this);
+        getServer().getPluginManager().registerEvents(new DropListener(this), this);
+        getServer().getPluginManager().registerEvents(new EntityDamageListener(this), this);
+        getServer().getPluginManager().registerEvents(new ItemBreakListener(this), this);
+        getServer().getPluginManager().registerEvents(new ItemCraftListener(this), this);
+        getServer().getPluginManager().registerEvents(new EnchantListener(this), this);
+        getServer().getPluginManager().registerEvents(new ProjectileHitListener(this), this);
+        getServer().getPluginManager().registerEvents(new FishListener(this), this);
+        getServer().getPluginManager().registerEvents(new InteractListener(this), this);
     }
 
     private void registerProvider() {
-        Bukkit.getServer().getServicesManager().register(PlayerStatistics.class, this, this, ServicePriority.Highest);
+        Bukkit.getServer().getServicesManager().register(PlayerStatisticsLib.class, lib, this, ServicePriority.Highest);
     }
 }

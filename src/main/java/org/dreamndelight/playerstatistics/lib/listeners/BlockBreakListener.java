@@ -8,10 +8,15 @@ import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 
 public class BlockBreakListener implements Listener {
 
+    private final PlayerStatistics plugin;
+
+    public BlockBreakListener(PlayerStatistics plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onBlockBreak(final BlockBreakEvent event) {
-        PlayerStatistics.get().getStatisticsManager().addStatistic(event.getPlayer(), Statistic.BLOCKS_BROKEN, event.getBlock().getType(), 1);
+        plugin.getLib().getStatisticsManager().addStatistic(event.getPlayer(), Statistic.BLOCKS_BROKEN, event.getBlock().getType(), 1);
     }
 
 }
