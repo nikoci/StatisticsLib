@@ -8,7 +8,7 @@ public class Util {
 
     private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
-    public static String generatePlayerID() {
+    public static String generatePlayerID(PlayerStatistics plugin) {
         int length = 10;
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < length; i++) {
@@ -17,7 +17,7 @@ public class Util {
             length--;
         }
 
-        return (PlayerStatistics.get().getUserData().isPlayerIDAvailable(builder.toString())) ? builder.toString() : generatePlayerID();
+        return (plugin.getLib().getUserData().isPlayerIDAvailable(builder.toString())) ? builder.toString() : generatePlayerID(plugin);
     }
 
     public static int getMaxCraftable(final CraftingInventory inventory) {

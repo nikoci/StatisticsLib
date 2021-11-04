@@ -16,7 +16,7 @@ public class PlayerStatisticsLib {
         if (!SQL.connect(statistics)) return;
         SQL.setupTables();
         userData = UserData.retrieveData();
-        statisticsManager = new StatisticsManager();
+        statisticsManager = new StatisticsManager(statistics);
     }
 
     public UserData getUserData() {
