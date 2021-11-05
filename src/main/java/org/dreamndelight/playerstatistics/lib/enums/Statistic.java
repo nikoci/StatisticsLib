@@ -7,6 +7,7 @@ public enum Statistic {
 
 
     BLOCKS_BROKEN("blocksbroken", Substatistic.MATERIAL),
+    BLOCKS_PLACED("blocksplaced", Substatistic.MATERIAL),
     ITEMS_BROKEN("itemsbroken", Substatistic.MATERIAL),
     ITEMS_ENCHANTED("itemsenchanted", Substatistic.MATERIAL),
     ITEMS_DROPPED("itemsdropped", Substatistic.MATERIAL),

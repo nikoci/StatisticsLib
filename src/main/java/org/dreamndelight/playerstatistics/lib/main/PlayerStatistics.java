@@ -66,6 +66,7 @@ public class PlayerStatistics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new InteractListener(this), this);
         getServer().getPluginManager().registerEvents(new RaidListener(this), this);
         getServer().getPluginManager().registerEvents(new EntityBreedListener(this), this);
+        getServer().getPluginManager().registerEvents(new BlockPlaceListener(this), this);
     }
 
     private void registerProvider() {
