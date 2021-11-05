@@ -20,14 +20,14 @@ public class EntityDamageListener implements Listener {
     public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player) {
 
-            plugin.getLib().getStatisticsManager().addStatistic((Player) event.getDamager(), Statistic.DAMAGE_DEALT, (int) Math.round(event.getFinalDamage()));
+            plugin.getStatisticsManager().addStatistic((Player) event.getDamager(), Statistic.DAMAGE_DEALT, (int) Math.round(event.getFinalDamage()));
         }
     }
 
     @EventHandler
     public void onEntityDamage(final EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
-            plugin.getLib().getStatisticsManager().addStatistic((Player) event.getEntity(), Statistic.DAMAGE_TAKEN, (int) Math.round(event.getDamage()));
+            plugin.getStatisticsManager().addStatistic((Player) event.getEntity(), Statistic.DAMAGE_TAKEN, (int) Math.round(event.getDamage()));
         }
     }
 

@@ -21,7 +21,7 @@ public class FishListener implements Listener {
 
         if (event.getState() == PlayerFishEvent.State.CAUGHT_FISH) {
             if (event.getCaught() != null && event.getCaught().getType() == EntityType.DROPPED_ITEM) {
-                plugin.getLib().getStatisticsManager().addStatistic(event.getPlayer(), Statistic.FISH_CAUGHT, ((Item) event.getCaught()).getItemStack().getType(), 1);
+                plugin.getStatisticsManager().addStatistic(event.getPlayer(), Statistic.FISH_CAUGHT, ((Item) event.getCaught()).getItemStack().getType(), 1);
             }
 
         }

@@ -21,9 +21,9 @@ public class ProjectileHitListener implements Listener {
             Player player = (Player) event.getEntity().getShooter();
 
             if (event.getHitEntity() != null) {
-                plugin.getLib().getStatisticsManager().addStatistic(player, Statistic.PROJECTILES_HIT_ENTITY, event.getEntityType(), 1);
+                plugin.getStatisticsManager().addStatistic(player, Statistic.PROJECTILES_HIT_ENTITY, event.getEntityType(), 1);
             } else if (event.getHitBlock() != null) {
-                plugin.getLib().getStatisticsManager().addStatistic(player, Statistic.PROJECTILES_HIT_BLOCK, event.getHitBlock().getType(), 1);
+                plugin.getStatisticsManager().addStatistic(player, Statistic.PROJECTILES_HIT_BLOCK, event.getHitBlock().getType(), 1);
             }
 
         }

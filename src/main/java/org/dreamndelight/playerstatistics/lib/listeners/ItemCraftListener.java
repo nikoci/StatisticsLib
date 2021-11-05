@@ -27,7 +27,7 @@ public class ItemCraftListener implements Listener {
         assert event.getWhoClicked() instanceof Player;
         if (event.getCurrentItem() == null) return;
         //TODO: Test if multiple crafts through e.g shiftclick is calculated correctly (with (half)full inventory, drops, etc.)
-        plugin.getLib().getStatisticsManager().addStatistic((Player) event.getWhoClicked(), Statistic.ITEMS_CRAFTED, event.getCurrentItem().getType(), calculateAmount(event));
+        plugin.getStatisticsManager().addStatistic((Player) event.getWhoClicked(), Statistic.ITEMS_CRAFTED, event.getCurrentItem().getType(), calculateAmount(event));
     }
 
     private int calculateAmount(final CraftItemEvent event) {

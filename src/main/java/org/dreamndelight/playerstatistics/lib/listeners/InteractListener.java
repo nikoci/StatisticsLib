@@ -24,7 +24,7 @@ public class InteractListener implements Listener {
         if (event.getItem() != null) {
             if (event.useItemInHand() == Event.Result.ALLOW) {
                 if (player.getCooldown(event.getMaterial()) <= 0) {
-                    plugin.getLib().getStatisticsManager().addStatistic(player, Statistic.ITEMS_USED, event.getMaterial(), 1);
+                    plugin.getStatisticsManager().addStatistic(player, Statistic.ITEMS_USED, event.getMaterial(), 1);
                 }
             }
         }

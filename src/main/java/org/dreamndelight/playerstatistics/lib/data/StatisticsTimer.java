@@ -14,6 +14,6 @@ public class StatisticsTimer extends TimerTask {
 
     @Override
     public void run() {
-        plugin.getLib().getStatisticsManager().saveStatistics(plugin.getLib().getConfigManager().clearCacheOnSave);
+        plugin.getStatisticsManager().saveStatistics(plugin.getConfigManager().clearCacheOnSave);
     }
 }

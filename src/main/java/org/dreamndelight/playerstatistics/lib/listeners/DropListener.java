@@ -16,7 +16,7 @@ public class DropListener implements Listener {
 
     @EventHandler
     public void onDrop(final PlayerDropItemEvent event) {
-        plugin.getLib().getStatisticsManager().addStatistic(event.getPlayer(), Statistic.ITEMS_DROPPED, event.getItemDrop().getItemStack().getType(), event.getItemDrop().getItemStack().getAmount());
+        plugin.getStatisticsManager().addStatistic(event.getPlayer(), Statistic.ITEMS_DROPPED, event.getItemDrop().getItemStack().getType(), event.getItemDrop().getItemStack().getAmount());
     }
 
 

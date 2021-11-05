@@ -17,7 +17,7 @@ public class Util {
             length--;
         }
 
-        return (plugin.getLib().getUserData().isPlayerIDAvailable(builder.toString())) ? builder.toString() : generatePlayerID(plugin);
+        return (plugin.getUserData().isPlayerIDAvailable(builder.toString())) ? builder.toString() : generatePlayerID(plugin);
     }
 
     public static int getMaxCraftable(final CraftingInventory inventory) {

@@ -16,8 +16,8 @@ public class JoinListener implements Listener {
 
     @EventHandler
     public void onJoin(final PlayerJoinEvent event) {
-        plugin.getLib().getUserData().registerPlayer(event.getPlayer());
-        plugin.getLib().getStatisticsManager().addStatistic(event.getPlayer(), Statistic.PLAYER_JOINS, 1);
+        plugin.getUserData().registerPlayer(event.getPlayer());
+        plugin.getStatisticsManager().addStatistic(event.getPlayer(), Statistic.PLAYER_JOINS, 1);
     }
 
 }

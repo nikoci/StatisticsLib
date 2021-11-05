@@ -16,7 +16,7 @@ public class EnchantListener implements Listener {
 
     @EventHandler
     public void onEnchant(final EnchantItemEvent event) {
-        plugin.getLib().getStatisticsManager().addStatistic(event.getEnchanter(), Statistic.ITEMS_ENCHANTED, event.getItem().getType(), 1);
+        plugin.getStatisticsManager().addStatistic(event.getEnchanter(), Statistic.ITEMS_ENCHANTED, event.getItem().getType(), 1);
     }
 
 }

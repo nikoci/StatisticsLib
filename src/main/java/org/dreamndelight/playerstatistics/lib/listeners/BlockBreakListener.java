@@ -16,7 +16,7 @@ public class BlockBreakListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(final BlockBreakEvent event) {
-        plugin.getLib().getStatisticsManager().addStatistic(event.getPlayer(), Statistic.BLOCKS_BROKEN, event.getBlock().getType(), 1);
+        plugin.getStatisticsManager().addStatistic(event.getPlayer(), Statistic.BLOCKS_BROKEN, event.getBlock().getType(), 1);
     }
 
 }
