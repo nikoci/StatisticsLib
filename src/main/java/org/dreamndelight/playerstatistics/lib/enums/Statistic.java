@@ -20,6 +20,7 @@ public enum Statistic {
     MOB_KILLS("mobkills", Substatistic.ENTITY),
     PROJECTILES_HIT_ENTITY("projectileshitentity", Substatistic.ENTITY),
     ENTITYS_BRED("entitysbred", Substatistic.ENTITY),
+    ENTITYS_TAMED("entitystamed", Substatistic.ENTITY),
     DEATHS("deaths", Substatistic.NONE),
     PLAYER_KILLS("playerkills", Substatistic.NONE),
     DAMAGE_DEALT("damagedealt", Substatistic.NONE),
