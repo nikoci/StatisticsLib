@@ -3,6 +3,7 @@ package org.dreamndelight.playerstatistics.lib.listeners;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.CraftItemEvent;
@@ -22,12 +23,14 @@ public class ItemCraftListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onCraftItem(final CraftItemEvent event) {
-        assert event.getWhoClicked() instanceof Player;
-        if (event.getCurrentItem() == null) return;
-        //TODO: Test if multiple crafts through e.g shiftclick is calculated correctly (with (half)full inventory, drops, etc.)
-        plugin.getStatisticsManager().addStatistic((Player) event.getWhoClicked(), Statistic.ITEMS_CRAFTED, event.getCurrentItem().getType(), calculateAmount(event));
+        if (!event.isCancelled()) {
+            assert event.getWhoClicked() instanceof Player;
+            if (event.getCurrentItem() == null) return;
+            //TODO: Test if multiple crafts through e.g shiftclick is calculated correctly (with (half)full inventory, drops, etc.)
+            plugin.getStatisticsManager().addStatistic((Player) event.getWhoClicked(), Statistic.ITEMS_CRAFTED, event.getCurrentItem().getType(), calculateAmount(event));
+        }
     }
 
     private int calculateAmount(final CraftItemEvent event) {

@@ -1,6 +1,7 @@
 package org.dreamndelight.playerstatistics.lib.listeners;
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.dreamndelight.playerstatistics.lib.enums.Statistic;
@@ -14,9 +15,11 @@ public class BlockBreakListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onBlockBreak(final BlockBreakEvent event) {
-        plugin.getStatisticsManager().addStatistic(event.getPlayer(), Statistic.BLOCKS_BROKEN, event.getBlock().getType(), 1);
+        if (!event.isCancelled()) {
+            plugin.getStatisticsManager().addStatistic(event.getPlayer(), Statistic.BLOCKS_BROKEN, event.getBlock().getType(), 1);
+        }
     }
 
 }

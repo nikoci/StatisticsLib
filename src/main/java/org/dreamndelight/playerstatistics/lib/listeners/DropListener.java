@@ -1,6 +1,7 @@
 package org.dreamndelight.playerstatistics.lib.listeners;
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.dreamndelight.playerstatistics.lib.enums.Statistic;
@@ -14,9 +15,11 @@ public class DropListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onDrop(final PlayerDropItemEvent event) {
-        plugin.getStatisticsManager().addStatistic(event.getPlayer(), Statistic.ITEMS_DROPPED, event.getItemDrop().getItemStack().getType(), event.getItemDrop().getItemStack().getAmount());
+        if (!event.isCancelled()) {
+            plugin.getStatisticsManager().addStatistic(event.getPlayer(), Statistic.ITEMS_DROPPED, event.getItemDrop().getItemStack().getType(), event.getItemDrop().getItemStack().getAmount());
+        }
     }
 
 
