@@ -16,6 +16,7 @@ public enum Statistic {
     FISH_CAUGHT("fishcaught", Substatistic.MATERIAL),
     BLOCKS_INTERACTED("blocksinteracted", Substatistic.MATERIAL),
     PROJECTILES_HIT_BLOCK("projectileshitblock", Substatistic.MATERIAL),
+    ITEMS_CONSUMED("itemsconsumed", Substatistic.MATERIAL),
     MOB_KILLS("mobkills", Substatistic.ENTITY),
     PROJECTILES_HIT_ENTITY("projectileshitentity", Substatistic.ENTITY),
     ENTITYS_BRED("entitysbred", Substatistic.ENTITY),
