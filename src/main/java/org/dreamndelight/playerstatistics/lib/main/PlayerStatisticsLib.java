@@ -8,7 +8,7 @@ import org.dreamndelight.playerstatistics.lib.data.UserData;
 public class PlayerStatisticsLib {
 
     private UserData userData;
-    private ConfigManager configManager;
+    private final ConfigManager configManager;
     private StatisticsManager statisticsManager;
 
     public PlayerStatisticsLib(PlayerStatistics statistics) {
