@@ -16,6 +16,7 @@ public enum Statistic {
     PROJECTILES_HIT_BLOCK("projectileshitblock", Substatistic.MATERIAL),
     MOB_KILLS("mobkills", Substatistic.ENTITY),
     PROJECTILES_HIT_ENTITY("projectileshitentity", Substatistic.ENTITY),
+    ENTITYS_BRED("entitysbred", Substatistic.ENTITY),
     DEATHS("deaths", Substatistic.NONE),
     PLAYER_KILLS("playerkills", Substatistic.NONE),
     DAMAGE_DEALT("damagedealt", Substatistic.NONE),
