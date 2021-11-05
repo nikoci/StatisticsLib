@@ -64,6 +64,7 @@ public class PlayerStatistics extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ProjectileHitListener(this), this);
         getServer().getPluginManager().registerEvents(new FishListener(this), this);
         getServer().getPluginManager().registerEvents(new InteractListener(this), this);
+        getServer().getPluginManager().registerEvents(new RaidListener(this), this);
     }
 
     private void registerProvider() {

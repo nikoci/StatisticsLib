@@ -21,7 +21,8 @@ public enum Statistic {
     DAMAGE_DEALT("damagedealt", Substatistic.NONE),
     DAMAGE_TAKEN("damagetaken", Substatistic.NONE),
     PLAYER_JOINS("joins", Substatistic.NONE),
-    PLAYER_QUITS("quits", Substatistic.NONE);
+    PLAYER_QUITS("quits", Substatistic.NONE),
+    RAIDS_WON("raidswon", Substatistic.NONE);
 
 
     private final String key;
