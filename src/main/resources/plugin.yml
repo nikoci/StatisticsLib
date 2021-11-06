@@ -3,6 +3,8 @@ authors: [ dehys, OverDodo ]
 version: '1.2.1_INDEV'
 main: 'com.devflask.statisticslib.lib.main.PlayerStatistics'
 api-version: '1.16'
+loadbefore:
+  - PlayerStatisticsPlugin
 
 commands:
   pslreload:
