@@ -4,13 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.dreamndelight</groupId>
-    <artifactId>playerstatistics</artifactId>
+    <groupId>com.devflask</groupId>
+    <artifactId>statisticslib</artifactId>
     <version>1.1.7</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>A library for getting/storing player statistics in a spigot-server environment.</description>
     <url>https://github.com/dream-n-delight/PlayerStatistics</url>
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
 
     <licenses>
         <license>
@@ -22,22 +28,22 @@
     <developers>
         <developer>
             <name>dehys</name>
-            <email>arijan.nikoci@outlook.com</email>
-            <organization>Dream n Delight</organization>
-            <organizationUrl>http://dreamndelight.org</organizationUrl>
+            <email>arijan@nikoci.se</email>
+            <organization>Devflask</organization>
+            <organizationUrl>https://devflask.com</organizationUrl>
         </developer>
         <developer>
-            <name>overdodo</name>
+            <name>dodo</name>
             <email>dodo.stenzi@gmx.de</email>
-            <organization>Dream n Delight</organization>
-            <organizationUrl>http://dreamndelight.org</organizationUrl>
+            <organization>Devflask</organization>
+            <organizationUrl>https://devflask.com</organizationUrl>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/dream-n-delight/playerstatistics.git</connection>
-        <developerConnection>scm:git:ssh://github.com:dream-n-delight/playerstatistics.git</developerConnection>
-        <url>http://github.com/dream-n-delight/playerstatistics/tree/release</url>
+        <connection>scm:git:git://github.com/devflask/StatisticsLib.git</connection>
+        <developerConnection>scm:git:ssh://github.com:devflask/StatisticsLib.git</developerConnection>
+        <url>http://github.com/devflask/StatisticsLib/tree/release</url>
     </scm>
 
 
@@ -67,32 +73,20 @@
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <finalName>StatisticsLib</finalName>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>libs/</classpathPrefix>
+                            <mainClass>
+                                com.devflask.statisticslib.lib.main.PlayerStatistics
+                            </mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.dreamndelight.playerstatistics.lib.main.PlayerStatistics</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
