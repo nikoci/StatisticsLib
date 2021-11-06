@@ -32,8 +32,10 @@ public class PlayerStatistics extends JavaPlugin {
     @Override
     public void onDisable() {
         super.onDisable();
-        lib.getUserData().saveData();
-        lib.getStatisticsManager().saveStatistics();
+        if (SQL.connection != null) {
+            lib.getUserData().saveData();
+            lib.getStatisticsManager().saveStatistics();
+        }
     }
 
 
