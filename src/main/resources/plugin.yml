@@ -3,3 +3,10 @@ authors: [ dehys, OverDodo ]
 version: '1.2.1_INDEV'
 main: 'org.dreamndelight.playerstatistics.lib.main.PlayerStatistics'
 api-version: '1.16'
+
+commands:
+  pslreload:
+    permission: 'psl.reload'
+    usage: '/pslreload'
+    description: 'Reloads the PlayerStatisticsLib config.yml'
+    executor: org.dreamndelight.playerstatistics.lib.command.ReloadCommand
