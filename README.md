@@ -56,13 +56,14 @@
 *Jump right in to using the your freshly added PlayerStatisticsLib!*
 <br>
 *Use this demo class to get started.*
+
 ```java
 package org.dreamndelight.playerstatistics.lib.main;
 
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.dreamndelight.playerstatistics.lib.data.StatisticsManager;
-import org.dreamndelight.playerstatistics.lib.main.PlayerStatisticsLib;
+import StatisticsManager;
+import PlayerStatisticsLib;
 
 public class MyPlugin extends JavaPlugin {
 
