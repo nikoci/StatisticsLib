@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.dreamndelight.playerstatistics.lib.enums.Statistic;
 import org.dreamndelight.playerstatistics.lib.enums.Substatistic;
+import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.PreparedStatement;
@@ -22,6 +23,7 @@ public class PlayerStatistic {
     private final HashMap<String, Integer> plainStatistics;
     private final HashMap<String, HashMap<Material, Integer>> materialStatistics;
     private final HashMap<String, HashMap<EntityType, Integer>> entityStatistics;
+    private PlayerStatistics plugin;
 
     /**
      * This is the main constructor used for creating a new and empty {@link PlayerStatistic} object
@@ -29,7 +31,7 @@ public class PlayerStatistic {
      * @param uuid   the uuid of the player this object will be destined to
      * @param userid another, shorter id of the player, which is used internally to access data from the SQL-Database
      */
-    public PlayerStatistic(final UUID uuid, final String userid) {
+    public PlayerStatistic(final UUID uuid, final String userid, PlayerStatistics plugin) {
         this.uuid = uuid;
         this.userid = userid;
 
@@ -50,7 +52,7 @@ public class PlayerStatistic {
      * @param entityStatistics   a map of all statistics which have an ENTITY {@link Substatistic}
      */
     public PlayerStatistic(final UUID uuid, final String userid, HashMap<String, Integer> plainStatistics,
-                           HashMap<String, HashMap<Material, Integer>> materialStatistics, HashMap<String, HashMap<EntityType, Integer>> entityStatistics) {
+                           HashMap<String, HashMap<Material, Integer>> materialStatistics, HashMap<String, HashMap<EntityType, Integer>> entityStatistics, PlayerStatistics plugin) {
         this.uuid = uuid;
         this.userid = userid;
         this.plainStatistics = plainStatistics;
@@ -113,6 +115,7 @@ public class PlayerStatistic {
     }
 
     void addStatistic(@NotNull Statistic statistic, Material material, EntityType entityType, int amount) {
+        if (plugin.getConfigManager().isStatisticDisabled(statistic)) return;
         switch (statistic.getSubstatistic()) {
             case MATERIAL:
                 assert material != null;
@@ -137,7 +140,7 @@ public class PlayerStatistic {
      * If a Statistic with Substatistics has been selected,
      * this method will return the sum of all the Substatistics of that Statistic
      */
-    public int getStatistic(@NotNull Statistic statistic) {
+    public int getStatistic(@NotNull Statistic statistic) throws IllegalAccessException {
         return getStatistic(statistic, null, null);
     }
 
@@ -149,7 +152,7 @@ public class PlayerStatistic {
      * @return returns the statistic specified by the {@link Material}
      * Will return the sum of all the Substatistics of that Statistic if material = null
      */
-    public int getStatistic(@NotNull Statistic statistic, Material material) {
+    public int getStatistic(@NotNull Statistic statistic, Material material) throws IllegalAccessException {
         return getStatistic(statistic, material, null);
     }
 
@@ -161,7 +164,7 @@ public class PlayerStatistic {
      * @return returns the statistic specified by the {@link EntityType}
      * Will return the sum of all the Substatistics of that Statistic if entityType = null
      */
-    public int getStatistic(@NotNull Statistic statistic, EntityType entityType) {
+    public int getStatistic(@NotNull Statistic statistic, EntityType entityType) throws IllegalAccessException {
         return getStatistic(statistic, null, entityType);
     }
 
@@ -248,7 +251,10 @@ public class PlayerStatistic {
      * @param entityType define the {@link EntityType} of the statistic
      * @return returns the value of the {@link Statistic} or 0 if it cannot be found.
      */
-    private int getStatistic(@NotNull Statistic statistic, Material material, EntityType entityType) {
+    private int getStatistic(@NotNull Statistic statistic, Material material, EntityType entityType) throws IllegalAccessException {
+        if (plugin.getConfigManager().isStatisticDisabled(statistic)) {
+            throw new IllegalAccessException("The statistic " + statistic.name() + " is not enabled in the config!");
+        }
         switch (statistic.getSubstatistic()) {
 
             case MATERIAL:

@@ -29,3 +29,31 @@ savedata:
   # clearcache: if set to true, every time all cached data is saved to the sql database, the cache will be cleared
   # useful for servers with a higher player count
   clearcache: true
+
+statistics:
+  # enabled: if set to false, disables the tracking of certain statistics
+  # useful to prevent unnecessary database entries/queries
+  enabled:
+
+    blocksbroken: true
+    blocksplaced: true
+    itemsbroken: true
+    itemsenchanted: true
+    itemsdropped: true
+    itemsused: true
+    itemscrafted: true
+    fishcaught: true
+    blocksinteracted: true
+    projectileshitblocks: true
+    itemsconsumed: true
+    mobkills: true
+    projectileshitentity: true
+    entitysbred: true
+    entitystamed: true
+    deaths: true
+    playerkills: true
+    damagedealt: true
+    damagetaken: true
+    joins: true
+    quits: true
+    raidswon: true

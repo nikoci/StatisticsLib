@@ -5,7 +5,6 @@ import java.util.Arrays;
 @SuppressWarnings({"unused", "RedundantSuppression", "SpellCheckingInspection"})
 public enum Statistic {
 
-
     BLOCKS_BROKEN("blocksbroken", Substatistic.MATERIAL),
     BLOCKS_PLACED("blocksplaced", Substatistic.MATERIAL),
     ITEMS_BROKEN("itemsbroken", Substatistic.MATERIAL),
