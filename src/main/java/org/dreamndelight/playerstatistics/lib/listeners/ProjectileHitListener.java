@@ -9,15 +9,20 @@ import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 
 public class ProjectileHitListener implements Listener {
 
+    private final PlayerStatistics plugin;
+
+    public ProjectileHitListener(PlayerStatistics plugin) {
+        this.plugin = plugin;
+    }
+
     @EventHandler
     public void onProjectileHit(final ProjectileHitEvent event) {
         if (event.getEntity().getShooter() instanceof Player) {
             Player player = (Player) event.getEntity().getShooter();
-
             if (event.getHitEntity() != null) {
-                PlayerStatistics.get().getStatisticsManager().addStatistic(player, Statistic.PROJECTILES_HIT_ENTITY, event.getEntityType(), 1);
+                plugin.getStatisticsManager().addStatistic(player, Statistic.PROJECTILES_HIT_ENTITY, event.getEntityType(), 1);
             } else if (event.getHitBlock() != null) {
-                PlayerStatistics.get().getStatisticsManager().addStatistic(player, Statistic.PROJECTILES_HIT_BLOCK, event.getHitBlock().getType(), 1);
+                plugin.getStatisticsManager().addStatistic(player, Statistic.PROJECTILES_HIT_BLOCK, event.getHitBlock().getType(), 1);
             }
 
         }

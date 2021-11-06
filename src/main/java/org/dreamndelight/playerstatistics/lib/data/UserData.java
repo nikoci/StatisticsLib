@@ -2,6 +2,7 @@ package org.dreamndelight.playerstatistics.lib.data;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.dreamndelight.playerstatistics.lib.main.PlayerStatistics;
 import org.dreamndelight.playerstatistics.lib.main.Util;
 
 import java.sql.PreparedStatement;
@@ -17,11 +18,12 @@ public class UserData {
 
     private final HashMap<UUID, String> players;
     private final HashMap<UUID, String> playerIDs;
+    private PlayerStatistics plugin;
 
-
-    public UserData() {
+    public UserData(PlayerStatistics plugin) {
         this.players = new HashMap<>();
         this.playerIDs = new HashMap<>();
+        this.plugin = plugin;
     }
 
     public UserData(HashMap<UUID, String> players, HashMap<UUID, String> playerIDs) {
@@ -79,7 +81,7 @@ public class UserData {
     public void registerPlayer(UUID uuid, String playerName) {
         players.put(uuid, playerName);
         if (!playerIDs.containsKey(uuid)) {
-            playerIDs.put(uuid, Util.generatePlayerID());
+            playerIDs.put(uuid, Util.generatePlayerID(plugin));
         }
     }
 
@@ -93,7 +95,7 @@ public class UserData {
             for (Map.Entry<UUID, String> entry : players.entrySet()) {
                 preparedStatement.setString(1, entry.getKey().toString());
                 preparedStatement.setString(2, entry.getValue());
-                preparedStatement.setString(3, getPlayerID(entry.getKey()).orElseGet(Util::generatePlayerID));
+                preparedStatement.setString(3, getPlayerID(entry.getKey()).orElseGet(() -> Util.generatePlayerID(plugin)));
                 preparedStatement.setString(4, entry.getValue());
                 preparedStatement.executeUpdate();
             }

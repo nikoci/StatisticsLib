@@ -12,19 +12,19 @@ public class SQL {
     public static Connection connection;
 
 
-    public static boolean connect() {
+    public static boolean connect(PlayerStatistics plugin) {
         if (!isConnected()) {
             try {
                 final String
-                        host = PlayerStatistics.get().getConfigManager().getString("sql.host").orElse(null),
-                        database = PlayerStatistics.get().getConfigManager().getString("sql.database").orElse(null),
-                        username = PlayerStatistics.get().getConfigManager().getString("sql.username").orElse(null),
-                        password = PlayerStatistics.get().getConfigManager().getString("sql.password").orElse(null);
+                        host = plugin.getConfigManager().getString("sql.host").orElse(null),
+                        database = plugin.getConfigManager().getString("sql.database").orElse(null),
+                        username = plugin.getConfigManager().getString("sql.username").orElse(null),
+                        password = plugin.getConfigManager().getString("sql.password").orElse(null);
                 connection = DriverManager.getConnection("jdbc:mysql://" + host + ":3306/" + database + "?autoReconnect=true", username, password);
                 return true;
             } catch (SQLException var4) {
                 Bukkit.getConsoleSender().sendMessage("Connection to SQL-Database unsuccessful. Plugin will be disabled.");
-                Bukkit.getServer().getPluginManager().disablePlugin(PlayerStatistics.get());
+                Bukkit.getServer().getPluginManager().disablePlugin(plugin);
                 return false;
             }
         } else {

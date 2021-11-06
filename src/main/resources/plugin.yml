@@ -1,5 +1,5 @@
-name: PlayerStatistics
+name: PlayerStatisticsLib
 authors: [ dehys, OverDodo ]
-version: '1.2.0'
+version: '1.2.1_INDEV'
 main: 'org.dreamndelight.playerstatistics.lib.main.PlayerStatistics'
 api-version: '1.16'

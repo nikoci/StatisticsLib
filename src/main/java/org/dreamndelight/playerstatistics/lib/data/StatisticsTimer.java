@@ -6,9 +6,14 @@ import java.util.TimerTask;
 
 public class StatisticsTimer extends TimerTask {
 
+    private final PlayerStatistics plugin;
+
+    public StatisticsTimer(PlayerStatistics plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public void run() {
-        PlayerStatistics.get().getStatisticsManager().saveStatistics(PlayerStatistics.get().getConfigManager().clearCacheOnSave);
+        plugin.getStatisticsManager().saveStatistics(plugin.getConfigManager().clearCacheOnSave);
     }
 }
