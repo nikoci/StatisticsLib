@@ -3,12 +3,14 @@ package org.dreamndelight.playerstatistics.lib.main;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.dreamndelight.playerstatistics.lib.commands.ReloadCommand;
 import org.dreamndelight.playerstatistics.lib.data.ConfigManager;
 import org.dreamndelight.playerstatistics.lib.data.StatisticsManager;
 import org.dreamndelight.playerstatistics.lib.data.StatisticsTimer;
 import org.dreamndelight.playerstatistics.lib.data.UserData;
 import org.dreamndelight.playerstatistics.lib.listeners.*;
 
+import java.util.Objects;
 import java.util.Timer;
 
 public class PlayerStatistics extends JavaPlugin {
@@ -22,6 +24,7 @@ public class PlayerStatistics extends JavaPlugin {
         saveDefaultConfig();
         lib = new PlayerStatisticsLib(this);
         setupListeners();
+        Objects.requireNonNull(getCommand("pslreload")).setExecutor(new ReloadCommand(this));
         registerProvider();
         Timer timer = new Timer();
         timer.schedule(new StatisticsTimer(this), getConfigManager().SAVEDATAPERIOD * 1000, getConfigManager().SAVEDATAPERIOD * 1000);

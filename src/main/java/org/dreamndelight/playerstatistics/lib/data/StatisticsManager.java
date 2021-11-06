@@ -157,7 +157,7 @@ public class StatisticsManager {
                 }
             }
 
-            PlayerStatistic statistic = new PlayerStatistic(uuid, userid.get(), plainStatistics, materialStatistics, entityStatistics);
+            PlayerStatistic statistic = new PlayerStatistic(uuid, userid.get(), plainStatistics, materialStatistics, entityStatistics, plugin);
             playerStatistics.put(uuid, statistic);
             return Optional.of(statistic);
         } catch (SQLException throwables) {
@@ -271,7 +271,7 @@ public class StatisticsManager {
      * @return this returns a new {@link PlayerStatistic} object for the player
      */
     private PlayerStatistic createStatistic(UUID uuid) {
-        PlayerStatistic statistic = new PlayerStatistic(uuid, plugin.getUserData().getPlayerID(uuid).orElseThrow(() -> new RuntimeException("Player was not registered due to an unknown error")));
+        PlayerStatistic statistic = new PlayerStatistic(uuid, plugin.getUserData().getPlayerID(uuid).orElseThrow(() -> new RuntimeException("Player was not registered due to an unknown error")), plugin);
         playerStatistics.put(uuid, statistic);
         return statistic;
     }
