@@ -1,7 +1,7 @@
 package com.devflask.statisticslib.lib.data;
 
-import org.bukkit.Bukkit;
 import com.devflask.statisticslib.lib.main.PlayerStatistics;
+import org.bukkit.Bukkit;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,10 +16,10 @@ public class SQL {
         if (!isConnected()) {
             try {
                 final String
-                        host = plugin.getConfigManager().getString("sql.host").orElse(null),
-                        database = plugin.getConfigManager().getString("sql.database").orElse(null),
-                        username = plugin.getConfigManager().getString("sql.username").orElse(null),
-                        password = plugin.getConfigManager().getString("sql.password").orElse(null);
+                        host = plugin.getConfig().getString("sql.host"),
+                        database = plugin.getConfig().getString("sql.database"),
+                        username = plugin.getConfig().getString("sql.username"),
+                        password = plugin.getConfig().getString("sql.password");
                 connection = DriverManager.getConnection("jdbc:mysql://" + host + ":3306/" + database + "?autoReconnect=true", username, password);
                 return true;
             } catch (SQLException var4) {
