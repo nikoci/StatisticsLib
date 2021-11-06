@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class Util {
 
-    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
 
     public static String generatePlayerID(PlayerStatistics plugin) {
         int length = 10;

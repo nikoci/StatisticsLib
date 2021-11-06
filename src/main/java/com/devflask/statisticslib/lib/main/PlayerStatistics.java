@@ -1,14 +1,11 @@
 package com.devflask.statisticslib.lib.main;
 
+import com.devflask.statisticslib.lib.commands.ReloadCommand;
+import com.devflask.statisticslib.lib.data.*;
+import com.devflask.statisticslib.lib.listeners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
-import com.devflask.statisticslib.lib.commands.ReloadCommand;
-import com.devflask.statisticslib.lib.data.ConfigManager;
-import com.devflask.statisticslib.lib.data.StatisticsManager;
-import com.devflask.statisticslib.lib.data.StatisticsTimer;
-import com.devflask.statisticslib.lib.data.UserData;
-import com.devflask.statisticslib.lib.listeners.*;
 
 import java.util.Objects;
 import java.util.Timer;
@@ -22,6 +19,8 @@ public class PlayerStatistics extends JavaPlugin {
     public void onEnable() {
         super.onEnable();
         saveDefaultConfig();
+        if (!SQL.connect(this)) return;
+        SQL.setupTables();
         lib = new PlayerStatisticsLib(this);
         setupListeners();
         Objects.requireNonNull(getCommand("pslreload")).setExecutor(new ReloadCommand(this));
@@ -33,8 +32,10 @@ public class PlayerStatistics extends JavaPlugin {
     @Override
     public void onDisable() {
         super.onDisable();
-        lib.getUserData().saveData();
-        lib.getStatisticsManager().saveStatistics();
+        if (SQL.connection != null) {
+            lib.getUserData().saveData();
+            lib.getStatisticsManager().saveStatistics();
+        }
     }
 
 
