@@ -24,10 +24,10 @@ public class ConfigManager {
     }
 
     public void reloadConfig() {
-        plugin.getLogger().log(Level.INFO, "Reloading config...");
+        plugin.getLogger().log(Level.INFO, "========== Reloading config ==========");
         refreshVariables();
         refreshEnabledStatistics();
-        plugin.getLogger().log(Level.INFO, "Config reloaded.");
+        plugin.getLogger().log(Level.INFO, "========== Config reloaded ==========");
     }
 
     private void refreshEnabledStatistics() {

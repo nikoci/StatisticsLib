@@ -186,8 +186,8 @@ public class PlayerStatistic {
                 plainStatement.executeUpdate();
             }
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
 
     }
