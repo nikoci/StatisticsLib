@@ -1,9 +1,9 @@
 package me.dehys.myplugin;
 
+import com.devflask.statisticslib.lib.data.StatisticsManager;
 import com.devflask.statisticslib.lib.main.StatisticsLib;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import com.devflask.statisticslib.lib.data.StatisticsManager;
 
 public class MyPlugin extends JavaPlugin {
 
@@ -12,7 +12,7 @@ public class MyPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         super.onEnable();
-        if (!setupPlayerStatisticsLib()) {
+        if (!setupStatisticsLib()) {
             getServer().getPluginManager().disablePlugin(this);
         }
     }
@@ -23,8 +23,8 @@ public class MyPlugin extends JavaPlugin {
      * @return true if an instance could be found, false if no instance could be found. In this case disable your plugin.
      * You *need* the instance registered to the Provider, creating your own instance can lead to loss of data
      */
-    private boolean setupPlayerStatisticsLib() {
-        if (getServer().getPluginManager().getPlugin("PlayerStatisticsLib") == null) {
+    private boolean setupStatisticsLib() {
+        if (getServer().getPluginManager().getPlugin("StatisticsLib") == null) {
             return false;
         }
         RegisteredServiceProvider<StatisticsLib> serviceProvider = getServer().getServicesManager().getRegistration(StatisticsLib.class);
