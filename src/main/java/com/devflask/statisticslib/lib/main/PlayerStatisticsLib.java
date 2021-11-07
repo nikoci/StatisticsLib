@@ -6,9 +6,9 @@ import com.devflask.statisticslib.lib.data.UserData;
 
 public class PlayerStatisticsLib {
 
-    private UserData userData;
-    private ConfigManager configManager;
-    private StatisticsManager statisticsManager;
+    private final UserData userData;
+    private final ConfigManager configManager;
+    private final StatisticsManager statisticsManager;
 
     public PlayerStatisticsLib(PlayerStatistics statistics) {
         configManager = new ConfigManager(statistics);

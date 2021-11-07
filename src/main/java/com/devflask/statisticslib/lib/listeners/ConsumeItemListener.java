@@ -1,19 +1,13 @@
 package com.devflask.statisticslib.lib.listeners;
 
+import com.devflask.statisticslib.lib.enums.Statistic;
+import com.devflask.statisticslib.lib.main.PlayerStatistics;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
-import com.devflask.statisticslib.lib.enums.Statistic;
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
 
-public class ConsumeItemListener implements Listener {
-
-    private final PlayerStatistics plugin;
-
-    public ConsumeItemListener(PlayerStatistics plugin) {
-        this.plugin = plugin;
-    }
+public record ConsumeItemListener(PlayerStatistics plugin) implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onItemConsume(final PlayerItemConsumeEvent event) {

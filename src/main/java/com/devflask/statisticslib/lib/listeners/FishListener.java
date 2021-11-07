@@ -1,21 +1,15 @@
 package com.devflask.statisticslib.lib.listeners;
 
+import com.devflask.statisticslib.lib.enums.Statistic;
+import com.devflask.statisticslib.lib.main.PlayerStatistics;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
-import com.devflask.statisticslib.lib.enums.Statistic;
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
 
-public class FishListener implements Listener {
-
-    private final PlayerStatistics plugin;
-
-    public FishListener(PlayerStatistics plugin) {
-        this.plugin = plugin;
-    }
+public record FishListener(PlayerStatistics plugin) implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onFish(final PlayerFishEvent event) {

@@ -1,18 +1,12 @@
 package com.devflask.statisticslib.lib.listeners;
 
+import com.devflask.statisticslib.lib.enums.Statistic;
+import com.devflask.statisticslib.lib.main.PlayerStatistics;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.raid.RaidFinishEvent;
-import com.devflask.statisticslib.lib.enums.Statistic;
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
 
-public class RaidListener implements Listener {
-
-    private final PlayerStatistics plugin;
-
-    public RaidListener(PlayerStatistics plugin) {
-        this.plugin = plugin;
-    }
+public record RaidListener(PlayerStatistics plugin) implements Listener {
 
     @EventHandler
     public void onRaid(final RaidFinishEvent event) {
