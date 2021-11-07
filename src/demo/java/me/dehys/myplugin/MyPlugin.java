@@ -27,7 +27,7 @@ public class MyPlugin extends JavaPlugin {
         if (getServer().getPluginManager().getPlugin("StatisticsLib") == null) {
             return false;
         }
-        RegisteredServiceProvider<StatisticsLib> serviceProvider = getServer().getServicesManager().getRegistration(StatisticsLib.class);
+        var serviceProvider = getServer().getServicesManager().getRegistration(StatisticsLib.class);
         if (serviceProvider == null) {
             return false;
         }
