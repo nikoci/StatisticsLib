@@ -1,7 +1,7 @@
 package com.devflask.statisticslib.lib.listeners;
 
 import com.devflask.statisticslib.lib.enums.Statistic;
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
+import com.devflask.statisticslib.plugin.Plugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,7 +9,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityTameEvent;
 
-public record EntityTameListener(PlayerStatistics plugin) implements Listener {
+public record EntityTameListener(Plugin plugin) implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onEntityTame(final EntityTameEvent event) {

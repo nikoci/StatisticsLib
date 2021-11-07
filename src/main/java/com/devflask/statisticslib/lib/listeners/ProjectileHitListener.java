@@ -1,13 +1,13 @@
 package com.devflask.statisticslib.lib.listeners;
 
 import com.devflask.statisticslib.lib.enums.Statistic;
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
+import com.devflask.statisticslib.plugin.Plugin;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
-public record ProjectileHitListener(PlayerStatistics plugin) implements Listener {
+public record ProjectileHitListener(Plugin plugin) implements Listener {
 
     @EventHandler
     public void onProjectileHit(final ProjectileHitEvent event) {

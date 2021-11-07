@@ -1,13 +1,13 @@
 package com.devflask.statisticslib.lib.listeners;
 
 import com.devflask.statisticslib.lib.enums.Statistic;
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
+import com.devflask.statisticslib.plugin.Plugin;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-public record DeathListener(PlayerStatistics plugin) implements Listener {
+public record DeathListener(Plugin plugin) implements Listener {
 
     @EventHandler
     public void onEntityDeath(final EntityDeathEvent event) {

@@ -6,7 +6,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import com.devflask.statisticslib.lib.enums.Statistic;
 import com.devflask.statisticslib.lib.enums.Substatistic;
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
+import com.devflask.statisticslib.plugin.Plugin;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,9 +22,9 @@ public class StatisticsManager {
 
     private final HashMap<UUID, PlayerStatistic> playerStatistics;
 
-    private final PlayerStatistics plugin;
+    private final Plugin plugin;
 
-    public StatisticsManager(PlayerStatistics plugin) {
+    public StatisticsManager(Plugin plugin) {
         this.plugin = plugin;
         playerStatistics = new HashMap<>();
     }

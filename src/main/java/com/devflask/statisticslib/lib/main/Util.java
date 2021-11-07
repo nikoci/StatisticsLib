@@ -1,5 +1,6 @@
 package com.devflask.statisticslib.lib.main;
 
+import com.devflask.statisticslib.plugin.Plugin;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -8,7 +9,7 @@ public class Util {
 
     private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
 
-    public static String generatePlayerID(PlayerStatistics plugin) {
+    public static String generatePlayerID(Plugin plugin) {
         int length = 10;
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < length; i++) {

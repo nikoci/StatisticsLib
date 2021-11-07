@@ -1,6 +1,6 @@
 package com.devflask.statisticslib.lib.data;
 
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
+import com.devflask.statisticslib.plugin.Plugin;
 import org.bukkit.Bukkit;
 
 import java.sql.Connection;
@@ -12,7 +12,7 @@ public class SQL {
     public static Connection connection;
 
 
-    public static boolean connect(PlayerStatistics plugin) {
+    public static boolean connect(Plugin plugin) {
         if (!isConnected()) {
             try {
                 final String

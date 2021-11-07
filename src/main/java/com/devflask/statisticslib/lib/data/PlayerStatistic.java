@@ -3,7 +3,7 @@ package com.devflask.statisticslib.lib.data;
 
 import com.devflask.statisticslib.lib.enums.Statistic;
 import com.devflask.statisticslib.lib.enums.Substatistic;
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
+import com.devflask.statisticslib.plugin.Plugin;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +23,7 @@ public class PlayerStatistic {
     private final HashMap<String, Integer> plainStatistics;
     private final HashMap<String, HashMap<Material, Integer>> materialStatistics;
     private final HashMap<String, HashMap<EntityType, Integer>> entityStatistics;
-    private PlayerStatistics plugin;
+    private Plugin plugin;
 
     /**
      * This is the main constructor used for creating a new and empty {@link PlayerStatistic} object
@@ -31,7 +31,7 @@ public class PlayerStatistic {
      * @param uuid   the uuid of the player this object will be destined to
      * @param userid another, shorter id of the player, which is used internally to access data from the SQL-Database
      */
-    public PlayerStatistic(final UUID uuid, final String userid, PlayerStatistics plugin) {
+    public PlayerStatistic(final UUID uuid, final String userid, Plugin plugin) {
         this.uuid = uuid;
         this.userid = userid;
 
@@ -52,7 +52,7 @@ public class PlayerStatistic {
      * @param entityStatistics   a map of all statistics which have an ENTITY {@link Substatistic}
      */
     public PlayerStatistic(final UUID uuid, final String userid, HashMap<String, Integer> plainStatistics,
-                           HashMap<String, HashMap<Material, Integer>> materialStatistics, HashMap<String, HashMap<EntityType, Integer>> entityStatistics, PlayerStatistics plugin) {
+                           HashMap<String, HashMap<Material, Integer>> materialStatistics, HashMap<String, HashMap<EntityType, Integer>> entityStatistics, Plugin plugin) {
         this.uuid = uuid;
         this.userid = userid;
         this.plainStatistics = plainStatistics;
