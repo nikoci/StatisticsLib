@@ -3,14 +3,15 @@ package com.devflask.statisticslib.lib.main;
 import com.devflask.statisticslib.lib.data.ConfigManager;
 import com.devflask.statisticslib.lib.data.StatisticsManager;
 import com.devflask.statisticslib.lib.data.UserData;
+import com.devflask.statisticslib.plugin.StatisticsPlugin;
 
-public class PlayerStatisticsLib {
+public class StatisticsLib {
 
-    private UserData userData;
-    private ConfigManager configManager;
-    private StatisticsManager statisticsManager;
+    private final UserData userData;
+    private final ConfigManager configManager;
+    private final StatisticsManager statisticsManager;
 
-    public PlayerStatisticsLib(PlayerStatistics statistics) {
+    public StatisticsLib(StatisticsPlugin statistics) {
         configManager = new ConfigManager(statistics);
         userData = UserData.retrieveData();
         statisticsManager = new StatisticsManager(statistics);

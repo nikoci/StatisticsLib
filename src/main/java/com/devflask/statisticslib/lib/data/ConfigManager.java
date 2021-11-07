@@ -1,15 +1,14 @@
 package com.devflask.statisticslib.lib.data;
 
+import com.devflask.statisticslib.lib.enums.Statistic;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
-import com.devflask.statisticslib.lib.enums.Statistic;
 
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.logging.Level;
 
-@SuppressWarnings("unused")
+
 public class ConfigManager {
 
     public long SAVEDATAPERIOD;
@@ -47,13 +46,6 @@ public class ConfigManager {
         return enabled.getOrDefault(statistic, false);
     }
 
-    public Optional<String> getString(String path) {
-        return Optional.ofNullable(plugin.getConfig().getString(path));
-    }
-
-    public void set(String path, Object value) {
-        plugin.getConfig().set(path, value);
-    }
 
     public FileConfiguration getConfig() {
         return plugin.getConfig();

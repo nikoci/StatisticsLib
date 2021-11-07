@@ -1,19 +1,19 @@
 package com.devflask.statisticslib.lib.data;
 
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
+import com.devflask.statisticslib.plugin.StatisticsPlugin;
 
 import java.util.TimerTask;
 
 public class StatisticsTimer extends TimerTask {
 
-    private final PlayerStatistics plugin;
+    private final StatisticsPlugin statisticsPlugin;
 
-    public StatisticsTimer(PlayerStatistics plugin) {
-        this.plugin = plugin;
+    public StatisticsTimer(StatisticsPlugin statisticsPlugin) {
+        this.statisticsPlugin = statisticsPlugin;
     }
 
     @Override
     public void run() {
-        plugin.getStatisticsManager().saveStatistics(plugin.getConfigManager().clearCacheOnSave);
+        statisticsPlugin.getStatisticsManager().saveStatistics(statisticsPlugin.getConfigManager().clearCacheOnSave);
     }
 }

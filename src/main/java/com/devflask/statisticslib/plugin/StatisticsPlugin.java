@@ -1,8 +1,9 @@
-package com.devflask.statisticslib.lib.main;
+package com.devflask.statisticslib.plugin;
 
-import com.devflask.statisticslib.lib.commands.ReloadCommand;
 import com.devflask.statisticslib.lib.data.*;
 import com.devflask.statisticslib.lib.listeners.*;
+import com.devflask.statisticslib.lib.main.StatisticsLib;
+import com.devflask.statisticslib.plugin.commands.ReloadCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -10,9 +11,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Objects;
 import java.util.Timer;
 
-public class PlayerStatistics extends JavaPlugin {
+public class StatisticsPlugin extends JavaPlugin {
 
-    private PlayerStatisticsLib lib;
+    private StatisticsLib lib;
 
 
     @Override
@@ -21,7 +22,7 @@ public class PlayerStatistics extends JavaPlugin {
         saveDefaultConfig();
         if (!SQL.connect(this)) return;
         SQL.setupTables();
-        lib = new PlayerStatisticsLib(this);
+        lib = new StatisticsLib(this);
         setupListeners();
         Objects.requireNonNull(getCommand("pslreload")).setExecutor(new ReloadCommand(this));
         registerProvider();
@@ -39,7 +40,7 @@ public class PlayerStatistics extends JavaPlugin {
     }
 
 
-    public PlayerStatisticsLib getLib() {
+    public StatisticsLib getLib() {
         return lib;
     }
 
@@ -76,6 +77,6 @@ public class PlayerStatistics extends JavaPlugin {
     }
 
     private void registerProvider() {
-        Bukkit.getServer().getServicesManager().register(PlayerStatisticsLib.class, lib, this, ServicePriority.Highest);
+        Bukkit.getServer().getServicesManager().register(StatisticsLib.class, lib, this, ServicePriority.Highest);
     }
 }

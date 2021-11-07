@@ -1,5 +1,7 @@
 package com.devflask.statisticslib.lib.listeners;
 
+import com.devflask.statisticslib.lib.enums.Statistic;
+import com.devflask.statisticslib.plugin.StatisticsPlugin;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,20 +10,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
-import com.devflask.statisticslib.lib.enums.Statistic;
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
 
 import static com.devflask.statisticslib.lib.main.Util.getMaxCraftable;
 import static com.devflask.statisticslib.lib.main.Util.getRemainingInvSpace;
 
 
-public class ItemCraftListener implements Listener {
-
-    private final PlayerStatistics plugin;
-
-    public ItemCraftListener(PlayerStatistics plugin) {
-        this.plugin = plugin;
-    }
+public record ItemCraftListener(StatisticsPlugin statisticsPlugin) implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onCraftItem(final CraftItemEvent event) {
@@ -29,7 +23,7 @@ public class ItemCraftListener implements Listener {
             assert event.getWhoClicked() instanceof Player;
             if (event.getCurrentItem() == null) return;
             //TODO: Test if multiple crafts through e.g shiftclick is calculated correctly (with (half)full inventory, drops, etc.)
-            plugin.getStatisticsManager().addStatistic((Player) event.getWhoClicked(), Statistic.ITEMS_CRAFTED, event.getCurrentItem().getType(), calculateAmount(event));
+            statisticsPlugin.getStatisticsManager().addStatistic((Player) event.getWhoClicked(), Statistic.ITEMS_CRAFTED, event.getCurrentItem().getType(), calculateAmount(event));
         }
     }
 

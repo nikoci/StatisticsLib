@@ -2,7 +2,6 @@ package com.devflask.statisticslib.lib.enums;
 
 import java.util.Arrays;
 
-@SuppressWarnings({"unused", "RedundantSuppression", "SpellCheckingInspection"})
 public enum Statistic {
 
     BLOCKS_BROKEN("blocksbroken", Substatistic.MATERIAL),
