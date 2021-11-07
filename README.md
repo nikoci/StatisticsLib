@@ -1,13 +1,13 @@
-<div style="text-align: center" id="top"> 
+<div align="center" id="top"> 
   <img src="https://cdn.dehys.com/StatisticsLib/statisticslib-logo.svg" width="700px" alt="StatisticsLib" />
 </div>
 
-<p style="text-align: center">
+<p align="center">
   <a href="https://discord.gg/TvEffRs"><img alt="Discord" src="https://img.shields.io/discord/435431724831211522?color=%237289DA&label=%20%E2%80%8E%20%E2%80%8E%20%E2%80%8EDiscord%20%E2%80%8E&logo=Discord&logoColor=%237289DA&style=flat-square"></a>
   <a href="https://github.com/devflask/StatisticsLib/releases"><img alt="Releases" src="https://img.shields.io/github/v/release/devflask/StatisticsLib?color=%2354f95f&label=Latest%20Release&logo=GitHub&logoColor=%2354f95f&style=flat-square"></a>
   <a href="https://en.wikipedia.org/wiki/MIT_License"><img alt="Discord" src="https://img.shields.io/github/license/devflask/StatisticsLib?color=%23f9a154&label=License&style=flat-square"></a>
 </p>
-<p style="text-align: center">
+<p align="center">
   <a href="https://github.com/devflask/StatisticsLib/blob/pilot/README.md#dependencies">Dependencies</a> &#xa0; | &#xa0;
   <a href="https://github.com/devflask/StatisticsLib/blob/pilot/README.md#implementation">Implementation</a> &#xa0; | &#xa0;
   <a href="https://github.com/devflask/StatisticsLib/tree/pilot#getting-started">Getting Started</a> &#xa0;
