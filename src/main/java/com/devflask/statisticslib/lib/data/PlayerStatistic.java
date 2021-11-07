@@ -1,11 +1,11 @@
 package com.devflask.statisticslib.lib.data;
 
 
-import org.bukkit.Material;
-import org.bukkit.entity.EntityType;
 import com.devflask.statisticslib.lib.enums.Statistic;
 import com.devflask.statisticslib.lib.enums.Substatistic;
 import com.devflask.statisticslib.lib.main.PlayerStatistics;
+import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.PreparedStatement;
@@ -117,18 +117,15 @@ public class PlayerStatistic {
     void addStatistic(@NotNull Statistic statistic, Material material, EntityType entityType, int amount) {
         if (plugin.getConfigManager().isStatisticDisabled(statistic)) return;
         switch (statistic.getSubstatistic()) {
-            case MATERIAL:
+            case MATERIAL -> {
                 assert material != null;
                 addMaterialStatistic(statistic, material, amount);
-                break;
-
-            case ENTITY:
+            }
+            case ENTITY -> {
                 assert entityType != null;
                 addEntityStatistic(statistic, entityType, amount);
-                break;
-
-            case NONE:
-                addPlainStatistic(statistic, amount);
+            }
+            case NONE -> addPlainStatistic(statistic, amount);
         }
     }
 
@@ -255,22 +252,15 @@ public class PlayerStatistic {
         if (plugin.getConfigManager().isStatisticDisabled(statistic)) {
             throw new IllegalAccessException("The statistic " + statistic.name() + " is not enabled in the config!");
         }
-        switch (statistic.getSubstatistic()) {
-
-            case MATERIAL:
-                return getMaterialStatistic(statistic).isPresent() ?
-                        (material != null ? getMaterialStatistic(statistic).get().getOrDefault(material, 0)
-                                : getMaterialStatistic(statistic).get().values().stream().mapToInt(Integer::intValue).sum()) : 0;
-            case ENTITY:
-                return getEntityStatistic(statistic).isPresent() ?
-                        (entityType != null ? getEntityStatistic(statistic).get().getOrDefault(entityType, 0)
-                                : getEntityStatistic(statistic).get().values().stream().mapToInt(Integer::intValue).sum()) : 0;
-            case NONE:
-                return getPlainStatistic(statistic);
-
-            default:
-                return 0;
-        }
+        return switch (statistic.getSubstatistic()) {
+            case MATERIAL -> getMaterialStatistic(statistic).isPresent() ?
+                    (material != null ? getMaterialStatistic(statistic).get().getOrDefault(material, 0)
+                            : getMaterialStatistic(statistic).get().values().stream().mapToInt(Integer::intValue).sum()) : 0;
+            case ENTITY -> getEntityStatistic(statistic).isPresent() ?
+                    (entityType != null ? getEntityStatistic(statistic).get().getOrDefault(entityType, 0)
+                            : getEntityStatistic(statistic).get().values().stream().mapToInt(Integer::intValue).sum()) : 0;
+            case NONE -> getPlainStatistic(statistic);
+        };
     }
 
 
