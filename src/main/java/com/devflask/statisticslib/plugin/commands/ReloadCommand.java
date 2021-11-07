@@ -1,4 +1,4 @@
-package com.devflask.statisticslib.lib.commands;
+package com.devflask.statisticslib.plugin.commands;
 
 import com.devflask.statisticslib.plugin.Plugin;
 import org.bukkit.command.Command;

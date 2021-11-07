@@ -1,9 +1,9 @@
 package com.devflask.statisticslib.plugin;
 
-import com.devflask.statisticslib.lib.commands.ReloadCommand;
 import com.devflask.statisticslib.lib.data.*;
 import com.devflask.statisticslib.lib.listeners.*;
 import com.devflask.statisticslib.lib.main.StatisticsLib;
+import com.devflask.statisticslib.plugin.commands.ReloadCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
