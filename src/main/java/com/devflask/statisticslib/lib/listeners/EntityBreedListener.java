@@ -1,14 +1,14 @@
 package com.devflask.statisticslib.lib.listeners;
 
 import com.devflask.statisticslib.lib.enums.Statistic;
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
+import com.devflask.statisticslib.plugin.Plugin;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityBreedEvent;
 
-public record EntityBreedListener(PlayerStatistics plugin) implements Listener {
+public record EntityBreedListener(Plugin plugin) implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onEntityBreed(EntityBreedEvent event) {

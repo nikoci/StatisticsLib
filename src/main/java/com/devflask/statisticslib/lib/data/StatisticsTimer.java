@@ -1,14 +1,14 @@
 package com.devflask.statisticslib.lib.data;
 
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
+import com.devflask.statisticslib.plugin.Plugin;
 
 import java.util.TimerTask;
 
 public class StatisticsTimer extends TimerTask {
 
-    private final PlayerStatistics plugin;
+    private final Plugin plugin;
 
-    public StatisticsTimer(PlayerStatistics plugin) {
+    public StatisticsTimer(Plugin plugin) {
         this.plugin = plugin;
     }
 

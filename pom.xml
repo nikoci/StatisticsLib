@@ -83,7 +83,7 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
                             <mainClass>
-                                com.devflask.statisticslib.lib.main.PlayerStatistics
+                                com.devflask.statisticslib.plugin.Plugin
                             </mainClass>
                         </manifest>
                     </archive>

@@ -20,4 +20,4 @@ jobs:
         with:
           java-version: 17
       - run: mvn -B package --file pom.xml
-      - run: mv ./target/StatisticsLib.jar ~/production/minecraft/statisticslib-test-server/plugins/
+      - run: mv ./target/StatisticsLib.jar ~/production/minecraft/test-server-1/plugins/

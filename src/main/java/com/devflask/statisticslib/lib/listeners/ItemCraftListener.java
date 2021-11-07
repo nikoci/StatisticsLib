@@ -1,7 +1,7 @@
 package com.devflask.statisticslib.lib.listeners;
 
 import com.devflask.statisticslib.lib.enums.Statistic;
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
+import com.devflask.statisticslib.plugin.Plugin;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,7 +15,7 @@ import static com.devflask.statisticslib.lib.main.Util.getMaxCraftable;
 import static com.devflask.statisticslib.lib.main.Util.getRemainingInvSpace;
 
 
-public record ItemCraftListener(PlayerStatistics plugin) implements Listener {
+public record ItemCraftListener(Plugin plugin) implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onCraftItem(final CraftItemEvent event) {

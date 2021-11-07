@@ -2,7 +2,7 @@ package com.devflask.statisticslib.lib.data;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import com.devflask.statisticslib.lib.main.PlayerStatistics;
+import com.devflask.statisticslib.plugin.Plugin;
 import com.devflask.statisticslib.lib.main.Util;
 
 import java.sql.PreparedStatement;
@@ -18,9 +18,9 @@ public class UserData {
 
     private final HashMap<UUID, String> players;
     private final HashMap<UUID, String> playerIDs;
-    private PlayerStatistics plugin;
+    private Plugin plugin;
 
-    public UserData(PlayerStatistics plugin) {
+    public UserData(Plugin plugin) {
         this.players = new HashMap<>();
         this.playerIDs = new HashMap<>();
         this.plugin = plugin;
