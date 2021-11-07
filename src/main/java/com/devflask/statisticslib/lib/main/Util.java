@@ -1,6 +1,6 @@
 package com.devflask.statisticslib.lib.main;
 
-import com.devflask.statisticslib.plugin.Plugin;
+import com.devflask.statisticslib.plugin.StatisticsPlugin;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -9,7 +9,7 @@ public class Util {
 
     private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
 
-    public static String generatePlayerID(Plugin plugin) {
+    public static String generatePlayerID(StatisticsPlugin statisticsPlugin) {
         int length = 10;
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < length; i++) {
@@ -18,7 +18,7 @@ public class Util {
             length--;
         }
 
-        return (plugin.getUserData().isPlayerIDAvailable(builder.toString())) ? builder.toString() : generatePlayerID(plugin);
+        return (statisticsPlugin.getUserData().isPlayerIDAvailable(builder.toString())) ? builder.toString() : generatePlayerID(statisticsPlugin);
     }
 
     public static int getMaxCraftable(final CraftingInventory inventory) {

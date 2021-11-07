@@ -1,18 +1,17 @@
 package com.devflask.statisticslib.lib.data;
 
+import com.devflask.statisticslib.lib.enums.Statistic;
+import com.devflask.statisticslib.lib.enums.Substatistic;
+import com.devflask.statisticslib.plugin.StatisticsPlugin;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import com.devflask.statisticslib.lib.enums.Statistic;
-import com.devflask.statisticslib.lib.enums.Substatistic;
-import com.devflask.statisticslib.plugin.Plugin;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -22,10 +21,10 @@ public class StatisticsManager {
 
     private final HashMap<UUID, PlayerStatistic> playerStatistics;
 
-    private final Plugin plugin;
+    private final StatisticsPlugin statisticsPlugin;
 
-    public StatisticsManager(Plugin plugin) {
-        this.plugin = plugin;
+    public StatisticsManager(StatisticsPlugin statisticsPlugin) {
+        this.statisticsPlugin = statisticsPlugin;
         playerStatistics = new HashMap<>();
     }
 
@@ -106,7 +105,7 @@ public class StatisticsManager {
      * could be found
      */
     private Optional<PlayerStatistic> fetchStatistics(UUID uuid) {
-        Optional<String> userid = plugin.getUserData().getPlayerID(uuid);
+        Optional<String> userid = statisticsPlugin.getUserData().getPlayerID(uuid);
         if(getStatistic(uuid).isPresent()) throw new RuntimeException("Statistics for this user are already fetched");
         if (!userid.isPresent()) throw new RuntimeException("No UserID found for given UUID.");
         try {
@@ -157,7 +156,7 @@ public class StatisticsManager {
                 }
             }
 
-            PlayerStatistic statistic = new PlayerStatistic(uuid, userid.get(), plainStatistics, materialStatistics, entityStatistics, plugin);
+            PlayerStatistic statistic = new PlayerStatistic(uuid, userid.get(), plainStatistics, materialStatistics, entityStatistics, statisticsPlugin);
             playerStatistics.put(uuid, statistic);
             return Optional.of(statistic);
         } catch (SQLException throwables) {
@@ -250,7 +249,7 @@ public class StatisticsManager {
      * but does not require the {@link PlayerStatistic} object of the player
      */
     private void addStatistic(Player player, Statistic statistic, Material material, EntityType entityType, int amount) {
-        plugin.getStatisticsManager().getStatistic(player).orElseGet(() -> plugin.getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, entityType, amount);
+        statisticsPlugin.getStatisticsManager().getStatistic(player).orElseGet(() -> statisticsPlugin.getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, entityType, amount);
         }
 
 
@@ -260,7 +259,7 @@ public class StatisticsManager {
      * @return this returns a new {@link PlayerStatistic} object for the player
      */
     private PlayerStatistic createStatistic(Player player) {
-        plugin.getUserData().registerPlayer(player);
+        statisticsPlugin.getUserData().registerPlayer(player);
         return createStatistic(player.getUniqueId());
     }
 
@@ -271,7 +270,7 @@ public class StatisticsManager {
      * @return this returns a new {@link PlayerStatistic} object for the player
      */
     private PlayerStatistic createStatistic(UUID uuid) {
-        PlayerStatistic statistic = new PlayerStatistic(uuid, plugin.getUserData().getPlayerID(uuid).orElseThrow(() -> new RuntimeException("Player was not registered due to an unknown error")), plugin);
+        PlayerStatistic statistic = new PlayerStatistic(uuid, statisticsPlugin.getUserData().getPlayerID(uuid).orElseThrow(() -> new RuntimeException("Player was not registered due to an unknown error")), statisticsPlugin);
         playerStatistics.put(uuid, statistic);
         return statistic;
     }
@@ -312,15 +311,15 @@ public class StatisticsManager {
     public void saveStatistics() {
 
         new Thread(() -> {
-                for (Map.Entry<UUID, PlayerStatistic> entry : playerStatistics.entrySet()) {
-                    UUID uuid = entry.getKey();
-                    PlayerStatistic statistic = entry.getValue();
-                    Optional<String> userID = plugin.getUserData().getPlayerID(uuid);
-                    if(!userID.isPresent()) continue;
-                    statistic.savePlainStatistics();
-                    statistic.saveMaterialStatistics();
-                    statistic.saveEntityStatistics();
-                }
+            for (var entry : playerStatistics.entrySet()) {
+                UUID uuid = entry.getKey();
+                PlayerStatistic statistic = entry.getValue();
+                Optional<String> userID = statisticsPlugin.getUserData().getPlayerID(uuid);
+                if (!userID.isPresent()) continue;
+                statistic.savePlainStatistics();
+                statistic.saveMaterialStatistics();
+                statistic.saveEntityStatistics();
+            }
         }).start();
 
     }
@@ -332,22 +331,22 @@ public class StatisticsManager {
      */
     void saveStatistics(boolean clearCache) {
 
-        plugin.getLogger().log(Level.INFO, "All cached Statistics will now be saved...");
-            for (Map.Entry<UUID, PlayerStatistic> entry : playerStatistics.entrySet()) {
-                UUID uuid = entry.getKey();
-                PlayerStatistic statistic = entry.getValue();
-                Optional<String> userID = plugin.getUserData().getPlayerID(uuid);
-                if(!userID.isPresent()) continue;
-                statistic.savePlainStatistics();
-                statistic.saveMaterialStatistics();
-                statistic.saveEntityStatistics();
-            }
-        plugin.getLogger().log(Level.INFO, "All Statistics have successfully been saved");
-            if(clearCache) {
-                final int entries = playerStatistics.size();
-                playerStatistics.clear();
-                plugin.getLogger().log(Level.INFO, entries + " cached entries have been cleared.");
-            }
+        statisticsPlugin.getLogger().log(Level.INFO, "All cached Statistics will now be saved...");
+        for (var entry : playerStatistics.entrySet()) {
+            UUID uuid = entry.getKey();
+            PlayerStatistic statistic = entry.getValue();
+            Optional<String> userID = statisticsPlugin.getUserData().getPlayerID(uuid);
+            if (!userID.isPresent()) continue;
+            statistic.savePlainStatistics();
+            statistic.saveMaterialStatistics();
+            statistic.saveEntityStatistics();
+        }
+        statisticsPlugin.getLogger().log(Level.INFO, "All Statistics have successfully been saved");
+        if (clearCache) {
+            final int entries = playerStatistics.size();
+            playerStatistics.clear();
+            statisticsPlugin.getLogger().log(Level.INFO, entries + " cached entries have been cleared.");
+        }
 
     }
 }

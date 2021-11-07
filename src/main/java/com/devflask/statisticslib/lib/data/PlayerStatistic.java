@@ -3,7 +3,7 @@ package com.devflask.statisticslib.lib.data;
 
 import com.devflask.statisticslib.lib.enums.Statistic;
 import com.devflask.statisticslib.lib.enums.Substatistic;
-import com.devflask.statisticslib.plugin.Plugin;
+import com.devflask.statisticslib.plugin.StatisticsPlugin;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
@@ -23,7 +23,7 @@ public class PlayerStatistic {
     private final HashMap<String, Integer> plainStatistics;
     private final HashMap<String, HashMap<Material, Integer>> materialStatistics;
     private final HashMap<String, HashMap<EntityType, Integer>> entityStatistics;
-    private Plugin plugin;
+    private StatisticsPlugin statisticsPlugin;
 
     /**
      * This is the main constructor used for creating a new and empty {@link PlayerStatistic} object
@@ -31,7 +31,7 @@ public class PlayerStatistic {
      * @param uuid   the uuid of the player this object will be destined to
      * @param userid another, shorter id of the player, which is used internally to access data from the SQL-Database
      */
-    public PlayerStatistic(final UUID uuid, final String userid, Plugin plugin) {
+    public PlayerStatistic(final UUID uuid, final String userid, StatisticsPlugin statisticsPlugin) {
         this.uuid = uuid;
         this.userid = userid;
 
@@ -52,7 +52,7 @@ public class PlayerStatistic {
      * @param entityStatistics   a map of all statistics which have an ENTITY {@link Substatistic}
      */
     public PlayerStatistic(final UUID uuid, final String userid, HashMap<String, Integer> plainStatistics,
-                           HashMap<String, HashMap<Material, Integer>> materialStatistics, HashMap<String, HashMap<EntityType, Integer>> entityStatistics, Plugin plugin) {
+                           HashMap<String, HashMap<Material, Integer>> materialStatistics, HashMap<String, HashMap<EntityType, Integer>> entityStatistics, StatisticsPlugin statisticsPlugin) {
         this.uuid = uuid;
         this.userid = userid;
         this.plainStatistics = plainStatistics;
@@ -115,7 +115,7 @@ public class PlayerStatistic {
     }
 
     void addStatistic(@NotNull Statistic statistic, Material material, EntityType entityType, int amount) {
-        if (plugin.getConfigManager().isStatisticDisabled(statistic)) return;
+        if (statisticsPlugin.getConfigManager().isStatisticDisabled(statistic)) return;
         switch (statistic.getSubstatistic()) {
             case MATERIAL -> {
                 assert material != null;
@@ -249,7 +249,7 @@ public class PlayerStatistic {
      * @return returns the value of the {@link Statistic} or 0 if it cannot be found.
      */
     private int getStatistic(@NotNull Statistic statistic, Material material, EntityType entityType) throws IllegalAccessException {
-        if (plugin.getConfigManager().isStatisticDisabled(statistic)) {
+        if (statisticsPlugin.getConfigManager().isStatisticDisabled(statistic)) {
             throw new IllegalAccessException("The statistic " + statistic.name() + " is not enabled in the config!");
         }
         return switch (statistic.getSubstatistic()) {

@@ -1,9 +1,9 @@
 package com.devflask.statisticslib.lib.data;
 
+import com.devflask.statisticslib.lib.main.Util;
+import com.devflask.statisticslib.plugin.StatisticsPlugin;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import com.devflask.statisticslib.plugin.Plugin;
-import com.devflask.statisticslib.lib.main.Util;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,12 +18,12 @@ public class UserData {
 
     private final HashMap<UUID, String> players;
     private final HashMap<UUID, String> playerIDs;
-    private Plugin plugin;
+    private StatisticsPlugin statisticsPlugin;
 
-    public UserData(Plugin plugin) {
+    public UserData(StatisticsPlugin statisticsPlugin) {
         this.players = new HashMap<>();
         this.playerIDs = new HashMap<>();
-        this.plugin = plugin;
+        this.statisticsPlugin = statisticsPlugin;
     }
 
     public UserData(HashMap<UUID, String> players, HashMap<UUID, String> playerIDs) {
@@ -81,7 +81,7 @@ public class UserData {
     public void registerPlayer(UUID uuid, String playerName) {
         players.put(uuid, playerName);
         if (!playerIDs.containsKey(uuid)) {
-            playerIDs.put(uuid, Util.generatePlayerID(plugin));
+            playerIDs.put(uuid, Util.generatePlayerID(statisticsPlugin));
         }
     }
 
@@ -95,7 +95,7 @@ public class UserData {
             for (Map.Entry<UUID, String> entry : players.entrySet()) {
                 preparedStatement.setString(1, entry.getKey().toString());
                 preparedStatement.setString(2, entry.getValue());
-                preparedStatement.setString(3, getPlayerID(entry.getKey()).orElseGet(() -> Util.generatePlayerID(plugin)));
+                preparedStatement.setString(3, getPlayerID(entry.getKey()).orElseGet(() -> Util.generatePlayerID(statisticsPlugin)));
                 preparedStatement.setString(4, entry.getValue());
                 preparedStatement.executeUpdate();
             }

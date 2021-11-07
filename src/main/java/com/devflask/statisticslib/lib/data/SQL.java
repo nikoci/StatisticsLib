@@ -1,6 +1,6 @@
 package com.devflask.statisticslib.lib.data;
 
-import com.devflask.statisticslib.plugin.Plugin;
+import com.devflask.statisticslib.plugin.StatisticsPlugin;
 import org.bukkit.Bukkit;
 
 import java.sql.Connection;
@@ -12,19 +12,19 @@ public class SQL {
     public static Connection connection;
 
 
-    public static boolean connect(Plugin plugin) {
+    public static boolean connect(StatisticsPlugin statisticsPlugin) {
         if (!isConnected()) {
             try {
                 final String
-                        host = plugin.getConfig().getString("sql.host"),
-                        database = plugin.getConfig().getString("sql.database"),
-                        username = plugin.getConfig().getString("sql.username"),
-                        password = plugin.getConfig().getString("sql.password");
+                        host = statisticsPlugin.getConfig().getString("sql.host"),
+                        database = statisticsPlugin.getConfig().getString("sql.database"),
+                        username = statisticsPlugin.getConfig().getString("sql.username"),
+                        password = statisticsPlugin.getConfig().getString("sql.password");
                 connection = DriverManager.getConnection("jdbc:mysql://" + host + ":3306/" + database + "?autoReconnect=true", username, password);
                 return true;
             } catch (SQLException var4) {
                 Bukkit.getConsoleSender().sendMessage("Connection to SQL-Database unsuccessful. Plugin will be disabled.");
-                Bukkit.getServer().getPluginManager().disablePlugin(plugin);
+                Bukkit.getServer().getPluginManager().disablePlugin(statisticsPlugin);
                 return false;
             }
         } else {

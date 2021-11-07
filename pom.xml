@@ -73,9 +73,9 @@
 
     <build>
         <plugins>
-            <plugin>
+            <statisticsPlugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
+                <artifactId>maven-jar-statisticsPlugin</artifactId>
                 <configuration>
                     <finalName>StatisticsLib</finalName>
                     <archive>
@@ -83,12 +83,12 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
                             <mainClass>
-                                com.devflask.statisticslib.plugin.Plugin
+                                com.devflask.statisticslib.plugin.StatisticsPlugin
                             </mainClass>
                         </manifest>
                     </archive>
                 </configuration>
-            </plugin>
+            </statisticsPlugin>
         </plugins>
     </build>
 </project>

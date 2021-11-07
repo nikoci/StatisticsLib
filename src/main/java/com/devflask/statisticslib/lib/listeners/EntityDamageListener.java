@@ -1,7 +1,7 @@
 package com.devflask.statisticslib.lib.listeners;
 
 import com.devflask.statisticslib.lib.enums.Statistic;
-import com.devflask.statisticslib.plugin.Plugin;
+import com.devflask.statisticslib.plugin.StatisticsPlugin;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -9,13 +9,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public record EntityDamageListener(Plugin plugin) implements Listener {
+public record EntityDamageListener(StatisticsPlugin statisticsPlugin) implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onEntityDamageByEntity(final EntityDamageByEntityEvent event) {
         if (!event.isCancelled()) {
             if (event.getDamager() instanceof Player) {
-                plugin.getStatisticsManager().addStatistic((Player) event.getDamager(), Statistic.DAMAGE_DEALT, (int) Math.round(event.getFinalDamage()));
+                statisticsPlugin.getStatisticsManager().addStatistic((Player) event.getDamager(), Statistic.DAMAGE_DEALT, (int) Math.round(event.getFinalDamage()));
             }
         }
     }
@@ -24,7 +24,7 @@ public record EntityDamageListener(Plugin plugin) implements Listener {
     public void onEntityDamage(final EntityDamageEvent event) {
         if (!event.isCancelled()) {
             if (event.getEntity() instanceof Player) {
-                plugin.getStatisticsManager().addStatistic((Player) event.getEntity(), Statistic.DAMAGE_TAKEN, (int) Math.round(event.getDamage()));
+                statisticsPlugin.getStatisticsManager().addStatistic((Player) event.getEntity(), Statistic.DAMAGE_TAKEN, (int) Math.round(event.getDamage()));
             }
         }
     }

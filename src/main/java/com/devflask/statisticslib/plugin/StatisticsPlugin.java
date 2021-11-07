@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Objects;
 import java.util.Timer;
 
-public class Plugin extends JavaPlugin {
+public class StatisticsPlugin extends JavaPlugin {
 
     private StatisticsLib lib;
 

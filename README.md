@@ -84,7 +84,7 @@ public class MyPlugin extends JavaPlugin {
   /**
    * This method is used to fetch the active StatisticsLib instance from Bukkit's RegisteredServiceProvider
    *
-   * @return true if an instance could be found, false if no instance could be found. In this case disable your plugin.
+   * @return true if an instance could be found, false if no instance could be found. In this case disable your statisticsPlugin.
    * You *need* the instance registered to the Provider, creating your own instance can lead to loss of data
    */
   private boolean setupStatisticsLib() {
@@ -101,7 +101,7 @@ public class MyPlugin extends JavaPlugin {
 
 
   /**
-   * Use this getter to access the StatisticsLib instance anywhere in your plugin
+   * Use this getter to access the StatisticsLib instance anywhere in your statisticsPlugin
    *
    * @return the active instance of StatisticsLib
    */
