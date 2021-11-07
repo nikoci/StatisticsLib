@@ -1,8 +1,8 @@
 package com.devflask.statisticslib.lib.main;
 
+import com.devflask.statisticslib.lib.data.ConfigManager;
 import com.devflask.statisticslib.lib.data.StatisticsManager;
 import com.devflask.statisticslib.lib.data.UserData;
-import com.devflask.statisticslib.plugin.ConfigManager;
 import com.devflask.statisticslib.plugin.Plugin;
 
 public class StatisticsLib {
