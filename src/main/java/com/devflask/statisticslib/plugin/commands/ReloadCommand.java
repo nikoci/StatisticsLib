@@ -10,7 +10,7 @@ public record ReloadCommand(Plugin plugin) implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        commandSender.sendMessage("§d[PlayerStatisticsLib] Reloading config.yml...");
+        commandSender.sendMessage(plugin.getConfigManager().PREFIX + "Reloading config.yml...");
         plugin.getConfigManager().reloadConfig();
         return true;
     }
