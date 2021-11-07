@@ -1,4 +1,4 @@
-package com.devflask.statisticslib.lib.data;
+package com.devflask.statisticslib.plugin;
 
 import com.devflask.statisticslib.lib.enums.Statistic;
 import org.bukkit.configuration.file.FileConfiguration;
