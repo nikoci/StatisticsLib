@@ -73,9 +73,9 @@
 
     <build>
         <plugins>
-            <statisticsPlugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-statisticsPlugin</artifactId>
+                <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <finalName>StatisticsLib</finalName>
                     <archive>
@@ -88,7 +88,7 @@
                         </manifest>
                     </archive>
                 </configuration>
-            </statisticsPlugin>
+            </plugin>
         </plugins>
     </build>
 </project>
