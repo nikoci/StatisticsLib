@@ -4,6 +4,7 @@ import com.devflask.statisticslib.lib.data.*;
 import com.devflask.statisticslib.lib.listeners.*;
 import com.devflask.statisticslib.lib.main.StatisticsLib;
 import com.devflask.statisticslib.plugin.commands.ReloadCommand;
+import com.devflask.statisticslib.plugin.listeners.InventoryClickListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -74,6 +75,8 @@ public class StatisticsPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockPlaceListener(this), this);
         getServer().getPluginManager().registerEvents(new ConsumeItemListener(this), this);
         getServer().getPluginManager().registerEvents(new EntityTameListener(this), this);
+
+        getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
     }
 
     private void registerProvider() {

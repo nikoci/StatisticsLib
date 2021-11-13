@@ -24,7 +24,7 @@ public class ItemCreator {
     private final List<String> lores = new ArrayList<>();
     private final ItemMeta itemMeta;
     private final StatisticsPlugin plugin;
-
+    private final ArrayList<ClickAction> clickActions = new ArrayList<>();
 
     public ItemCreator(ItemStack item, final StatisticsPlugin plugin) {
         this.itemStack = item;
@@ -110,6 +110,20 @@ public class ItemCreator {
         return this;
     }
 
+    public ItemCreator cancelClickAction(boolean bool) {
+        if (bool) {
+            this.clickActions.remove(ClickAction.CANCEL);
+        } else {
+            this.clickActions.add(ClickAction.CANCEL);
+        }
+        return this;
+    }
+
+    public ItemCreator addClickAction(ClickAction clickAction) {
+        this.clickActions.add(clickAction);
+        return this;
+    }
+
     public ItemStack build() {
         if (!lores.isEmpty()) {
             this.itemMeta.setLore(lores);
@@ -118,5 +132,12 @@ public class ItemCreator {
         return itemStack;
     }
 
+    public ItemStack getItemStack() {
+        return itemStack;
+    }
+
+    public ArrayList<ClickAction> getClickActions() {
+        return clickActions;
+    }
 
 }
