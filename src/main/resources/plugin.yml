@@ -1,8 +1,8 @@
 name: StatisticsLib
 authors: [ dehys, OverDodo ]
 version: '1.2.1_INDEV'
-main: 'com.devflask.statisticslib.plugin.Plugin'
-api-version: '1.16'
+main: 'com.devflask.statisticslib.plugin.StatisticsPlugin'
+api-version: '1.17'
 loadbefore:
   - PlayerStatisticsPlugin
 
