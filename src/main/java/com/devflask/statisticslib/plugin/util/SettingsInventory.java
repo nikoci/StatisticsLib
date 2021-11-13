@@ -29,28 +29,29 @@ public class SettingsInventory {
         plugin.getConfigManager().getEnabledStatistics().forEach((statistic, enabled) -> settingsInventory.addItem((enabled ? guiItemsEnabled : guiItemsDisabled).get(statistic)));
     }
 
+    private ItemStack generateItem(Statistic statistic, boolean disabled) {
+        ItemCreator itemCreator = new ItemCreator(statistic.getIcon(), plugin);
+        itemCreator.setDisplayName(ChatColor.GOLD + statistic.getDisplayName())
+                .setGlow(!disabled)
+                .addLore("§7Status: " + (disabled ? "§4Disabled" : "§aEnabled"))
+                .addLore(" ")
+                .addLore("§7Click to " + (disabled ? "§aenable" : "§4disable"))
+                .cancelClickAction(true)
+                .addClickAction(event -> {
+                    if (event.getClickedInventory() == null || !event.getClickedInventory().equals(settingsInventory))
+                        return;
+                    if (!event.getWhoClicked().hasPermission("psl.admin")) return;
+                    plugin.getConfigManager().setStatisticEnabled(statistic, !disabled);
+
+                    event.getWhoClicked().sendMessage(plugin.getConfigManager().PREFIX + "§7The statistic \"§6" + statistic.getDisplayName() + "\"§7 has been " + (disabled ? "§aenabled" : "§4disabled") + ".");
+                });
+        return itemCreator.build();
+    }
+
     private void loadGUIItems() {
         Arrays.stream(Statistic.values()).forEach(statistic -> {
-            ItemCreator itemCreator = new ItemCreator(statistic.getIcon(), plugin);
-            final boolean disabled = plugin.getConfigManager().isStatisticDisabled(statistic);
-            itemCreator.setDisplayName(ChatColor.GOLD + statistic.getDisplayName())
-                    .setGlow(!disabled)
-                    .addLore("§7Status: " + (disabled ? "§4Disabled" : "§aEnabled"))
-                    .addLore(" ")
-                    .addLore("§7Click to " + (disabled ? "§aenable" : "§4disable"))
-                    .cancelClickAction(true)
-                    .addClickAction(event -> {
-                        if (event.getClickedInventory() == null || !event.getClickedInventory().equals(settingsInventory))
-                            return;
-                        if (!event.getWhoClicked().hasPermission("psl.admin")) return;
-                        plugin.getConfigManager().setStatisticEnabled(statistic, !disabled);
-
-                        event.getWhoClicked().sendMessage(plugin.getConfigManager().PREFIX + "§7The statistic \"§6" + statistic.getDisplayName() + "\"§7 has been " + (disabled ? "§aenabled" : "§4disabled") + ".");
-                    });
-            final ItemStack item = itemCreator.build();
-
-            if (disabled) guiItemsDisabled.put(statistic, item);
-            else guiItemsEnabled.put(statistic, item);
+            guiItemsEnabled.put(statistic, generateItem(statistic, false));
+            guiItemsDisabled.put(statistic, generateItem(statistic, true));
         });
     }
 
