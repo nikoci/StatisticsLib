@@ -250,7 +250,13 @@ public class StatisticsManager {
      */
     private void addStatistic(Player player, Statistic statistic, Material material, EntityType entityType, int amount) {
         statisticsPlugin.getStatisticsManager().getStatistic(player).orElseGet(() -> statisticsPlugin.getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, entityType, amount);
+
+        try {
+            player.sendMessage("New value for " + statistic.getDisplayName() + ": " + getStatistic(player).get().getStatistic(statistic) + " material:" + material + " entity:" + entityType);
+        } catch (IllegalAccessException e) {
+            player.sendMessage("Statistic " + statistic.getDisplayName() + " is disabled in config");
         }
+    }
 
 
     /**
@@ -330,7 +336,7 @@ public class StatisticsManager {
      * @param clearCache decides whether the cache should be cleared after saving or not
      */
     void saveStatistics(boolean clearCache) {
-
+        final int entries = playerStatistics.size();
         statisticsPlugin.getLogger().log(Level.INFO, "All cached Statistics will now be saved...");
         for (var entry : playerStatistics.entrySet()) {
             UUID uuid = entry.getKey();
@@ -343,7 +349,6 @@ public class StatisticsManager {
         }
         statisticsPlugin.getLogger().log(Level.INFO, "All Statistics have successfully been saved");
         if (clearCache) {
-            final int entries = playerStatistics.size();
             playerStatistics.clear();
             statisticsPlugin.getLogger().log(Level.INFO, entries + " cached entries have been cleared.");
         }

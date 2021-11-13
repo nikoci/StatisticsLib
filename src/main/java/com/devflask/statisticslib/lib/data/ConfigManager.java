@@ -44,7 +44,7 @@ public class ConfigManager {
     }
 
     public boolean isStatisticDisabled(Statistic statistic) {
-        return enabledStatistics.getOrDefault(statistic, false);
+        return !enabledStatistics.getOrDefault(statistic, true);
     }
 
     public HashMap<Statistic, Boolean> getEnabledStatistics() {
