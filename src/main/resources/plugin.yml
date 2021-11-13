@@ -11,4 +11,9 @@ commands:
     permission: 'psl.reload'
     usage: '/pslreload'
     description: 'Reloads the PlayerStatisticsLib config.yml'
-    executor: com.devflask.statisticslib.lib.command.ReloadCommand
+    executor: com.devflask.statisticslib.plugin.command.ReloadCommand
+  psladmin:
+    permission: 'psl.admin'
+    usage: '/psladmin'
+    description: 'Opens the PlayerStatisticsLib Management-GUI'
+    executor: com.devflask.statisticslib.plugin.command.ManageStatisticsCommand

@@ -11,11 +11,11 @@ import java.util.logging.Level;
 
 public class ConfigManager {
 
+    private final Plugin plugin;
+    private final HashMap<Statistic, Boolean> enabledStatistics = new HashMap<>();
     public long SAVEDATAPERIOD;
     public boolean clearCacheOnSave;
     public String PREFIX;
-    private final Plugin plugin;
-    private final HashMap<Statistic, Boolean> enabled = new HashMap<>();
 
     public ConfigManager(Plugin plugin) {
         this.plugin = plugin;
@@ -31,8 +31,8 @@ public class ConfigManager {
 
     private void refreshEnabledStatistics() {
         Objects.requireNonNull(getConfig().getConfigurationSection("statistics.enabled")).getKeys(false).forEach(key -> {
-            enabled.put(Statistic.getByKey(key), getConfig().getBoolean("statistics.enabled." + key));
-            plugin.getLogger().log(Level.INFO, "Statistic \"" + key + "\" is " + (enabled.get(Statistic.getByKey(key)) ? "ENABLED" : "DISABLED"));
+            enabledStatistics.put(Statistic.getByKey(key), getConfig().getBoolean("statistics.enabled." + key));
+            plugin.getLogger().log(Level.INFO, "Statistic \"" + key + "\" is " + (enabledStatistics.get(Statistic.getByKey(key)) ? "ENABLED" : "DISABLED"));
         });
     }
 
@@ -43,13 +43,19 @@ public class ConfigManager {
     }
 
     public boolean isStatisticDisabled(Statistic statistic) {
-        return enabled.getOrDefault(statistic, false);
+        return enabledStatistics.getOrDefault(statistic, false);
     }
 
+    public HashMap<Statistic, Boolean> getEnabledStatistics() {
+        return enabledStatistics;
+    }
 
     public FileConfiguration getConfig() {
         return plugin.getConfig();
     }
 
 
+    public void setStatisticEnabled(Statistic statistic, boolean bool) {
+        enabledStatistics.put(statistic, bool);
+    }
 }
