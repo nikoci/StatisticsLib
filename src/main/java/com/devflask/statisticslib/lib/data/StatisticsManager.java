@@ -106,8 +106,8 @@ public class StatisticsManager {
      */
     private Optional<PlayerStatistic> fetchStatistics(UUID uuid) {
         Optional<String> userid = statisticsPlugin.getUserData().getPlayerID(uuid);
-        if(getStatistic(uuid).isPresent()) throw new RuntimeException("Statistics for this user are already fetched");
-        if (!userid.isPresent()) throw new RuntimeException("No UserID found for given UUID.");
+        if (getStatistic(uuid).isPresent()) throw new RuntimeException("Statistics for this user are already fetched");
+        if (userid.isEmpty()) throw new RuntimeException("No UserID found for given UUID.");
         try {
 
             PreparedStatement preparedStatement = SQL.prepareStatement("SELECT statistic, amount FROM plainstatistics WHERE userid = ?");
@@ -321,7 +321,7 @@ public class StatisticsManager {
                 UUID uuid = entry.getKey();
                 PlayerStatistic statistic = entry.getValue();
                 Optional<String> userID = statisticsPlugin.getUserData().getPlayerID(uuid);
-                if (!userID.isPresent()) continue;
+                if (userID.isEmpty()) continue;
                 statistic.savePlainStatistics();
                 statistic.saveMaterialStatistics();
                 statistic.saveEntityStatistics();
@@ -342,7 +342,7 @@ public class StatisticsManager {
             UUID uuid = entry.getKey();
             PlayerStatistic statistic = entry.getValue();
             Optional<String> userID = statisticsPlugin.getUserData().getPlayerID(uuid);
-            if (!userID.isPresent()) continue;
+            if (userID.isEmpty()) continue;
             statistic.savePlainStatistics();
             statistic.saveMaterialStatistics();
             statistic.saveEntityStatistics();
