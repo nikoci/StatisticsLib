@@ -112,9 +112,9 @@ public class ItemCreator {
 
     public ItemCreator cancelClickAction(boolean bool) {
         if (bool) {
-            this.clickActions.remove(ClickAction.CANCEL);
-        } else {
             this.clickActions.add(ClickAction.CANCEL);
+        } else {
+            this.clickActions.remove(ClickAction.CANCEL);
         }
         return this;
     }
@@ -129,6 +129,7 @@ public class ItemCreator {
             this.itemMeta.setLore(lores);
         }
         this.itemStack.setItemMeta(itemMeta);
+        ItemActionHandler.registerItem(this);
         return itemStack;
     }
 

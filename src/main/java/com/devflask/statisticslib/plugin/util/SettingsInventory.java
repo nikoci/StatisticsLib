@@ -4,6 +4,7 @@ import com.devflask.statisticslib.lib.enums.Statistic;
 import com.devflask.statisticslib.plugin.StatisticsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -26,32 +27,36 @@ public class SettingsInventory {
 
         loadGUIItems();
 
-        plugin.getConfigManager().getEnabledStatistics().forEach((statistic, enabled) -> settingsInventory.addItem((enabled ? guiItemsEnabled : guiItemsDisabled).get(statistic)));
+        plugin.getConfigManager().getEnabledStatistics().forEach((statistic, enabled) -> settingsInventory.addItem((enabled ? guiItemsEnabled : guiItemsDisabled).getOrDefault(statistic, new ItemStack(Material.STONE))));
     }
 
-    private ItemStack generateItem(Statistic statistic, boolean disabled) {
+    private ItemStack generateItem(Statistic statistic, boolean enabled) {
         ItemCreator itemCreator = new ItemCreator(statistic.getIcon(), plugin);
         itemCreator.setDisplayName(ChatColor.GOLD + statistic.getDisplayName())
-                .setGlow(!disabled)
-                .addLore("§7Status: " + (disabled ? "§4Disabled" : "§aEnabled"))
+                .setGlow(enabled)
+                .addLore("§7Status: " + (enabled ? "§aEnabled" : "§4Disabled"))
                 .addLore(" ")
-                .addLore("§7Click to " + (disabled ? "§aenable" : "§4disable"))
+                .addLore("§7Click to " + (enabled ? "§4disable" : "§aenable"))
                 .cancelClickAction(true)
                 .addClickAction(event -> {
                     if (event.getClickedInventory() == null || !event.getClickedInventory().equals(settingsInventory))
                         return;
                     if (!event.getWhoClicked().hasPermission("psl.admin")) return;
-                    plugin.getConfigManager().setStatisticEnabled(statistic, !disabled);
-
-                    event.getWhoClicked().sendMessage(plugin.getConfigManager().PREFIX + "§7The statistic \"§6" + statistic.getDisplayName() + "\"§7 has been " + (disabled ? "§aenabled" : "§4disabled") + ".");
+                    plugin.getConfigManager().setStatisticEnabled(statistic, !enabled);
+                    swapItem(event.getSlot(), statistic, !enabled);
+                    event.getWhoClicked().sendMessage(plugin.getConfigManager().PREFIX + "§7The statistic \"§6" + statistic.getDisplayName() + "\"§7 has been " + (enabled ? "§4disabled" : "§aenabled") + ".");
                 });
         return itemCreator.build();
     }
 
+    private void swapItem(int slot, Statistic statistic, boolean enabled) {
+        settingsInventory.setItem(slot, (enabled ? guiItemsEnabled : guiItemsDisabled).get(statistic));
+    }
+
     private void loadGUIItems() {
         Arrays.stream(Statistic.values()).forEach(statistic -> {
-            guiItemsEnabled.put(statistic, generateItem(statistic, false));
-            guiItemsDisabled.put(statistic, generateItem(statistic, true));
+            guiItemsEnabled.put(statistic, generateItem(statistic, true));
+            guiItemsDisabled.put(statistic, generateItem(statistic, false));
         });
     }
 

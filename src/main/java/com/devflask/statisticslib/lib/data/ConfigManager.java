@@ -1,8 +1,9 @@
 package com.devflask.statisticslib.lib.data;
 
 import com.devflask.statisticslib.lib.enums.Statistic;
+import com.devflask.statisticslib.plugin.StatisticsPlugin;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.Plugin;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -11,13 +12,13 @@ import java.util.logging.Level;
 
 public class ConfigManager {
 
-    private final Plugin plugin;
+    private final StatisticsPlugin plugin;
     private final HashMap<Statistic, Boolean> enabledStatistics = new HashMap<>();
     public long SAVEDATAPERIOD;
     public boolean clearCacheOnSave;
     public String PREFIX;
 
-    public ConfigManager(Plugin plugin) {
+    public ConfigManager(StatisticsPlugin plugin) {
         this.plugin = plugin;
         reloadConfig();
     }
@@ -38,7 +39,7 @@ public class ConfigManager {
 
     private void refreshVariables() {
         SAVEDATAPERIOD = plugin.getConfig().getLong("savedata.period");
-        PREFIX = plugin.getConfig().getString("prefix");
+        PREFIX = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("prefix")));
         clearCacheOnSave = plugin.getConfig().getBoolean("savedata.clearcache");
     }
 
@@ -57,5 +58,7 @@ public class ConfigManager {
 
     public void setStatisticEnabled(Statistic statistic, boolean bool) {
         enabledStatistics.put(statistic, bool);
+        getConfig().set("statistics.enabled." + statistic.getKey(), bool);
+        plugin.saveConfig();
     }
 }

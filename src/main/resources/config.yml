@@ -44,7 +44,7 @@ statistics:
     itemscrafted: true
     fishcaught: true
     blocksinteracted: true
-    projectileshitblocks: true
+    projectileshitblock: true
     itemsconsumed: true
     mobkills: true
     projectileshitentity: true

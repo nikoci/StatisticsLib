@@ -13,7 +13,7 @@ public class StatisticsLib {
 
     public StatisticsLib(StatisticsPlugin statistics) {
         configManager = new ConfigManager(statistics);
-        userData = UserData.retrieveData();
+        userData = UserData.retrieveData(statistics);
         statisticsManager = new StatisticsManager(statistics);
     }
 
