@@ -18,7 +18,7 @@ public class UserData {
 
     private final HashMap<UUID, String> players;
     private final HashMap<UUID, String> playerIDs;
-    private StatisticsPlugin statisticsPlugin;
+    private final StatisticsPlugin statisticsPlugin;
 
     public UserData(StatisticsPlugin statisticsPlugin) {
         this.players = new HashMap<>();
@@ -26,12 +26,13 @@ public class UserData {
         this.statisticsPlugin = statisticsPlugin;
     }
 
-    public UserData(HashMap<UUID, String> players, HashMap<UUID, String> playerIDs) {
+    public UserData(HashMap<UUID, String> players, HashMap<UUID, String> playerIDs, StatisticsPlugin statisticsPlugin) {
         this.players = players;
         this.playerIDs = playerIDs;
+        this.statisticsPlugin = statisticsPlugin;
     }
 
-    public static UserData retrieveData() {
+    public static UserData retrieveData(StatisticsPlugin statisticsPlugin) {
         try {
             PreparedStatement preparedStatement = SQL.prepareStatement("SELECT * FROM userdata");
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -48,7 +49,7 @@ public class UserData {
                     exception.printStackTrace();
                 }
             }
-            return new UserData(players, playerIDs);
+            return new UserData(players, playerIDs, statisticsPlugin);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

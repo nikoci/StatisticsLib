@@ -1,8 +1,9 @@
 package com.devflask.statisticslib.lib.data;
 
 import com.devflask.statisticslib.lib.enums.Statistic;
+import com.devflask.statisticslib.plugin.StatisticsPlugin;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.Plugin;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -11,13 +12,13 @@ import java.util.logging.Level;
 
 public class ConfigManager {
 
+    private final StatisticsPlugin plugin;
+    private final HashMap<Statistic, Boolean> enabledStatistics = new HashMap<>();
     public long SAVEDATAPERIOD;
     public boolean clearCacheOnSave;
     public String PREFIX;
-    private final Plugin plugin;
-    private final HashMap<Statistic, Boolean> enabled = new HashMap<>();
 
-    public ConfigManager(Plugin plugin) {
+    public ConfigManager(StatisticsPlugin plugin) {
         this.plugin = plugin;
         reloadConfig();
     }
@@ -31,25 +32,33 @@ public class ConfigManager {
 
     private void refreshEnabledStatistics() {
         Objects.requireNonNull(getConfig().getConfigurationSection("statistics.enabled")).getKeys(false).forEach(key -> {
-            enabled.put(Statistic.getByKey(key), getConfig().getBoolean("statistics.enabled." + key));
-            plugin.getLogger().log(Level.INFO, "Statistic \"" + key + "\" is " + (enabled.get(Statistic.getByKey(key)) ? "ENABLED" : "DISABLED"));
+            enabledStatistics.put(Statistic.getByKey(key), getConfig().getBoolean("statistics.enabled." + key));
+            plugin.getLogger().log(Level.INFO, "Statistic \"" + key + "\" is " + (enabledStatistics.get(Statistic.getByKey(key)) ? "ENABLED" : "DISABLED"));
         });
     }
 
     private void refreshVariables() {
         SAVEDATAPERIOD = plugin.getConfig().getLong("savedata.period");
-        PREFIX = plugin.getConfig().getString("prefix");
+        PREFIX = ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("prefix")));
         clearCacheOnSave = plugin.getConfig().getBoolean("savedata.clearcache");
     }
 
     public boolean isStatisticDisabled(Statistic statistic) {
-        return enabled.getOrDefault(statistic, false);
+        return !enabledStatistics.getOrDefault(statistic, true);
     }
 
+    public HashMap<Statistic, Boolean> getEnabledStatistics() {
+        return enabledStatistics;
+    }
 
     public FileConfiguration getConfig() {
         return plugin.getConfig();
     }
 
 
+    public void setStatisticEnabled(Statistic statistic, boolean bool) {
+        enabledStatistics.put(statistic, bool);
+        getConfig().set("statistics.enabled." + statistic.getKey(), bool);
+        plugin.saveConfig();
+    }
 }

@@ -23,7 +23,7 @@ public class PlayerStatistic {
     private final HashMap<String, Integer> plainStatistics;
     private final HashMap<String, HashMap<Material, Integer>> materialStatistics;
     private final HashMap<String, HashMap<EntityType, Integer>> entityStatistics;
-    private StatisticsPlugin statisticsPlugin;
+    private final StatisticsPlugin statisticsPlugin;
 
     /**
      * This is the main constructor used for creating a new and empty {@link PlayerStatistic} object
@@ -34,6 +34,7 @@ public class PlayerStatistic {
     public PlayerStatistic(final UUID uuid, final String userid, StatisticsPlugin statisticsPlugin) {
         this.uuid = uuid;
         this.userid = userid;
+        this.statisticsPlugin = statisticsPlugin;
 
         plainStatistics = new HashMap<>();
         materialStatistics = new HashMap<>();
@@ -58,6 +59,7 @@ public class PlayerStatistic {
         this.plainStatistics = plainStatistics;
         this.materialStatistics = materialStatistics;
         this.entityStatistics = entityStatistics;
+        this.statisticsPlugin = statisticsPlugin;
 
     }
 

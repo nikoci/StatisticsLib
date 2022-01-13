@@ -3,7 +3,10 @@ package com.devflask.statisticslib.plugin;
 import com.devflask.statisticslib.lib.data.*;
 import com.devflask.statisticslib.lib.listeners.*;
 import com.devflask.statisticslib.lib.main.StatisticsLib;
+import com.devflask.statisticslib.plugin.commands.ManageStatisticsCommand;
 import com.devflask.statisticslib.plugin.commands.ReloadCommand;
+import com.devflask.statisticslib.plugin.listeners.InventoryClickListener;
+import com.devflask.statisticslib.plugin.util.SettingsInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,7 +17,7 @@ import java.util.Timer;
 public class StatisticsPlugin extends JavaPlugin {
 
     private StatisticsLib lib;
-
+    private SettingsInventory settingsInventory;
 
     @Override
     public void onEnable() {
@@ -23,8 +26,10 @@ public class StatisticsPlugin extends JavaPlugin {
         if (!SQL.connect(this)) return;
         SQL.setupTables();
         lib = new StatisticsLib(this);
+        this.settingsInventory = new SettingsInventory(this);
         setupListeners();
         Objects.requireNonNull(getCommand("pslreload")).setExecutor(new ReloadCommand(this));
+        Objects.requireNonNull(getCommand("psladmin")).setExecutor(new ManageStatisticsCommand(this));
         registerProvider();
         Timer timer = new Timer();
         timer.schedule(new StatisticsTimer(this), getConfigManager().SAVEDATAPERIOD * 1000, getConfigManager().SAVEDATAPERIOD * 1000);
@@ -74,9 +79,15 @@ public class StatisticsPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockPlaceListener(this), this);
         getServer().getPluginManager().registerEvents(new ConsumeItemListener(this), this);
         getServer().getPluginManager().registerEvents(new EntityTameListener(this), this);
+
+        getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
     }
 
     private void registerProvider() {
         Bukkit.getServer().getServicesManager().register(StatisticsLib.class, lib, this, ServicePriority.Highest);
+    }
+
+    public SettingsInventory getSettingsInventory() {
+        return settingsInventory;
     }
 }

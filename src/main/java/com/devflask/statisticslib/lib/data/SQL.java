@@ -20,9 +20,10 @@ public class SQL {
                         database = statisticsPlugin.getConfig().getString("sql.database"),
                         username = statisticsPlugin.getConfig().getString("sql.username"),
                         password = statisticsPlugin.getConfig().getString("sql.password");
-                connection = DriverManager.getConnection("jdbc:mysql://" + host + ":3306/" + database + "?autoReconnect=true", username, password);
+                connection = DriverManager.getConnection("jdbc:mysql://" + host + ":3306/" + database + "?autoReconnect=true&useSSL=false", username, password);
                 return true;
             } catch (SQLException var4) {
+                var4.printStackTrace();
                 Bukkit.getConsoleSender().sendMessage("Connection to SQL-Database unsuccessful. Plugin will be disabled.");
                 Bukkit.getServer().getPluginManager().disablePlugin(statisticsPlugin);
                 return false;

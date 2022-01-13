@@ -21,7 +21,7 @@
 <br>
 
 ### Dependencies ###
-- [**Spigot API** - 1.8+](https://hub.spigotmc.org/jenkins/job/BuildTools/)<br>
+- [**Spigot API** - 1.17+](https://hub.spigotmc.org/jenkins/job/BuildTools/)<br>
   *Spigot-API is licensed under the GNU General Public License v3.0*<br>
 - [**Java JDK** - 16+](https://www.oracle.com/java/technologies/javase/jdk16-archive-downloads.html)<br>
   *This software is licensed under the Oracle BSD License*

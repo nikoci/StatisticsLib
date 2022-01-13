@@ -9,12 +9,14 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 
 public record InteractListener(StatisticsPlugin statisticsPlugin) implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onInteract(final PlayerInteractEvent event) {
         Player player = event.getPlayer();
+        if (event.getHand() != EquipmentSlot.HAND) return;
         if (event.getItem() != null) {
             if (event.useItemInHand() == Event.Result.ALLOW) {
                 if (player.getCooldown(event.getMaterial()) <= 0) {

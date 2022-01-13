@@ -106,8 +106,8 @@ public class StatisticsManager {
      */
     private Optional<PlayerStatistic> fetchStatistics(UUID uuid) {
         Optional<String> userid = statisticsPlugin.getUserData().getPlayerID(uuid);
-        if(getStatistic(uuid).isPresent()) throw new RuntimeException("Statistics for this user are already fetched");
-        if (!userid.isPresent()) throw new RuntimeException("No UserID found for given UUID.");
+        if (getStatistic(uuid).isPresent()) throw new RuntimeException("Statistics for this user are already fetched");
+        if (userid.isEmpty()) throw new RuntimeException("No UserID found for given UUID.");
         try {
 
             PreparedStatement preparedStatement = SQL.prepareStatement("SELECT statistic, amount FROM plainstatistics WHERE userid = ?");
@@ -250,7 +250,13 @@ public class StatisticsManager {
      */
     private void addStatistic(Player player, Statistic statistic, Material material, EntityType entityType, int amount) {
         statisticsPlugin.getStatisticsManager().getStatistic(player).orElseGet(() -> statisticsPlugin.getStatisticsManager().fetchOrCreate(player)).addStatistic(statistic, material, entityType, amount);
+
+        try {
+            player.sendMessage("New value for " + statistic.getDisplayName() + ": " + getStatistic(player).get().getStatistic(statistic) + " material:" + material + " entity:" + entityType);
+        } catch (IllegalAccessException e) {
+            player.sendMessage("Statistic " + statistic.getDisplayName() + " is disabled in config");
         }
+    }
 
 
     /**
@@ -315,7 +321,7 @@ public class StatisticsManager {
                 UUID uuid = entry.getKey();
                 PlayerStatistic statistic = entry.getValue();
                 Optional<String> userID = statisticsPlugin.getUserData().getPlayerID(uuid);
-                if (!userID.isPresent()) continue;
+                if (userID.isEmpty()) continue;
                 statistic.savePlainStatistics();
                 statistic.saveMaterialStatistics();
                 statistic.saveEntityStatistics();
@@ -330,20 +336,19 @@ public class StatisticsManager {
      * @param clearCache decides whether the cache should be cleared after saving or not
      */
     void saveStatistics(boolean clearCache) {
-
+        final int entries = playerStatistics.size();
         statisticsPlugin.getLogger().log(Level.INFO, "All cached Statistics will now be saved...");
         for (var entry : playerStatistics.entrySet()) {
             UUID uuid = entry.getKey();
             PlayerStatistic statistic = entry.getValue();
             Optional<String> userID = statisticsPlugin.getUserData().getPlayerID(uuid);
-            if (!userID.isPresent()) continue;
+            if (userID.isEmpty()) continue;
             statistic.savePlainStatistics();
             statistic.saveMaterialStatistics();
             statistic.saveEntityStatistics();
         }
         statisticsPlugin.getLogger().log(Level.INFO, "All Statistics have successfully been saved");
         if (clearCache) {
-            final int entries = playerStatistics.size();
             playerStatistics.clear();
             statisticsPlugin.getLogger().log(Level.INFO, entries + " cached entries have been cleared.");
         }
