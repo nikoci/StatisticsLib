@@ -3,7 +3,7 @@
 </div>
 
 <p align="center">
-  <a href="https://discord.gg/TvEffRs"><img alt="Discord" src="https://img.shields.io/discord/298480981441118208?color=%237289DA&label=%20%E2%80%8E%20%E2%80%8E%20%E2%80%8EDiscord%20%E2%80%8E&logo=Discord&logoColor=%237289DA&style=flat-square"></a>
+  <a href="https://discord.gg/DdnayChh4g"><img alt="Discord" src="https://img.shields.io/discord/298480981441118208?color=%237289DA&label=%20%E2%80%8E%20%E2%80%8E%20%E2%80%8EDiscord%20%E2%80%8E&logo=Discord&logoColor=%237289DA&style=flat-square"></a>
   <a href="https://github.com/devflask/StatisticsLib/releases"><img alt="Releases" src="https://img.shields.io/github/v/release/devflask/StatisticsLib?color=%2354f95f&label=Latest%20Release&logo=GitHub&logoColor=%2354f95f&style=flat-square"></a>
   <a href="https://en.wikipedia.org/wiki/MIT_License"><img alt="Discord" src="https://img.shields.io/github/license/devflask/StatisticsLib?color=%23f9a154&label=License&style=flat-square"></a>
 </p>
