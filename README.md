@@ -1,5 +1,5 @@
 <div align="center" id="top"> 
-  <img src="https://cdn.dehys.com/StatisticsLib/statisticslib-logo.svg" width="700px" alt="StatisticsLib" />
+  <img src="https://i.imgur.com/mV0oK20.png" width="700px" alt="StatisticsLib" />
 </div>
 
 <p align="center">
